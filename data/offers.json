@@ -1,0 +1,187 @@
+[
+  {
+    "id": "a1b2c3d4-0001",
+    "title": "Sahara Classique",
+    "img": "/assets/sahara/sahara-desert.jpg",
+    "cat": "sahara",
+    "dur": "7 jours / 6 nuits",
+    "desc": "Partez à la conquête du Grand Erg Oriental, l'un des plus grands déserts de sable au monde. Traversée de dunes monumentales, nuit en bivouac sous un ciel étoilé, découverte des oasis cachées et rencontre avec les nomades touaregs. Un voyage qui transforme.",
+    "meta": [
+      { "icon": "📍", "label": "Départ: Alger → Ghardaïa → Tamanrasset" },
+      { "icon": "👥", "label": "Groupes de 10 à 50 personnes" },
+      { "icon": "🗣️", "label": "Guide francophone natif" },
+      { "icon": "🛡️", "label": "Escorte sécuritaire officielle" }
+    ],
+    "inclus": [
+      { "ico": "🚌", "txt": "Transport privé climatisé" },
+      { "ico": "🏨", "txt": "Hébergement 3★ + 1 nuit bivouac" },
+      { "ico": "🍽️", "txt": "Pension complète" },
+      { "ico": "🧭", "txt": "Guide francophone expert" },
+      { "ico": "🚔", "txt": "Escorte policière" },
+      { "ico": "💼", "txt": "Assurance voyage incluse" },
+      { "ico": "📸", "txt": "Séance photo coucher de soleil" },
+      { "ico": "🐪", "txt": "Balade dromadaire" }
+    ],
+    "programme": [
+      { "j": "J1", "titre": "Alger → Ghardaïa", "desc": "Vol interne ou bus VIP. Dîner de bienvenue et présentation du circuit." },
+      { "j": "J2", "titre": "Ghardaïa – Cité UNESCO", "desc": "Visite de la ville mozabite, souk historique et artisanat local." },
+      { "j": "J3", "titre": "Route vers le Grand Erg", "desc": "Traversée des paysages désertiques, arrêt aux oasis." },
+      { "j": "J4", "titre": "Dunes & Bivouac", "desc": "Arrivée dans l'Erg, coucher de soleil en quad, nuit sous les étoiles." },
+      { "j": "J5", "titre": "Lever de soleil & Oasis", "desc": "Lever de soleil sur les dunes, visite d'une oasis secrète." },
+      { "j": "J6", "titre": "Retour vers le Nord", "desc": "Route retour avec escale photographique." },
+      { "j": "J7", "titre": "Retour Alger", "desc": "Transfert aéroport, fin du circuit." }
+    ]
+  },
+  {
+    "id": "a1b2c3d4-0002",
+    "title": "Ghardaïa & la Vallée du M'Zab",
+    "img": "/assets/gherdaia/ghardaia-Par-VisualEyze-min.jpg",
+    "cat": "culture",
+    "dur": "5 jours / 4 nuits",
+    "desc": "Classée au patrimoine mondial de l'UNESCO, la vallée du M'Zab est un joyau architectural et culturel. Ses cinq ksours mozabites révèlent une civilisation millénaire d'une cohérence remarquable.",
+    "meta": [
+      { "icon": "📍", "label": "Départ: Alger → Ghardaïa" },
+      { "icon": "👥", "label": "Groupes de 8 à 40 personnes" },
+      { "icon": "🏛️", "label": "Site classé UNESCO" },
+      { "icon": "🎨", "label": "Ateliers artisanat inclus" }
+    ],
+    "inclus": [
+      { "ico": "🚌", "txt": "Transport privé" },
+      { "ico": "🏨", "txt": "Hébergement 3★" },
+      { "ico": "🍽️", "txt": "Demi-pension + 1 dîner chez l'habitant" },
+      { "ico": "🧭", "txt": "Guide local certifié UNESCO" },
+      { "ico": "🎨", "txt": "Atelier artisanat mozabite" },
+      { "ico": "🛡️", "txt": "Sécurité assurée" }
+    ],
+    "programme": [
+      { "j": "J1", "titre": "Alger → Ghardaïa", "desc": "Arrivée, installation hôtel, dîner de bienvenue." },
+      { "j": "J2", "titre": "Ghardaïa & El-Atteuf", "desc": "Visite du marché historique, ancien ksar d'El-Atteuf." },
+      { "j": "J3", "titre": "Beni Isguen & Melika", "desc": "Cité sainte de Beni Isguen, vue panoramique de Melika." },
+      { "j": "J4", "titre": "Artisanat & Gastronomie", "desc": "Atelier tapis et bijoux, cours de cuisine locale." },
+      { "j": "J5", "titre": "Retour Alger", "desc": "Matinée libre, transfert aéroport." }
+    ]
+  },
+  {
+    "id": "a1b2c3d4-0003",
+    "title": "Grand Sahara Premium",
+    "img": "/assets/sahara/-1x-1.webp",
+    "cat": "premium",
+    "dur": "10 jours / 9 nuits",
+    "desc": "Pour les voyageurs les plus exigeants : campements de luxe au cœur des dunes, activités exclusives en quad et en hélicoptère, dîner gastronomique servi dans l'Erg, et conciergerie personnelle 24h/24.",
+    "meta": [
+      { "icon": "📍", "label": "Alger → Tamanrasset → Grand Erg" },
+      { "icon": "👥", "label": "Groupes privés de 6 à 20 personnes" },
+      { "icon": "👑", "label": "Formule 5 étoiles exclusive" },
+      { "icon": "📱", "label": "Conciergerie 24h/24" }
+    ],
+    "inclus": [
+      { "ico": "🚁", "txt": "Survol désert en hélicoptère" },
+      { "ico": "🏕️", "txt": "Campement luxe 5★ en Erg" },
+      { "ico": "🏎️", "txt": "Excursion quad privative" },
+      { "ico": "🍾", "txt": "Dîner gastronomique sur les dunes" },
+      { "ico": "🐪", "txt": "Safari dromadaire au lever du soleil" },
+      { "ico": "🛡️", "txt": "Escorte VIP permanente" },
+      { "ico": "📱", "txt": "Conciergerie dédiée" },
+      { "ico": "💼", "txt": "Assurance tous risques" }
+    ],
+    "programme": [
+      { "j": "J1-2", "titre": "Arrivée & Alger Prestige", "desc": "Accueil VIP, hôtel 5★ Alger, dîner gastronomique." },
+      { "j": "J3", "titre": "Vol vers Tamanrasset", "desc": "Vol privé, installation au lodge désert." },
+      { "j": "J4", "titre": "Assekrem & Hoggar", "desc": "Lever de soleil sur l'Assekrem, paysages lunaires du Hoggar." },
+      { "j": "J5-6", "titre": "Grand Erg Premium", "desc": "Arrivée au campement luxe, quad, coucher de soleil." },
+      { "j": "J7", "titre": "Dîner des Étoiles", "desc": "Soirée gastronomique en plein désert, astronomie." },
+      { "j": "J8", "titre": "Oasis Secrète", "desc": "Excursion exclusive vers une oasis préservée." },
+      { "j": "J9-10", "titre": "Retour & Fête", "desc": "Retour Alger, soirée de clôture, transfert aéroport." }
+    ]
+  },
+  {
+    "id": "a1b2c3d4-0004",
+    "title": "Algérie Découverte Complète",
+    "img": "/assets/sahara/algeria-desert-landscape-at-sunny-day-wallpaper-1920x540_70.jpg",
+    "cat": "culture",
+    "dur": "14 jours / 13 nuits",
+    "desc": "Le grand circuit qui traverse l'Algérie du Nord au Sud : côte méditerranéenne, hauts plateaux, Sahara et oasis. 5 régions, 8 villes, des paysages d'une diversité exceptionnelle.",
+    "meta": [
+      { "icon": "📍", "label": "Alger → Oran → Constantine → Sahara" },
+      { "icon": "👥", "label": "Groupes de 15 à 60 personnes" },
+      { "icon": "🗺️", "label": "5 régions traversées" },
+      { "icon": "✈️", "label": "Vols intérieurs inclus" }
+    ],
+    "inclus": [
+      { "ico": "✈️", "txt": "Vols intérieurs inclus" },
+      { "ico": "🚌", "txt": "Bus VIP air conditionné" },
+      { "ico": "🏨", "txt": "Hôtels 3-4★ sélectionnés" },
+      { "ico": "🍽️", "txt": "Pension complète" },
+      { "ico": "🧭", "txt": "2 guides régionaux" },
+      { "ico": "🎭", "txt": "Spectacles culturels chaque soir" },
+      { "ico": "📸", "txt": "Photographe professionnel 2 jours" },
+      { "ico": "💼", "txt": "Assurance tous risques" }
+    ],
+    "programme": [
+      { "j": "J1-3", "titre": "Alger & Côte", "desc": "Casbah d'Alger, Tipaza romaine, côte méditerranéenne." },
+      { "j": "J4-5", "titre": "Oran & Tlemcen", "desc": "Oran la belle, mosquées de Tlemcen, gastronomie oranaise." },
+      { "j": "J6-8", "titre": "Est & Constantine", "desc": "Pont de Constantine, Cirta antique, Djemila romaine." },
+      { "j": "J9-10", "titre": "Hauts Plateaux", "desc": "Timgad, Batna, paysages de steppe et chotts." },
+      { "j": "J11-13", "titre": "Grand Sud Saharien", "desc": "Ghardaïa, Grand Erg, bivouac, lever de soleil sur dunes." },
+      { "j": "J14", "titre": "Retour & Clôture", "desc": "Cérémonie de clôture, transfert aéroport Alger." }
+    ]
+  },
+  {
+    "id": "a1b2c3d4-0005",
+    "title": "Séminaire Corporate à Alger",
+    "img": "/assets/hotels/algiers-marriott-hotel.jpg",
+    "cat": "corporate",
+    "dur": "4 jours / 3 nuits",
+    "desc": "Offrez à votre équipe un séminaire inoubliable dans le cadre exceptionnel d'Alger. Salles de conférence high-tech, team-building dans le désert, soirées de gala et immersion culturelle unique.",
+    "meta": [
+      { "icon": "📍", "label": "Alger – Hôtels 4-5★" },
+      { "icon": "👥", "label": "Groupes de 20 à 200 personnes" },
+      { "icon": "🏢", "label": "Entreprises & CE" },
+      { "icon": "📋", "label": "Devis personnalisé sous 24h" }
+    ],
+    "inclus": [
+      { "ico": "🏢", "txt": "Hôtel business 4-5★" },
+      { "ico": "🖥️", "txt": "Salle de conférence équipée" },
+      { "ico": "🍽️", "txt": "Repas d'affaires & dîner de gala" },
+      { "ico": "🤝", "txt": "Activité team-building désert" },
+      { "ico": "🏛️", "txt": "Visite culturelle Alger" },
+      { "ico": "🚌", "txt": "Transferts aéroport & navettes" }
+    ],
+    "programme": [
+      { "j": "J1", "titre": "Arrivée & Installation", "desc": "Accueil à l'aéroport, transfert hôtel, dîner de bienvenue." },
+      { "j": "J2", "titre": "Journée Séminaire", "desc": "Sessions plénières, ateliers de travail, déjeuner d'affaires." },
+      { "j": "J3", "titre": "Team-Building & Culture", "desc": "Activité désert en groupe, visite Casbah, dîner de gala." },
+      { "j": "J4", "titre": "Clôture & Départ", "desc": "Bilan et remise de certificats, transfert aéroport." }
+    ]
+  },
+  {
+    "id": "a1b2c3d4-0006",
+    "title": "Culture & Traditions Algériennes",
+    "img": "/assets/gherdaia/guided-tours-with-algerian.jpg",
+    "cat": "culture",
+    "dur": "6 jours / 5 nuits",
+    "desc": "Une immersion profonde dans le patrimoine vivant de l'Algérie : de la musique andalouse d'Alger aux danses berbères de Ghardaïa, en passant par les secrets de la cuisine kabyle.",
+    "meta": [
+      { "icon": "📍", "label": "Alger → Tizi-Ouzou → Ghardaïa" },
+      { "icon": "👥", "label": "Groupes de 10 à 35 personnes" },
+      { "icon": "🎭", "label": "Spectacles culturels chaque soir" },
+      { "icon": "🤝", "label": "Rencontres avec artisans locaux" }
+    ],
+    "inclus": [
+      { "ico": "🎵", "txt": "Concert musique andalouse" },
+      { "ico": "🍲", "txt": "Cours de cuisine berbère" },
+      { "ico": "🧶", "txt": "Atelier tapis traditionnel" },
+      { "ico": "🏨", "txt": "Maisons d'hôtes authentiques" },
+      { "ico": "🧭", "txt": "Guides locaux passionnés" },
+      { "ico": "🎭", "txt": "Soirée culturelle chaque soir" }
+    ],
+    "programme": [
+      { "j": "J1", "titre": "Alger – Casbah & Musique", "desc": "Visite de la Casbah classée UNESCO, soirée concert andalou." },
+      { "j": "J2", "titre": "Kabylie & Artisanat", "desc": "Tizi-Ouzou, bijoux kabyles, démonstration poterie." },
+      { "j": "J3", "titre": "Villages berbères", "desc": "Randonnée en village montagnard, déjeuner chez l'habitant." },
+      { "j": "J4", "titre": "Cours de Cuisine", "desc": "Atelier couscous et tajine berbère, marché du village." },
+      { "j": "J5", "titre": "Ghardaïa & M'Zab", "desc": "Cité mozabite, souk historique, soirée musicale gnaoua." },
+      { "j": "J6", "titre": "Retour & Souvenirs", "desc": "Shopping artisanat, transfert aéroport." }
+    ]
+  }
+]
