@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { UIProvider } from '@/context/UIContext'
+import { LangProvider } from '@/context/LangContext'
+import { ThemeProvider } from '@/context/ThemeContext'
 import Nav from '@/components/Nav'
 import Sidebar from '@/components/Sidebar'
 import Footer from '@/components/Footer'
@@ -30,6 +32,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body>
+        <ThemeProvider>
+        <LangProvider>
         <UIProvider>
           <Nav />
           <Sidebar />
@@ -48,6 +52,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </svg>
           </a>
         </UIProvider>
+        </LangProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

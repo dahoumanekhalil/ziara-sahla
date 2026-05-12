@@ -3,15 +3,8 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useUI } from '@/context/UIContext'
+import { useLang } from '@/context/LangContext'
 import type { Offer } from '@/lib/types'
-
-const filterLabels = [
-  { key: 'all', label: 'Toutes les offres' },
-  { key: 'sahara', label: '🏜️ Sahara' },
-  { key: 'culture', label: '🏛️ Culture' },
-  { key: 'premium', label: '👑 Premium' },
-  { key: 'corporate', label: '🏢 Corporate' },
-]
 
 const catDisplayLabels: Record<string, string> = {
   sahara: 'Sahara',
@@ -22,6 +15,8 @@ const catDisplayLabels: Record<string, string> = {
 
 export default function OffresClient({ offers }: { offers: Offer[] }) {
   const { openModal } = useUI()
+  const { tr } = useLang()
+  const o = tr.offresPage
   const [activeFilter, setActiveFilter] = useState('all')
   const [detailIdx, setDetailIdx] = useState<number | null>(null)
   const [quoteOpen, setQuoteOpen] = useState(false)
@@ -48,7 +43,7 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
     return () => { document.body.style.overflow = '' }
   }, [detailIdx, quoteOpen])
 
-  const filtered = activeFilter === 'all' ? offers : offers.filter(o => o.cat === activeFilter)
+  const filtered = activeFilter === 'all' ? offers : offers.filter(of => of.cat === activeFilter)
 
   function openQuote(name = '') {
     setSelectedOffer(name)
@@ -59,28 +54,36 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
   function submitQuote(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const btn = e.currentTarget.querySelector('.form-submit') as HTMLButtonElement
-    btn.textContent = '✓ Demande envoyée !'
+    btn.textContent = tr.offresModal.successMsg
     btn.style.background = '#2E7D32'
     btn.disabled = true
     setTimeout(() => {
       setQuoteOpen(false)
-      btn.textContent = 'Envoyer ma demande →'
+      btn.textContent = tr.offresModal.submit
       btn.style.background = ''
       btn.disabled = false
       ;(e.currentTarget as HTMLFormElement)?.reset()
     }, 3200)
   }
 
+  function getPriceLabel(cat: string) {
+    if (cat === 'premium') return o.pricePremium
+    if (cat === 'corporate') return o.priceCorporate
+    if (cat === 'sahara') return o.priceSahara
+    return o.priceDefault
+  }
+
   const detail = detailIdx !== null ? filtered[detailIdx] : null
+  const m = tr.offresModal
 
   return (
     <>
       {/* PAGE BANNER */}
       <section className="page-banner">
         <div className="container">
-          <span className="badge">Voyages &amp; Circuits</span>
-          <h1>Nos Offres en Algérie</h1>
-          <p>Du désert saharien aux cités millénaires, choisissez l&apos;aventure qui vous correspond.</p>
+          <span className="badge">{o.badge}</span>
+          <h1>{o.title}</h1>
+          <p>{o.sub}</p>
         </div>
       </section>
 
@@ -90,7 +93,7 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
 
           {/* Filter bar */}
           <div className="filter-bar reveal">
-            {filterLabels.map(f => (
+            {o.filters.map(f => (
               <button
                 key={f.key}
                 className={`filter-btn${activeFilter === f.key ? ' active' : ''}`}
@@ -112,9 +115,9 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
                 <div className="offer-img">
                   <Image src={offer.img} alt={offer.title} width={400} height={240} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   <span className="offer-cat">{catDisplayLabels[offer.cat] ?? offer.cat}</span>
-                  {offer.cat === 'sahara' && <span className="offer-status status-hot">Populaire</span>}
-                  {offer.cat === 'premium' && <span className="offer-status status-top">Best-seller</span>}
-                  {offer.cat === 'corporate' && <span className="offer-status status-promo">Entreprises</span>}
+                  {offer.cat === 'sahara' && <span className="offer-status status-hot">{o.statusSahara}</span>}
+                  {offer.cat === 'premium' && <span className="offer-status status-top">{o.statusPremium}</span>}
+                  {offer.cat === 'corporate' && <span className="offer-status status-promo">{o.statusCorporate}</span>}
                   <span className="offer-duration">🗓️ {offer.dur}</span>
                 </div>
                 <div className="offer-body">
@@ -127,12 +130,12 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
                   </ul>
                   <div className="offer-foot">
                     <div className="offer-price">
-                      <span className="from">{offer.cat === 'premium' ? 'Tarif premium' : offer.cat === 'corporate' ? 'Tarif groupe' : 'À partir de'}</span>
-                      <strong>Sur devis</strong> <small>/ pers.</small>
+                      <span className="from">{getPriceLabel(offer.cat)}</span>
+                      <strong>{o.priceValue}</strong> <small>{o.perPerson}</small>
                     </div>
                     <div style={{ display: 'flex', gap: '8px' }}>
-                      <button className="offer-detail" onClick={() => setDetailIdx(i)}>Détails</button>
-                      <button className="offer-devis" onClick={() => openQuote(offer.title)}>Devis →</button>
+                      <button className="offer-detail" onClick={() => setDetailIdx(i)}>{o.detailBtn}</button>
+                      <button className="offer-devis" onClick={() => openQuote(offer.title)}>{o.quoteBtn}</button>
                     </div>
                   </div>
                 </div>
@@ -147,12 +150,12 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
         <div className="container">
           <div className="custom-inner">
             <div className="custom-text">
-              <h2>Votre voyage sur mesure</h2>
-              <p>Vous avez un projet spécial — mariage, pèlerinage, voyage scolaire, anniversaire ? Nous construisons un circuit unique rien que pour votre groupe.</p>
+              <h2>{o.customTitle}</h2>
+              <p>{o.customSub}</p>
             </div>
             <div className="custom-actions">
-              <button className="btn btn-primary" onClick={() => openQuote()}>Demander un devis sur mesure →</button>
-              <Link href="/contact" className="btn btn-ghost">Nous contacter</Link>
+              <button className="btn btn-primary" onClick={() => openQuote()}>{o.customBtn}</button>
+              <Link href="/contact" className="btn btn-ghost">{o.contactBtn}</Link>
             </div>
           </div>
         </div>
@@ -162,7 +165,7 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
       {detail && (
         <div className="modal-overlay open" onClick={() => setDetailIdx(null)}>
           <div className="detail-modal" onClick={e => e.stopPropagation()}>
-            <button className="modal-x" onClick={() => setDetailIdx(null)} style={{ top: '14px', right: '14px', background: 'rgba(0,0,0,.35)', color: '#fff' }} aria-label="Fermer">✕</button>
+            <button className="modal-x" onClick={() => setDetailIdx(null)} style={{ top: '14px', right: '14px', background: 'rgba(0,0,0,.35)', color: '#fff' }} aria-label="Close">✕</button>
             <div className="detail-hero">
               <Image src={detail.img} alt={detail.title} width={800} height={300} style={{ width: '100%', height: '260px', objectFit: 'cover' }} />
               <div className="detail-hero-info">
@@ -177,11 +180,11 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
                 ))}
               </div>
               <div className="detail-section">
-                <h4>À propos de ce circuit</h4>
+                <h4>{o.aboutCircuit}</h4>
                 <p className="detail-desc">{detail.desc}</p>
               </div>
               <div className="detail-section">
-                <h4>Ce qui est inclus</h4>
+                <h4>{o.includedLabel}</h4>
                 <ul className="detail-feats">
                   {detail.inclus.map((f, i) => (
                     <li key={i}><span className="df-ico">{f.ico}</span> {f.txt}</li>
@@ -189,7 +192,7 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
                 </ul>
               </div>
               <div className="detail-section">
-                <h4>Programme jour par jour</h4>
+                <h4>{o.programLabel}</h4>
                 <ul className="detail-prog">
                   {detail.programme.map((p, i) => (
                     <li className="detail-day" key={i}>
@@ -201,12 +204,12 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
               </div>
               <div className="detail-foot">
                 <div className="detail-price">
-                  <span className="det-from">À partir de</span>
-                  <strong>Sur devis</strong>
+                  <span className="det-from">{o.fromLabel}</span>
+                  <strong>{o.priceValue}</strong>
                 </div>
                 <div className="detail-actions">
-                  <button className="offer-detail" onClick={() => setDetailIdx(null)}>Fermer</button>
-                  <button className="offer-devis" onClick={() => openQuote(detail.title)}>Demander un devis →</button>
+                  <button className="offer-detail" onClick={() => setDetailIdx(null)}>{o.closeBtn}</button>
+                  <button className="offer-devis" onClick={() => openQuote(detail.title)}>{o.sendQuote}</button>
                 </div>
               </div>
             </div>
@@ -218,38 +221,33 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
       {quoteOpen && (
         <div className="modal-overlay open" onClick={() => setQuoteOpen(false)}>
           <div className="modal" onClick={e => e.stopPropagation()}>
-            <button className="modal-x" onClick={() => setQuoteOpen(false)} aria-label="Fermer">✕</button>
-            <h2>Demande de devis</h2>
-            <p className="sub">Remplissez ce formulaire et notre équipe vous contacte sous 24h.</p>
+            <button className="modal-x" onClick={() => setQuoteOpen(false)} aria-label="Close">✕</button>
+            <h2>{m.title}</h2>
+            <p className="sub">{m.sub}</p>
             <form onSubmit={submitQuote}>
               <div className="fg-row">
-                <div className="fg"><label htmlFor="qm-prenom">Prénom *</label><input type="text" id="qm-prenom" placeholder="Marie" required /></div>
-                <div className="fg"><label htmlFor="qm-nom">Nom *</label><input type="text" id="qm-nom" placeholder="Dupont" required /></div>
+                <div className="fg"><label>{m.firstName}</label><input type="text" placeholder="Marie" required /></div>
+                <div className="fg"><label>{m.lastName}</label><input type="text" placeholder="Dupont" required /></div>
               </div>
-              <div className="fg"><label htmlFor="qm-email">Email *</label><input type="email" id="qm-email" placeholder="marie@exemple.com" required /></div>
-              <div className="fg"><label htmlFor="qm-tel">Téléphone</label><input type="tel" id="qm-tel" placeholder="+33 6 12 34 56 78" /></div>
+              <div className="fg"><label>{m.email}</label><input type="email" placeholder="marie@exemple.com" required /></div>
+              <div className="fg"><label>{m.phone}</label><input type="tel" placeholder="+33 6 12 34 56 78" /></div>
               <div className="fg-row">
                 <div className="fg">
-                  <label htmlFor="qm-groupe">Taille du groupe</label>
-                  <select id="qm-groupe">
-                    <option value="">Sélectionner</option>
-                    <option>1 – 10 personnes</option>
-                    <option>11 – 25 personnes</option>
-                    <option>26 – 50 personnes</option>
-                    <option>50+ personnes</option>
+                  <label>{m.groupSize}</label>
+                  <select>
+                    {m.groupOptions.map((opt, i) => <option key={i} value={i === 0 ? '' : opt}>{opt}</option>)}
                   </select>
                 </div>
                 <div className="fg">
-                  <label htmlFor="qm-offre">Offre souhaitée</label>
-                  <select id="qm-offre" value={selectedOffer} onChange={e => setSelectedOffer(e.target.value)}>
-                    <option value="">Sélectionner</option>
-                    {offers.map(o => <option key={o.id} value={o.title}>{o.title}</option>)}
-                    <option>Sur mesure</option>
+                  <label>{m.desiredOffer}</label>
+                  <select value={selectedOffer} onChange={e => setSelectedOffer(e.target.value)}>
+                    <option value="">{m.groupOptions[0]}</option>
+                    {offers.map(of => <option key={of.id} value={of.title}>{of.title}</option>)}
                   </select>
                 </div>
               </div>
-              <div className="fg"><label htmlFor="qm-msg">Message</label><textarea id="qm-msg" placeholder="Dates souhaitées, besoins spécifiques…"></textarea></div>
-              <button type="submit" className="form-submit">Envoyer ma demande →</button>
+              <div className="fg"><label>{m.message}</label><textarea placeholder={m.messagePlaceholder}></textarea></div>
+              <button type="submit" className="form-submit">{m.submit}</button>
             </form>
           </div>
         </div>

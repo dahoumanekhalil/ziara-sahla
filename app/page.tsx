@@ -3,9 +3,11 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useUI } from "@/context/UIContext";
+import { useLang } from "@/context/LangContext";
 
 export default function HomePage() {
   const { openModal } = useUI();
+  const { tr } = useLang();
   const planeStarted = useRef(false);
 
   useEffect(() => {
@@ -100,69 +102,48 @@ export default function HomePage() {
 
         <div className="container">
           <div className="hero-content">
-            <div className="hero-eyebrow">
-              Voyages culturels de groupe en Algérie
+            {/* Big brand logo seal */}
+            <div className="hero-brand">
+              <Image
+                src="/assets/logo/logo.png"
+                alt="Ziara-Sahla"
+                width={110}
+                height={110}
+                className="hero-brand-logo"
+                draggable={false}
+              />
+              <div>
+                <div className="hero-brand-name">Ziara-Sahla</div>
+                <div className="hero-brand-tagline">{tr.hero.eyebrow}</div>
+              </div>
             </div>
+
             <h1 className="hero-title">
-              L&apos;Algérie authentique,
+              {tr.hero.title1}
               <br />
-              <em>organisée pour vous.</em>
+              <em>{tr.hero.title2}</em>
             </h1>
-            <p className="hero-sub">
-              Ziara-Sahla conçoit des circuits culturels sur mesure pour
-              groupes, associations et entreprises européennes. Sécurisés,
-              immersifs et inoubliables.
-            </p>
+            <p className="hero-sub">{tr.hero.sub}</p>
             <div className="hero-actions">
               <button className="btn btn-primary" onClick={openModal}>
-                <svg
-                  width="17"
-                  height="17"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.81 19.79 19.79 0 01.02 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16z" />
                 </svg>
-                Demandez un devis
+                {tr.hero.cta1}
               </button>
               <a href="#services" className="btn btn-outline">
-                Découvrir nos circuits
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                >
+                {tr.hero.cta2}
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                   <polyline points="9 18 15 12 9 6" />
                 </svg>
               </a>
-            </div>
-            <div className="hero-stats">
-              <div className="hero-stat">
-                <strong>+200</strong>
-                <span>Groupes accompagnés</span>
-              </div>
-              <div className="hero-stat">
-                <strong>12</strong>
-                <span>Wilayates couvertes</span>
-              </div>
-              <div className="hero-stat">
-                <strong>100%</strong>
-                <span>Sécurisé &amp; assuré</span>
-              </div>
             </div>
           </div>
         </div>
 
         <div className="hero-scroll">
           <div className="scroll-pill"></div>
-          Découvrir
+          {tr.hero.discover}
         </div>
       </section>
 
@@ -190,50 +171,43 @@ export default function HomePage() {
               <div className="about-float">
                 <div className="ico">🏆</div>
                 <div>
-                  <strong>Agréé &amp; certifié</strong>
-                  <span>Opérateur touristique officiel</span>
+                  <strong>{tr.about.cert}</strong>
+                  <span>{tr.about.certSub}</span>
                 </div>
               </div>
             </div>
 
             <div className="about-text reveal-r">
-              <span className="badge">Qui sommes-nous</span>
-              <h2 className="section-title">
-                L&apos;expertise franco-algérienne au service de votre voyage
-              </h2>
-              <p className="section-sub">
-                Fondée par une équipe binationale passionnée, Ziara-Sahla est
-                votre pont entre l&apos;Europe et l&apos;âme profonde de
-                l&apos;Algérie. Nous ne vendons pas des voyages — nous créons
-                des expériences mémorables, en toute sécurité.
-              </p>
+              <span className="badge">{tr.about.badge}</span>
+              <h2 className="section-title">{tr.about.title}</h2>
+              <p className="section-sub">{tr.about.sub}</p>
               <div className="feat-grid">
                 <div className="feat">
                   <div className="ico">🌍</div>
                   <div>
-                    <strong>Bilinguisme total</strong>
-                    <p>Guides francophones natifs</p>
+                    <strong>{tr.about.feat1.title}</strong>
+                    <p>{tr.about.feat1.desc}</p>
                   </div>
                 </div>
                 <div className="feat">
                   <div className="ico">🛡️</div>
                   <div>
-                    <strong>Sécurité garantie</strong>
-                    <p>Escorte policière 24h/24</p>
+                    <strong>{tr.about.feat2.title}</strong>
+                    <p>{tr.about.feat2.desc}</p>
                   </div>
                 </div>
                 <div className="feat">
                   <div className="ico">🏨</div>
                   <div>
-                    <strong>Logistique complète</strong>
-                    <p>Hôtels, transport, repas</p>
+                    <strong>{tr.about.feat3.title}</strong>
+                    <p>{tr.about.feat3.desc}</p>
                   </div>
                 </div>
                 <div className="feat">
                   <div className="ico">🤝</div>
                   <div>
-                    <strong>Sur mesure</strong>
-                    <p>Adapté à chaque groupe</p>
+                    <strong>{tr.about.feat4.title}</strong>
+                    <p>{tr.about.feat4.desc}</p>
                   </div>
                 </div>
               </div>
@@ -246,107 +220,50 @@ export default function HomePage() {
       <section id="services">
         <div className="container">
           <div className="services-head reveal">
-            <span className="badge">Nos circuits</span>
-            <h2 className="section-title">
-              Choisissez votre formule de voyage
-            </h2>
-            <p className="section-sub">
-              Trois niveaux d&apos;expérience, une seule promesse : authenticité
-              et sécurité.
-            </p>
+            <span className="badge">{tr.services.badge}</span>
+            <h2 className="section-title">{tr.services.title}</h2>
+            <p className="section-sub">{tr.services.sub}</p>
           </div>
 
           <div className="cards">
             <div className="card reveal" style={{ transitionDelay: ".08s" }}>
               <div className="card-img">
-                <Image
-                  src="/assets/hotels/exterior.jpg"
-                  alt="Hébergement économique"
-                  width={400}
-                  height={210}
-                  loading="lazy"
-                />
+                <Image src="/assets/hotels/exterior.jpg" alt="Hébergement économique" width={400} height={210} loading="lazy" />
               </div>
               <div className="card-body">
                 <div className="card-icon ci-eco">🌿</div>
-                <div className="card-label">Formule 01</div>
-                <h3>Économique</h3>
-                <p>
-                  L&apos;essentiel de l&apos;Algérie pour les groupes soucieux
-                  du budget. Confort simple, authenticité totale.
-                </p>
+                <div className="card-label">{tr.services.card1.label}</div>
+                <h3>{tr.services.card1.title}</h3>
+                <p>{tr.services.card1.desc}</p>
                 <ul className="card-feats">
-                  <li>Hébergement 2-3 étoiles</li>
-                  <li>Transport bus climatisé</li>
-                  <li>Guide francophone</li>
-                  <li>Repas traditionnels inclus</li>
-                  <li>Assistance 7j/7</li>
+                  {tr.services.feats1.map((f, i) => <li key={i}>{f}</li>)}
                 </ul>
                 <div className="card-foot">
-                  <div className="card-price">
-                    Sur devis <small>/ pers.</small>
-                  </div>
-                  <button
-                    className="card-link"
-                    onClick={openModal}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      padding: 0,
-                    }}
-                  >
-                    En savoir plus →
+                  <div className="card-price">{tr.services.priceLabel} <small>/ pers.</small></div>
+                  <button className="card-link" onClick={openModal} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                    {tr.services.moreBtn}
                   </button>
                 </div>
               </div>
             </div>
 
-            <div
-              className="card featured reveal"
-              style={{ transitionDelay: ".16s" }}
-            >
-              <div className="ribbon">Populaire</div>
+            <div className="card featured reveal" style={{ transitionDelay: ".16s" }}>
+              <div className="ribbon">{tr.services.card2.ribbon}</div>
               <div className="card-img">
-                <Image
-                  src="/assets/hotels/algiers-marriott-hotel.jpg"
-                  alt="Hôtel intermédiaire Alger"
-                  width={400}
-                  height={210}
-                  loading="lazy"
-                />
+                <Image src="/assets/hotels/algiers-marriott-hotel.jpg" alt="Hôtel intermédiaire Alger" width={400} height={210} loading="lazy" />
               </div>
               <div className="card-body">
                 <div className="card-icon ci-mid">✨</div>
-                <div className="card-label">Formule 02</div>
-                <h3>Intermédiaire</h3>
-                <p>
-                  Le parfait équilibre entre confort et immersion culturelle.
-                  Notre formule la plus demandée.
-                </p>
+                <div className="card-label">{tr.services.card2.label}</div>
+                <h3>{tr.services.card2.title}</h3>
+                <p>{tr.services.card2.desc}</p>
                 <ul className="card-feats">
-                  <li>Hébergement 3-4 étoiles</li>
-                  <li>Transport privé VIP</li>
-                  <li>Guide expert bilingue</li>
-                  <li>Excursions culturelles</li>
-                  <li>Escorte sécuritaire incluse</li>
-                  <li>Assistance 24h/24</li>
+                  {tr.services.feats2.map((f, i) => <li key={i}>{f}</li>)}
                 </ul>
                 <div className="card-foot">
-                  <div className="card-price">
-                    Sur devis <small>/ pers.</small>
-                  </div>
-                  <button
-                    className="card-link"
-                    onClick={openModal}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      padding: 0,
-                    }}
-                  >
-                    En savoir plus →
+                  <div className="card-price">{tr.services.priceLabel} <small>/ pers.</small></div>
+                  <button className="card-link" onClick={openModal} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                    {tr.services.moreBtn}
                   </button>
                 </div>
               </div>
@@ -354,45 +271,20 @@ export default function HomePage() {
 
             <div className="card reveal" style={{ transitionDelay: ".24s" }}>
               <div className="card-img">
-                <Image
-                  src="/assets/hotels/sheraton-club-des-pins-resort-general-1267fc26.jpg"
-                  alt="Sheraton Club des Pins Alger"
-                  width={400}
-                  height={210}
-                  loading="lazy"
-                />
+                <Image src="/assets/hotels/sheraton-club-des-pins-resort-general-1267fc26.jpg" alt="Sheraton Club des Pins Alger" width={400} height={210} loading="lazy" />
               </div>
               <div className="card-body">
                 <div className="card-icon ci-prem">👑</div>
-                <div className="card-label">Formule 03</div>
-                <h3>Premium</h3>
-                <p>
-                  Une expérience d&apos;exception, taillée sur mesure pour les
-                  groupes exigeants et les événements corporate.
-                </p>
+                <div className="card-label">{tr.services.card3.label}</div>
+                <h3>{tr.services.card3.title}</h3>
+                <p>{tr.services.card3.desc}</p>
                 <ul className="card-feats">
-                  <li>Hébergement 4-5 étoiles</li>
-                  <li>Flotte de véhicules dédiés</li>
-                  <li>Guide expert + interprète</li>
-                  <li>Programme personnalisé</li>
-                  <li>Escorte VIP garantie</li>
-                  <li>Conciergerie dédiée</li>
+                  {tr.services.feats3.map((f, i) => <li key={i}>{f}</li>)}
                 </ul>
                 <div className="card-foot">
-                  <div className="card-price">
-                    Sur devis <small>/ pers.</small>
-                  </div>
-                  <button
-                    className="card-link"
-                    onClick={openModal}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      padding: 0,
-                    }}
-                  >
-                    En savoir plus →
+                  <div className="card-price">{tr.services.priceLabel} <small>/ pers.</small></div>
+                  <button className="card-link" onClick={openModal} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                    {tr.services.moreBtn}
                   </button>
                 </div>
               </div>
@@ -405,95 +297,32 @@ export default function HomePage() {
       <section id="trust">
         <div className="container">
           <div style={{ maxWidth: "600px" }}>
-            <span className="badge">Confiance &amp; Sécurité</span>
-            <h2 className="section-title reveal">
-              Votre sécurité est notre priorité absolue
-            </h2>
-            <p
-              className="section-sub reveal"
-              style={{ color: "rgba(255,255,255,.55)" }}
-            >
-              Chaque circuit est organisé avec le plus haut niveau de sécurité
-              pour vous offrir une sérénité totale.
-            </p>
+            <span className="badge">{tr.trust.badge}</span>
+            <h2 className="section-title reveal">{tr.trust.title}</h2>
+            <p className="section-sub reveal" style={{ color: "rgba(255,255,255,.55)" }}>{tr.trust.sub}</p>
           </div>
 
           <div className="trust-cards">
-            <div className="tc reveal" style={{ transitionDelay: ".05s" }}>
-              <div className="tc-icon">🚔</div>
-              <h3>Escorte policière</h3>
-              <p>
-                Chaque groupe bénéficie d&apos;une escorte officielle des forces
-                de l&apos;ordre algériennes sur tout le parcours.
-              </p>
-            </div>
-            <div className="tc reveal" style={{ transitionDelay: ".11s" }}>
-              <div className="tc-icon">📞</div>
-              <h3>Assistance 24h/24</h3>
-              <p>
-                Une équipe dédiée disponible à toute heure, urgences médicales
-                incluses.
-              </p>
-            </div>
-            <div className="tc reveal" style={{ transitionDelay: ".17s" }}>
-              <div className="tc-icon">🗺️</div>
-              <h3>Logistique maîtrisée</h3>
-              <p>
-                Transport, hébergements, restauration et activités — tout
-                planifié avant votre arrivée.
-              </p>
-            </div>
-            <div className="tc reveal" style={{ transitionDelay: ".23s" }}>
-              <div className="tc-icon">🏥</div>
-              <h3>Couverture médicale</h3>
-              <p>
-                Partenariat avec des structures médicales locales. Médecin
-                référent disponible pour les longs séjours.
-              </p>
-            </div>
-            <div className="tc reveal" style={{ transitionDelay: ".29s" }}>
-              <div className="tc-icon">📋</div>
-              <h3>Accréditation officielle</h3>
-              <p>
-                Opérateur agréé par le Ministère du Tourisme algérien. Vos
-                droits sont protégés.
-              </p>
-            </div>
-            <div className="tc reveal" style={{ transitionDelay: ".35s" }}>
-              <div className="tc-icon">🛡️</div>
-              <h3>Assurance incluse</h3>
-              <p>
-                Chaque participant est couvert par une assurance rapatriement et
-                responsabilité civile complète.
-              </p>
-            </div>
+            {tr.trust.cards.map((card, i) => (
+              <div className="tc reveal" key={i} style={{ transitionDelay: `${.05 + i * .06}s` }}>
+                <div className="tc-icon">{['🚔','📞','🗺️','🏥','📋','🛡️'][i]}</div>
+                <h3>{card.title}</h3>
+                <p>{card.desc}</p>
+              </div>
+            ))}
           </div>
 
-          <div className="trust-bar reveal">
-            <div className="tb-stat">
-              <strong>200+</strong>
-              <span>Groupes accompagnés</span>
-            </div>
+          {/* trust-bar hidden until real stats are ready */}
+          <div className="trust-bar reveal" style={{ display: 'none' }}>
+            <div className="tb-stat"><strong>200+</strong><span>Groupes accompagnés</span></div>
             <div className="tb-div"></div>
-            <div className="tb-stat">
-              <strong>0</strong>
-              <span>Incident de sécurité</span>
-            </div>
+            <div className="tb-stat"><strong>0</strong><span>Incident de sécurité</span></div>
             <div className="tb-div"></div>
-            <div className="tb-stat">
-              <strong>5★</strong>
-              <span>Note moyenne clients</span>
-            </div>
+            <div className="tb-stat"><strong>5★</strong><span>Note moyenne clients</span></div>
             <div className="tb-div"></div>
-            <div className="tb-stat">
-              <strong>15+</strong>
-              <span>Pays d&apos;origine</span>
-            </div>
+            <div className="tb-stat"><strong>15+</strong><span>Pays d&apos;origine</span></div>
             <div className="tb-div"></div>
-            <div className="tb-stat">
-              <strong>100%</strong>
-              <span>Satisfaction garantie</span>
-            </div>
+            <div className="tb-stat"><strong>100%</strong><span>Satisfaction garantie</span></div>
           </div>
         </div>
       </section>
@@ -513,73 +342,24 @@ export default function HomePage() {
               />
               <div className="why-visual-overlay"></div>
               <blockquote className="why-quote">
-                &ldquo;Un voyage en Algérie avec Ziara Sahla, c&apos;est bien
-                plus qu&apos;un circuit — c&apos;est une rencontre avec une
-                civilisation millénaire.&rdquo;
-                <cite>— Marie D., Chef de projet, Paris</cite>
+                &ldquo;{tr.why.quote}&rdquo;
+                <cite>{tr.why.quoteAuthor}</cite>
               </blockquote>
             </div>
 
             <div className="reveal-r">
-              <span className="badge">Pourquoi nous choisir</span>
-              <h2 className="section-title">
-                Ce qui fait de nous votre meilleur partenaire voyage
-              </h2>
+              <span className="badge">{tr.why.badge}</span>
+              <h2 className="section-title">{tr.why.title}</h2>
               <div className="why-list">
-                <div className="why-item">
-                  <div className="why-num">01</div>
-                  <div>
-                    <strong>Double culture, double expertise</strong>
-                    <p>
-                      Notre équipe binationale comprend vos attentes européennes
-                      et connaît l&apos;Algérie comme sa poche. Aucune mauvaise
-                      surprise.
-                    </p>
+                {tr.why.items.map((item, i) => (
+                  <div className="why-item" key={i}>
+                    <div className="why-num">0{i + 1}</div>
+                    <div>
+                      <strong>{item.title}</strong>
+                      <p>{item.desc}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="why-item">
-                  <div className="why-num">02</div>
-                  <div>
-                    <strong>Circuits hors des sentiers battus</strong>
-                    <p>
-                      Sahara, Tassili, Ghardaïa, Béjaïa, Tipaza… Nous ouvrons
-                      des portes que les agences ordinaires n&apos;osent pas
-                      franchir.
-                    </p>
-                  </div>
-                </div>
-                <div className="why-item">
-                  <div className="why-num">03</div>
-                  <div>
-                    <strong>Tout inclus, zéro stress</strong>
-                    <p>
-                      De votre arrivée à l&apos;aéroport jusqu&apos;à votre
-                      départ, tout est pris en charge. Vous profitez, nous
-                      gérons.
-                    </p>
-                  </div>
-                </div>
-                <div className="why-item">
-                  <div className="why-num">04</div>
-                  <div>
-                    <strong>Idéal pour entreprises &amp; associations</strong>
-                    <p>
-                      Teambuilding, voyages d&apos;études, retraites
-                      associatives — nous avons l&apos;expertise pour tous les
-                      profils de groupe.
-                    </p>
-                  </div>
-                </div>
-                <div className="why-item">
-                  <div className="why-num">05</div>
-                  <div>
-                    <strong>Transparence totale des prix</strong>
-                    <p>
-                      Devis détaillé sans surprise. Vous savez exactement ce que
-                      vous payez et ce que vous recevez.
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -590,142 +370,57 @@ export default function HomePage() {
       <section id="gallery">
         <div className="container">
           <div className="gallery-head reveal">
-            <span className="badge">Galerie</span>
-            <h2 className="section-title">
-              L&apos;Algérie vue par nos voyageurs
-            </h2>
-            <p className="section-sub">
-              Des paysages à couper le souffle qui ne demandent qu&apos;à être
-              vécus de l&apos;intérieur.
-            </p>
+            <span className="badge">{tr.gallery.badge}</span>
+            <h2 className="section-title">{tr.gallery.title}</h2>
+            <p className="section-sub">{tr.gallery.sub}</p>
           </div>
 
           <div className="gallery-grid reveal">
             <div className="gi gi-1">
-              <Image
-                src="/assets/sahara/sahara-desert.jpg"
-                alt="Grand Erg Oriental – Sahara algérien"
-                width={600}
-                height={460}
-                loading="lazy"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
+              <Image src="/assets/sahara/sahara-desert.jpg" alt="Grand Erg Oriental – Sahara algérien" width={600} height={460} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               <span className="gi-label">Sahara</span>
             </div>
             <div className="gi gi-2">
-              <Image
-                src="/assets/gherdaia/ghardaia-Par-VisualEyze-min.jpg"
-                alt="Ghardaïa – Vallée du M'Zab"
-                width={400}
-                height={230}
-                loading="lazy"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
+              <Image src="/assets/gherdaia/ghardaia-Par-VisualEyze-min.jpg" alt="Ghardaïa – Vallée du M'Zab" width={400} height={230} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               <span className="gi-label">Ghardaïa</span>
             </div>
             <div className="gi gi-3">
-              <Image
-                src="/assets/hotels/getlstd-property-photo.jpg"
-                alt="Hôtel de charme"
-                width={300}
-                height={230}
-                loading="lazy"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
+              <Image src="/assets/hotels/getlstd-property-photo.jpg" alt="Hôtel de charme" width={300} height={230} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               <span className="gi-label">Hébergement</span>
             </div>
             <div className="gi gi-4">
-              <Image
-                src="/assets/gherdaia/association-d-orientation.jpg"
-                alt="Visite culturelle guidée"
-                width={300}
-                height={230}
-                loading="lazy"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
+              <Image src="/assets/gherdaia/association-d-orientation.jpg" alt="Visite culturelle guidée" width={300} height={230} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               <span className="gi-label">Culture</span>
             </div>
             <div className="gi gi-5">
-              <Image
-                src="/assets/hotels/649232884.jpg"
-                alt="Piscine hôtel Algérie"
-                width={400}
-                height={230}
-                loading="lazy"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
+              <Image src="/assets/hotels/649232884.jpg" alt="Piscine hôtel Algérie" width={400} height={230} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               <span className="gi-label">Confort</span>
             </div>
           </div>
 
-          <div
-            className="gallery-grid reveal"
-            style={{ marginTop: "12px", gridTemplateRows: "200px" }}
-          >
+          <div className="gallery-grid reveal" style={{ marginTop: "12px", gridTemplateRows: "200px" }}>
             <div className="gi" style={{ gridColumn: "span 4" }}>
-              <Image
-                src="/assets/sahara/images.jpg"
-                alt="Dunes du Sahara"
-                width={400}
-                height={200}
-                loading="lazy"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
+              <Image src="/assets/sahara/images.jpg" alt="Dunes du Sahara" width={400} height={200} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               <span className="gi-label">Sahara</span>
             </div>
             <div className="gi" style={{ gridColumn: "span 4" }}>
-              <Image
-                src="/assets/hotels/4de8805405a9d2deb1ded672b3c4371cd996655229816595b538429ece31.webp"
-                alt="Hôtel luxe Algérie"
-                width={400}
-                height={200}
-                loading="lazy"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
+              <Image src="/assets/hotels/4de8805405a9d2deb1ded672b3c4371cd996655229816595b538429ece31.webp" alt="Hôtel luxe Algérie" width={400} height={200} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               <span className="gi-label">Hôtel</span>
             </div>
             <div className="gi" style={{ gridColumn: "span 4" }}>
-              <Image
-                src="/assets/gherdaia/Ghardaia-1.jpeg"
-                alt="Ghardaïa panorama"
-                width={400}
-                height={200}
-                loading="lazy"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
+              <Image src="/assets/gherdaia/Ghardaia-1.jpeg" alt="Ghardaïa panorama" width={400} height={200} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               <span className="gi-label">Ghardaïa</span>
             </div>
           </div>
 
-          <div
-            className="gallery-more reveal"
-            style={{
-              display: "flex",
-              gap: "14px",
-              justifyContent: "center",
-              flexWrap: "wrap",
-              marginTop: "32px",
-            }}
-          >
-            <Link href="/galerie" className="btn btn-primary">
-              Voir toute la galerie →
-            </Link>
+          <div className="gallery-more reveal" style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap", marginTop: "32px" }}>
+            <Link href="/galerie" className="btn btn-primary">{tr.gallery.viewAll}</Link>
             <button
               className="btn"
               onClick={openModal}
-              style={{
-                background: "transparent",
-                color: "var(--orange)",
-                border: "2px solid var(--orange)",
-                padding: "15px 32px",
-                borderRadius: "100px",
-                fontWeight: 600,
-                fontSize: ".95rem",
-                cursor: "pointer",
-                fontFamily: "Inter, sans-serif",
-              }}
+              style={{ background: "transparent", color: "var(--orange)", border: "2px solid var(--orange)", padding: "15px 32px", borderRadius: "100px", fontWeight: 600, fontSize: ".95rem", cursor: "pointer", fontFamily: "Inter, sans-serif" }}
             >
-              Organiser votre voyage
+              {tr.gallery.organize}
             </button>
           </div>
         </div>
@@ -736,15 +431,10 @@ export default function HomePage() {
         <div className="container">
           <div className="cta-inner reveal">
             <div className="cta-flag">
-              <span className="pulse"></span>Disponible maintenant
+              <span className="pulse"></span>{tr.cta.flag}
             </div>
-            <h2 className="cta-title">
-              Prêt à vivre l&apos;Algérie autrement ?
-            </h2>
-            <p className="cta-sub">
-              Demandez votre devis personnalisé gratuitement. Notre équipe vous
-              répond sous 24h.
-            </p>
+            <h2 className="cta-title">{tr.cta.title}</h2>
+            <p className="cta-sub">{tr.cta.sub}</p>
             <div className="cta-actions">
               <a
                 href="https://wa.me/213600000000?text=Bonjour%20Ziara-Sahla%2C%20je%20souhaite%20un%20devis%20pour%20un%20voyage%20en%20Alg%C3%A9rie."
@@ -755,7 +445,7 @@ export default function HomePage() {
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
-                Demandez votre devis sur WhatsApp
+                {tr.cta.btn1}
               </a>
               <a
                 href="https://wa.me/213600000000"
@@ -766,12 +456,10 @@ export default function HomePage() {
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
-                Discuter directement
+                {tr.cta.btn2}
               </a>
             </div>
-            <div className="urgency">
-              🗓️ Places limitées — Saison 2026 en cours de remplissage
-            </div>
+            <div className="urgency">{tr.cta.urgency}</div>
           </div>
         </div>
       </section>

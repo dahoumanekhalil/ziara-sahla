@@ -1,97 +1,64 @@
-import Link from "next/link";
-import Image from "next/image";
+'use client'
+import Link from 'next/link'
+import Image from 'next/image'
+import { useLang } from '@/context/LangContext'
 
 export default function Footer() {
+  const { tr } = useLang()
+
   return (
     <footer>
       <div className="container">
         <div className="footer-grid">
           <div>
             <div className="footer-logo">
-              <div className="logo-mark">
+              <div className="logo-mark logo-mark--lg">
                 <Image
                   src="/assets/logo/logo.png"
                   alt="Ziara-Sahla logo"
-                  width={42}
-                  height={42}
+                  width={60}
+                  height={60}
                   draggable={false}
                 />
               </div>
               Ziara-Sahla
             </div>
-            <p className="footer-about">
-              Votre spécialiste des voyages culturels de groupe en Algérie.
-              Sécurisés, authentiques et inoubliables depuis plus de 10 ans.
-            </p>
+            <p className="footer-about">{tr.footer.about}</p>
             <div className="socials">
-              <a href="#" className="soc" aria-label="Facebook">
-                f
-              </a>
-              <a href="#" className="soc" aria-label="Instagram">
-                ig
-              </a>
-              <a href="#" className="soc" aria-label="LinkedIn">
-                in
-              </a>
-              <a href="#" className="soc" aria-label="WhatsApp">
-                wa
-              </a>
+              <a href="#" className="soc" aria-label="Facebook">f</a>
+              <a href="#" className="soc" aria-label="Instagram">ig</a>
+              <a href="#" className="soc" aria-label="LinkedIn">in</a>
+              <a href="#" className="soc" aria-label="WhatsApp">wa</a>
             </div>
           </div>
 
           <div className="fcol">
-            <h4>Navigation</h4>
+            <h4>{tr.footer.navTitle}</h4>
             <ul className="flinks">
-              <li>
-                <Link href="/#about">À propos</Link>
-              </li>
-              <li>
-                <Link href="/#services">Nos circuits</Link>
-              </li>
-              <li>
-                <Link href="/offres">Nos offres</Link>
-              </li>
-              <li>
-                <Link href="/#why">Pourquoi nous</Link>
-              </li>
-              <li>
-                <Link href="/galerie">Galerie</Link>
-              </li>
-              <li>
-                <Link href="/contact">Contact</Link>
-              </li>
+              <li><Link href="/#about">{tr.footer.nav.about}</Link></li>
+              <li><Link href="/#services">{tr.footer.nav.circuits}</Link></li>
+              <li><Link href="/offres">{tr.footer.nav.offers}</Link></li>
+              <li><Link href="/#why">{tr.footer.nav.why}</Link></li>
+              <li><Link href="/galerie">{tr.footer.nav.gallery}</Link></li>
+              <li><Link href="/contact">{tr.footer.nav.contact}</Link></li>
             </ul>
           </div>
 
           <div className="fcol">
-            <h4>Formules</h4>
+            <h4>{tr.footer.formulasTitle}</h4>
             <ul className="flinks">
-              <li>
-                <a href="#">Circuit Économique</a>
-              </li>
-              <li>
-                <a href="#">Circuit Intermédiaire</a>
-              </li>
-              <li>
-                <a href="#">Circuit Premium</a>
-              </li>
-              <li>
-                <a href="#">Sur mesure groupes</a>
-              </li>
-              <li>
-                <a href="#">Entreprises &amp; CE</a>
-              </li>
+              {tr.footer.formulas.map((f, i) => (
+                <li key={i}><a href="#">{f}</a></li>
+              ))}
             </ul>
           </div>
 
           <div className="fcol">
-            <h4>Contact</h4>
+            <h4>{tr.footer.contactTitle}</h4>
             <div className="fcontact">
               <div className="fci">
                 <span className="icon">📧</span>
-                <a href="mailto:contact@ziara-sahla.com">
-                  contact@ziara-sahla.com
-                </a>
+                <a href="mailto:contact@ziara-sahla.com">contact@ziara-sahla.com</a>
               </div>
               <div className="fci">
                 <span className="icon">📞</span>
@@ -110,13 +77,12 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <span>© 2026 Ziara-Sahla. Tous droits réservés.</span>
+          <span>{tr.footer.rights}</span>
           <span>
-            <a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> ·{" "}
-            <a href="#">CGV</a>
+            <a href="#">{tr.footer.legal}</a> · <a href="#">{tr.footer.privacy}</a> · <a href="#">{tr.footer.cgv}</a>
           </span>
         </div>
       </div>
     </footer>
-  );
+  )
 }

@@ -2,9 +2,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useUI } from '@/context/UIContext'
+import { useLang, Lang } from '@/context/LangContext'
+import { useTheme } from '@/context/ThemeContext'
 
 export default function Sidebar() {
   const { isSidebarOpen, closeSidebar, openModal } = useUI()
+  const { lang, setLang, tr } = useLang()
+  const { theme, toggleTheme } = useTheme()
 
   return (
     <>
@@ -22,8 +26,8 @@ export default function Sidebar() {
       >
         <div className="sidebar-head">
           <div className="sidebar-logo">
-            <div className="logo-mark">
-              <Image src="/assets/logo/logo.png" alt="Ziara-Sahla logo" width={42} height={42} draggable={false} />
+            <div className="logo-mark logo-mark--lg">
+              <Image src="/assets/logo/logo.png" alt="Ziara-Sahla logo" width={60} height={60} draggable={false} />
             </div>
             Ziara-Sahla
           </div>
@@ -31,22 +35,39 @@ export default function Sidebar() {
         </div>
 
         <nav className="sidebar-links">
-          <Link href="/#about" onClick={closeSidebar}>À propos <span className="arrow">›</span></Link>
-          <Link href="/#services" onClick={closeSidebar}>Nos circuits <span className="arrow">›</span></Link>
-          <Link href="/#trust" onClick={closeSidebar}>Sécurité <span className="arrow">›</span></Link>
-          <Link href="/#why" onClick={closeSidebar}>Pourquoi nous <span className="arrow">›</span></Link>
-          <Link href="/offres" onClick={closeSidebar}>Nos offres <span className="arrow">›</span></Link>
-          <Link href="/galerie" onClick={closeSidebar}>Galerie <span className="arrow">›</span></Link>
-          <Link href="/contact" onClick={closeSidebar}>Contact <span className="arrow">›</span></Link>
+          <Link href="/#about" onClick={closeSidebar}>{tr.sidebar.about} <span className="arrow">›</span></Link>
+          <Link href="/#services" onClick={closeSidebar}>{tr.sidebar.circuits} <span className="arrow">›</span></Link>
+          <Link href="/#trust" onClick={closeSidebar}>{tr.sidebar.security} <span className="arrow">›</span></Link>
+          <Link href="/#why" onClick={closeSidebar}>{tr.sidebar.why} <span className="arrow">›</span></Link>
+          <Link href="/offres" onClick={closeSidebar}>{tr.sidebar.offers} <span className="arrow">›</span></Link>
+          <Link href="/galerie" onClick={closeSidebar}>{tr.sidebar.gallery} <span className="arrow">›</span></Link>
+          <Link href="/contact" onClick={closeSidebar}>{tr.sidebar.contact} <span className="arrow">›</span></Link>
         </nav>
 
         <div className="sidebar-foot">
+          <div className="sidebar-controls">
+            <div className="lang-switch lang-switch--sidebar" role="group" aria-label="Language">
+              {(['fr', 'en', 'ar'] as Lang[]).map((l) => (
+                <button
+                  key={l}
+                  className={`lang-btn${lang === l ? ' active' : ''}`}
+                  onClick={() => setLang(l)}
+                  aria-pressed={lang === l}
+                >
+                  {l.toUpperCase()}
+                </button>
+              ))}
+            </div>
+            <button className="theme-toggle theme-toggle--sidebar" onClick={toggleTheme} aria-label="Toggle theme">
+              {theme === 'light' ? '🌙' : '☀️'}
+            </button>
+          </div>
           <button
             className="btn btn-primary"
             onClick={() => { openModal(); closeSidebar() }}
             style={{ width: '100%', justifyContent: 'center' }}
           >
-            Demandez un devis gratuit
+            {tr.sidebar.quoteBtn}
           </button>
           <div className="sidebar-contact">
             <p>📞 <a href="tel:+33123456789">+33 1 23 45 67 89</a></p>

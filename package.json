@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node -e \"const{rmSync,existsSync}=require('fs');existsSync('.next')&&rmSync('.next',{recursive:true,force:true})\"",
     "build": "next build",
     "start": "next start",
+    "clean": "node -e \"const{rmSync,existsSync}=require('fs');existsSync('.next')&&rmSync('.next',{recursive:true,force:true})\"",
     "lint": "next lint"
   },
   "dependencies": {
