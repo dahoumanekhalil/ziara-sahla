@@ -659,6 +659,23 @@ section { position: relative; overflow: hidden; }
 .pulse { display:inline-block; width:8px; height:8px; background:#7CFC00; border-radius:50%; margin-right:8px; animation:pulse 1.6s ease infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.45;transform:scale(1.6);} }
 
+/* ── CTA brand medallion ── */
+.cta-medallion { display:flex; flex-direction:column; align-items:center; gap:13px; margin-bottom:28px; }
+.cta-m-outer { position:relative; width:132px; height:132px; display:flex; align-items:center; justify-content:center; }
+.cta-m-glow { position:absolute; width:176px; height:176px; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.22) 0%,transparent 68%); animation:cm-breathe 3.4s ease-in-out infinite; pointer-events:none; }
+@keyframes cm-breathe { 0%,100%{transform:scale(1);opacity:.7;} 50%{transform:scale(1.13);opacity:1;} }
+.cta-m-ring { position:absolute; inset:0; border-radius:50%; border:1.5px dashed rgba(255,255,255,.45); animation:cm-spin 22s linear infinite; }
+.cta-m-ring::after { content:''; position:absolute; inset:-7px; border-radius:50%; border:1px solid rgba(255,255,255,.15); }
+@keyframes cm-spin { to{transform:rotate(360deg);} }
+.cta-m-circle { width:106px; height:106px; border-radius:50%; background:linear-gradient(148deg,#fff 0%,#F5ECD7 100%); border:3px solid rgba(255,255,255,.75); box-shadow:0 0 0 8px rgba(255,255,255,.1),0 18px 52px rgba(0,0,0,.28),inset 0 2px 0 rgba(255,255,255,.9); display:flex; align-items:center; justify-content:center; position:relative; z-index:2; }
+.cta-m-label { font-family:'Playfair Display',serif; font-style:italic; font-size:1.05rem; font-weight:600; color:rgba(255,255,255,.92); letter-spacing:.07em; text-shadow:0 1px 8px rgba(0,0,0,.25); }
+
+/* ── Gallery brand seal ── */
+.gallery-brand-seal { position:relative; width:60px; height:60px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center; }
+.gbs-ring { position:absolute; inset:0; border-radius:50%; border:2px solid var(--orange); opacity:.35; animation:gbs-spin 12s linear infinite; background:radial-gradient(circle at 30% 30%, rgba(224,123,57,.08), transparent 70%); }
+@keyframes gbs-spin { to{transform:rotate(360deg);} }
+.gbs-logo { border-radius:50% !important; position:relative; z-index:1; filter:drop-shadow(0 2px 10px rgba(224,123,57,.4)); }
+
 /* ═══════════════════════════════════
    FOOTER
 ═══════════════════════════════════ */

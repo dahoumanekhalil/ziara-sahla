@@ -370,6 +370,18 @@ export default function HomePage() {
       <section id="gallery">
         <div className="container">
           <div className="gallery-head reveal">
+            {/* Decorative brand seal above the badge */}
+            <div className="gallery-brand-seal" aria-hidden="true">
+              <div className="gbs-ring" />
+              <Image
+                src="/assets/logo/logo.png"
+                alt=""
+                width={44}
+                height={44}
+                className="gbs-logo"
+                draggable={false}
+              />
+            </div>
             <span className="badge">{tr.gallery.badge}</span>
             <h2 className="section-title">{tr.gallery.title}</h2>
             <p className="section-sub">{tr.gallery.sub}</p>
@@ -430,6 +442,26 @@ export default function HomePage() {
       <section id="cta">
         <div className="container">
           <div className="cta-inner reveal">
+
+            {/* ── Brand Medallion ── */}
+            <div className="cta-medallion" aria-hidden="true">
+              <div className="cta-m-outer">
+                <div className="cta-m-glow" />
+                <div className="cta-m-ring" />
+                <div className="cta-m-circle">
+                  <Image
+                    src="/assets/logo/logo.png"
+                    alt="Ziara-Sahla"
+                    width={66}
+                    height={66}
+                    draggable={false}
+                    style={{ borderRadius: "50%" }}
+                  />
+                </div>
+              </div>
+              <span className="cta-m-label">Ziara‑Sahla</span>
+            </div>
+
             <div className="cta-flag">
               <span className="pulse"></span>{tr.cta.flag}
             </div>

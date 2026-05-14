@@ -1,0 +1,128 @@
+[
+  {
+    "id": "g-01",
+    "src": "/assets/sahara/sahara-desert.jpg",
+    "alt": "Grand Erg Oriental – Sahara algérien",
+    "label": "Grand Erg Oriental",
+    "category": "sahara"
+  },
+  {
+    "id": "g-02",
+    "src": "/assets/sahara/images.jpg",
+    "alt": "Dunes du Sahara",
+    "label": "Dunes",
+    "category": "sahara"
+  },
+  {
+    "id": "g-03",
+    "src": "/assets/sahara/-1x-1.webp",
+    "alt": "Sahara algérien",
+    "label": "Sahara",
+    "category": "sahara"
+  },
+  {
+    "id": "g-04",
+    "src": "/assets/sahara/a-saharan-oasis.jpg",
+    "alt": "Oasis saharienne",
+    "label": "Oasis",
+    "category": "sahara"
+  },
+  {
+    "id": "g-05",
+    "src": "/assets/sahara/ghardaia.jpg",
+    "alt": "Paysage désertique près de Ghardaïa",
+    "label": "Paysage désertique",
+    "category": "sahara"
+  },
+  {
+    "id": "g-06",
+    "src": "/assets/sahara/96449.jpg",
+    "alt": "Désert algérien",
+    "label": "Désert",
+    "category": "sahara"
+  },
+  {
+    "id": "g-07",
+    "src": "/assets/sahara/algeria-desert-landscape-at-sunny-day-wallpaper-1920x540_70.jpg",
+    "alt": "Paysage algérien ensoleillé",
+    "label": "Paysage algérien",
+    "category": "sahara"
+  },
+  {
+    "id": "g-08",
+    "src": "/assets/gherdaia/ghardaia-Par-VisualEyze-min.jpg",
+    "alt": "Ghardaïa – Vallée du M'Zab",
+    "label": "Vallée du M'Zab",
+    "category": "ghardaia"
+  },
+  {
+    "id": "g-09",
+    "src": "/assets/gherdaia/Ghardaia-1.jpeg",
+    "alt": "Ghardaïa panorama",
+    "label": "Panorama",
+    "category": "ghardaia"
+  },
+  {
+    "id": "g-10",
+    "src": "/assets/gherdaia/association-d-orientation.jpg",
+    "alt": "Visite culturelle guidée",
+    "label": "Visite guidée",
+    "category": "ghardaia"
+  },
+  {
+    "id": "g-11",
+    "src": "/assets/gherdaia/guided-tours-with-algerian.jpg",
+    "alt": "Circuit touristique en groupe",
+    "label": "Circuit en groupe",
+    "category": "ghardaia"
+  },
+  {
+    "id": "03af3fba-b5ab-4fc2-9411-969858c57948",
+    "src": "https://cdn.getyourguide.com/image/format=auto,fit=crop,gravity=auto,quality=60,width=960,dpr=1/tour_img/ba70ad8ba11e2bd3b6a3a218107652f084a5b95183dc9e9fd995b4f748f063c0.png",
+    "alt": "Explorez les merveilles de Ghardaïa : ses palais antiques, ses marchés animés et ses oasis de palmiers. Savourez un déjeuner dans une maison traditionnelle, un safari palpitant en 4x4 dans le désert et un dîner à la belle étoile.",
+    "label": "Palais de la ville de Ghardaïa",
+    "category": "ghardaia"
+  },
+  {
+    "id": "f83dd242-340f-4b62-8db7-97dab256648f",
+    "src": "/assets/uploads/1778794820073-h4ou04.jpg",
+    "alt": "La Gazelle d'Or Resort & Spa ",
+    "label": "La Gazelle d'Or Resort & Spa ",
+    "category": "hotels"
+  },
+  {
+    "id": "30b2f255-a21e-4289-8575-9032a35ec857",
+    "src": "/assets/uploads/1778794898980-od7p0n.jpg",
+    "alt": "La Gazelle d'Or Resort & Spa ",
+    "label": "La Gazelle d'Or Resort & Spa ",
+    "category": "hotels"
+  },
+  {
+    "id": "1ecf24e5-a4c4-43ee-af6d-950676ed3602",
+    "src": "/assets/uploads/1778794911856-sjj51v.jpg",
+    "alt": "La Gazelle d'Or Resort & Spa ",
+    "label": "La Gazelle d'Or Resort & Spa ",
+    "category": "hotels"
+  },
+  {
+    "id": "686afc30-8376-4597-8226-658576707200",
+    "src": "/assets/uploads/1778794944131-xvf86l.jpg",
+    "alt": "La Gazelle d'Or Resort & Spa ",
+    "label": "La Gazelle d'Or Resort & Spa ",
+    "category": "hotels"
+  },
+  {
+    "id": "640038f9-7c83-4405-a702-5fa3597bddfc",
+    "src": "/assets/uploads/1778794968877-7ob03d.jpg",
+    "alt": "La Gazelle d'Or Resort & Spa ",
+    "label": "La Gazelle d'Or Resort & Spa ",
+    "category": "hotels"
+  },
+  {
+    "id": "db953ca8-ced3-4ee1-85f1-5fffed9f1474",
+    "src": "/assets/uploads/1778794995290-n0xaqq.webp",
+    "alt": "boussada",
+    "label": "boussada",
+    "category": "sahara"
+  }
+]
