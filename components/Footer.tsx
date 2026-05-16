@@ -1,10 +1,10 @@
-'use client'
-import Link from 'next/link'
-import Image from 'next/image'
-import { useLang } from '@/context/LangContext'
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { useLang } from "@/context/LangContext";
 
 export default function Footer() {
-  const { tr } = useLang()
+  const { tr } = useLang();
 
   return (
     <footer>
@@ -25,22 +25,42 @@ export default function Footer() {
             </div>
             <p className="footer-about">{tr.footer.about}</p>
             <div className="socials">
-              <a href="#" className="soc" aria-label="Facebook">f</a>
-              <a href="#" className="soc" aria-label="Instagram">ig</a>
-              <a href="#" className="soc" aria-label="LinkedIn">in</a>
-              <a href="#" className="soc" aria-label="WhatsApp">wa</a>
+              <a href="#" className="soc" aria-label="Facebook">
+                f
+              </a>
+              <a href="#" className="soc" aria-label="Instagram">
+                ig
+              </a>
+              <a href="#" className="soc" aria-label="LinkedIn">
+                in
+              </a>
+              <a href="#" className="soc" aria-label="WhatsApp">
+                wa
+              </a>
             </div>
           </div>
 
           <div className="fcol">
             <h4>{tr.footer.navTitle}</h4>
             <ul className="flinks">
-              <li><Link href="/#about">{tr.footer.nav.about}</Link></li>
-              <li><Link href="/#services">{tr.footer.nav.circuits}</Link></li>
-              <li><Link href="/offres">{tr.footer.nav.offers}</Link></li>
-              <li><Link href="/#why">{tr.footer.nav.why}</Link></li>
-              <li><Link href="/galerie">{tr.footer.nav.gallery}</Link></li>
-              <li><Link href="/contact">{tr.footer.nav.contact}</Link></li>
+              <li>
+                <Link href="/#about">{tr.footer.nav.about}</Link>
+              </li>
+              <li>
+                <Link href="/#services">{tr.footer.nav.circuits}</Link>
+              </li>
+              <li>
+                <Link href="/offres">{tr.footer.nav.offers}</Link>
+              </li>
+              <li>
+                <Link href="/#why">{tr.footer.nav.why}</Link>
+              </li>
+              <li>
+                <Link href="/galerie">{tr.footer.nav.gallery}</Link>
+              </li>
+              <li>
+                <Link href="/contact">{tr.footer.nav.contact}</Link>
+              </li>
             </ul>
           </div>
 
@@ -48,7 +68,9 @@ export default function Footer() {
             <h4>{tr.footer.formulasTitle}</h4>
             <ul className="flinks">
               {tr.footer.formulas.map((f, i) => (
-                <li key={i}><a href="#">{f}</a></li>
+                <li key={i}>
+                  <a href="#">{f}</a>
+                </li>
               ))}
             </ul>
           </div>
@@ -58,15 +80,17 @@ export default function Footer() {
             <div className="fcontact">
               <div className="fci">
                 <span className="icon">📧</span>
-                <a href="mailto:contact@ziara-sahla.com">contact@ziara-sahla.com</a>
+                <a href="mailto:contact@ziara-sahla.com">
+                  contact@ziara-sahla.com
+                </a>
               </div>
               <div className="fci">
                 <span className="icon">📞</span>
-                <a href="tel:+33123456789">+33 1 23 45 67 89</a>
+                <a href="tel:+33761832197">+33 761 832 197</a>
               </div>
               <div className="fci">
                 <span className="icon">🇩🇿</span>
-                <a href="tel:+213555000000">+213 555 000 000</a>
+                <a href="tel:+213557610660">+213 557 610 660</a>
               </div>
               <div className="fci">
                 <span className="icon">📍</span>
@@ -78,11 +102,8 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <span>{tr.footer.rights}</span>
-          <span>
-            <a href="#">{tr.footer.legal}</a> · <a href="#">{tr.footer.privacy}</a> · <a href="#">{tr.footer.cgv}</a>
-          </span>
         </div>
       </div>
     </footer>
-  )
+  );
 }

@@ -235,7 +235,7 @@ const t: Record<Lang, Translations> = {
       quote: "Devis gratuit",
     },
     hero: {
-      eyebrow: "Voyages culturels de groupe en Algérie",
+      eyebrow: "Voyages culturels de groupes en Algérie",
       title1: "L'Algérie authentique,",
       title2: "organisée pour vous.",
       sub: "Ziara-Sahla conçoit des circuits culturels sur mesure pour groupes, associations et entreprises européennes. Sécurisés, immersifs et inoubliables.",
@@ -249,10 +249,13 @@ const t: Record<Lang, Translations> = {
     about: {
       badge: "Qui sommes-nous",
       title: "L'expertise franco-algérienne au service de votre voyage",
-      sub: "Fondée par une équipe binationale passionnée, Ziara-Sahla est votre pont entre l'Europe et l'âme profonde de l'Algérie. Nous ne vendons pas des voyages — nous créons des expériences mémorables, en toute sécurité.",
+      sub: "Fondée par deux passionnés aux profils complémentaires — l’un franco-algérien (Dahmen), profondément attaché aux deux cultures, et l’autre algérien (Bilal), enraciné dans l’authenticité locale — Ziara-Sahla est votre pont entre l’Europe et l’âme profonde de l’Algérie. Nous ne vendons pas des voyages — nous créons des expériences mémorables, humaines et sécurisées.",
       feat1: { title: "Bilinguisme total", desc: "Guides francophones natifs" },
       feat2: { title: "Sécurité garantie", desc: "Escorte policière 24h/24" },
-      feat3: { title: "Logistique complète", desc: "Hôtels, transport, repas" },
+      feat3: {
+        title: "Logistique complète",
+        desc: "Hôtels, transports, repas",
+      },
       feat4: { title: "Sur mesure", desc: "Adapté à chaque groupe" },
       cert: "Agréé & certifié",
       certSub: "Opérateur touristique officiel",
@@ -280,7 +283,7 @@ const t: Record<Lang, Translations> = {
       priceLabel: "Sur devis",
       moreBtn: "En savoir plus →",
       feats1: [
-        "Hébergement 2-3 étoiles",
+        "Hébergement 2 étoiles",
         "Transport bus climatisé",
         "Guide francophone",
         "Repas traditionnels inclus",
@@ -297,7 +300,7 @@ const t: Record<Lang, Translations> = {
       feats3: [
         "Hébergement 4-5 étoiles",
         "Flotte de véhicules dédiés",
-        "Guide expert + interprète",
+        "Guide expert",
         "Programme personnalisé",
         "Escorte VIP garantie",
         "Conciergerie dédiée",
@@ -344,7 +347,7 @@ const t: Record<Lang, Translations> = {
         },
         {
           title: "Circuits hors des sentiers battus",
-          desc: "Sahara, Tassili, Ghardaïa, Béjaïa, Tipaza… Nous ouvrons des portes que les agences ordinaires n'osent pas franchir.",
+          desc: "Sahara, Ghardaïa, Oued Souf, Alger, Sétif, Boussada, Djemila, M'sila… Nous ouvrons des portes que les agences ordinaires n'osent pas franchir.",
         },
         {
           title: "Tout inclus, zéro stress",
@@ -379,7 +382,7 @@ const t: Record<Lang, Translations> = {
     },
     footer: {
       about:
-        "Votre spécialiste des voyages culturels de groupe en Algérie. Sécurisés, authentiques et inoubliables depuis plus de 10 ans.",
+        "Votre spécialiste des voyages culturels de groupes en Algérie. Sécurisés, authentiques et inoubliables depuis plus de 10 ans.",
       navTitle: "Navigation",
       formulasTitle: "Formules",
       contactTitle: "Contact",
@@ -599,13 +602,13 @@ const t: Record<Lang, Translations> = {
     about: {
       badge: "Who we are",
       title: "Franco-Algerian expertise at the service of your journey",
-      sub: "Founded by a passionate binational team, Ziara-Sahla is your bridge between Europe and the deep soul of Algeria. We don't sell trips — we create memorable experiences, in complete safety.",
+      sub: "Founded by two passionate individuals with complementary backgrounds — one French-Algerian (Dahmen) deeply connected to both European and Algerian cultures, and the other proudly Algerian (Bilal) with strong local roots — Ziara-Sahla serves as a bridge between Europe and the authentic soul of Algeria. We do not simply sell trips — we create meaningful, safe, and unforgettable experiences.",
       feat1: {
         title: "Full bilingualism",
         desc: "Native French-speaking guides",
       },
       feat2: { title: "Guaranteed safety", desc: "Police escort 24/7" },
-      feat3: { title: "Complete logistics", desc: "Hotels, transport, meals" },
+      feat3: { title: "Complete logistics", desc: "Hotels, transports, meals" },
       feat4: { title: "Tailor-made", desc: "Adapted to each group" },
       cert: "Licensed & certified",
       certSub: "Official tourism operator",
@@ -633,7 +636,7 @@ const t: Record<Lang, Translations> = {
       priceLabel: "On quote",
       moreBtn: "Learn more →",
       feats1: [
-        "2-3 star accommodation",
+        "2 star accommodation",
         "Air-conditioned bus",
         "French-speaking guide",
         "Traditional meals included",
@@ -650,7 +653,7 @@ const t: Record<Lang, Translations> = {
       feats3: [
         "4-5 star accommodation",
         "Dedicated vehicle fleet",
-        "Expert guide + interpreter",
+        "Expert guide",
         "Personalized program",
         "VIP escort guaranteed",
         "Dedicated concierge",
@@ -697,7 +700,7 @@ const t: Record<Lang, Translations> = {
         },
         {
           title: "Off-the-beaten-track tours",
-          desc: "Sahara, Tassili, Ghardaïa, Béjaïa, Tipaza… We open doors that ordinary agencies dare not enter.",
+          desc: "Sahara, Ghardaïa, Oued Souf, Alger, Setif, Boussada, Djemila, M'sila… We open doors that ordinary agencies dare not enter.",
         },
         {
           title: "All-inclusive, zero stress",
@@ -951,10 +954,10 @@ const t: Record<Lang, Translations> = {
     about: {
       badge: "من نحن",
       title: "الخبرة الجزائرية الفرنسية في خدمة رحلتكم",
-      sub: "تأسست زيارة سهلة على يد فريق ثنائي الجنسية متحمس، وهي جسركم بين أوروبا وروح الجزائر العميقة. نحن لا نبيع رحلات — نحن نصنع تجارب لا تُنسى، بأمان تام.",
+      sub: "تأسست Ziara-Sahla على يد شغوفَين بخلفيتين متكاملتين — أحدهما فرنسي جزائري (دحمان) مرتبط بثقافتي أوروبا والجزائر، والآخر جزائري (بلال) أصيل يعرف عمق وتفاصيل الهوية المحلية — لنكون الجسر الذي يربط بين أوروبا وروح الجزائر الحقيقية. نحن لا نبيع رحلات، بل نصنع تجارب إنسانية، آمنة، لا تُنسى.",
       feat1: { title: "ثنائية اللغة الكاملة", desc: "مرشدون ناطقون بالفرنسية" },
       feat2: { title: "أمان مضمون", desc: "مرافقة شرطية على مدار الساعة" },
-      feat3: { title: "لوجستيك متكامل", desc: "فنادق ونقل ووجبات" },
+      feat3: { title: "لوجستيك متكامل", desc: "فنادق, نقل ووجبات" },
       feat4: { title: "مخصص لكل مجموعة", desc: "يتكيف مع كل احتياجاتكم" },
       cert: "مرخص ومعتمد",
       certSub: "مشغل سياحي رسمي",
@@ -982,11 +985,11 @@ const t: Record<Lang, Translations> = {
       priceLabel: "بناءً على الطلب",
       moreBtn: "← اعرف المزيد",
       feats1: [
-        "إقامة ٢-٣ نجوم",
+        "إقامة 2 نجوم",
         "نقل بالحافلة المكيفة",
         "مرشد ناطق بالفرنسية",
         "وجبات تقليدية مشمولة",
-        "مساعدة ٧ أيام/٧",
+        "مساعدة 7 أيام/7",
       ],
       feats2: [
         "إقامة ٣-٤ نجوم",
@@ -999,7 +1002,7 @@ const t: Record<Lang, Translations> = {
       feats3: [
         "إقامة ٤-٥ نجوم",
         "أسطول مركبات مخصص",
-        "مرشد خبير + مترجم",
+        "مرشد خبير",
         "برنامج مخصص",
         "مرافقة VIP مضمونة",
         "خدمة كونسيرج مخصصة",

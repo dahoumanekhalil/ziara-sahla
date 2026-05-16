@@ -1,34 +1,42 @@
-'use client'
-import { useEffect, useRef } from 'react'
-import { useLang } from '@/context/LangContext'
+"use client";
+import { useEffect, useRef } from "react";
+import { useLang } from "@/context/LangContext";
 
 export default function ContactPage() {
-  const { tr } = useLang()
-  const c = tr.contactPage
-  const formRef = useRef<HTMLFormElement>(null)
-  const successRef = useRef<HTMLDivElement>(null)
+  const { tr } = useLang();
+  const c = tr.contactPage;
+  const formRef = useRef<HTMLFormElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('on'); observer.unobserve(e.target) }
-      }),
-      { threshold: 0.1 }
-    )
-    document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("on");
+            observer.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.1 },
+    );
+    document
+      .querySelectorAll(".reveal, .reveal-l, .reveal-r")
+      .forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const btn = e.currentTarget.querySelector('.form-submit') as HTMLButtonElement
-    btn.textContent = '✓ ' + c.successTitle
-    btn.style.background = '#2E7D32'
-    btn.disabled = true
+    e.preventDefault();
+    const btn = e.currentTarget.querySelector(
+      ".form-submit",
+    ) as HTMLButtonElement;
+    btn.textContent = "✓ " + c.successTitle;
+    btn.style.background = "#2E7D32";
+    btn.disabled = true;
     setTimeout(() => {
-      if (formRef.current) formRef.current.style.display = 'none'
-      if (successRef.current) successRef.current.style.display = 'block'
-    }, 400)
+      if (formRef.current) formRef.current.style.display = "none";
+      if (successRef.current) successRef.current.style.display = "block";
+    }, 400);
   }
 
   return (
@@ -46,7 +54,6 @@ export default function ContactPage() {
       <section className="contact-section">
         <div className="container">
           <div className="contact-grid">
-
             {/* Left: info */}
             <div className="contact-info reveal-l">
               <h2>{c.infoTitle}</h2>
@@ -57,7 +64,9 @@ export default function ContactPage() {
                   <div className="info-icon">📧</div>
                   <div className="info-content">
                     <h4>{c.emailLabel}</h4>
-                    <a href="mailto:contact@ziara-sahla.com">contact@ziara-sahla.com</a>
+                    <a href="mailto:contact@ziara-sahla.com">
+                      contact@ziara-sahla.com
+                    </a>
                     <span className="sub-line">{c.emailSub}</span>
                   </div>
                 </div>
@@ -66,7 +75,7 @@ export default function ContactPage() {
                   <div className="info-icon">📞</div>
                   <div className="info-content">
                     <h4>{c.phoneFrLabel}</h4>
-                    <a href="tel:+33123456789">+33 1 23 45 67 89</a>
+                    <a href="tel:+33761832197">+33 761832197</a>
                     <span className="sub-line">{c.phoneFrSub}</span>
                   </div>
                 </div>
@@ -75,7 +84,7 @@ export default function ContactPage() {
                   <div className="info-icon">🇩🇿</div>
                   <div className="info-content">
                     <h4>{c.phoneDzLabel}</h4>
-                    <a href="tel:+213555000000">+213 555 000 000</a>
+                    <a href="tel:+213557610660">+213 557 61 06 60</a>
                     <span className="sub-line">{c.phoneDzSub}</span>
                   </div>
                 </div>
@@ -93,10 +102,18 @@ export default function ContactPage() {
               <div className="contact-socials">
                 <h4>{c.socialLabel}</h4>
                 <div className="socials">
-                  <a href="#" className="soc" aria-label="Facebook">f</a>
-                  <a href="#" className="soc" aria-label="Instagram">ig</a>
-                  <a href="#" className="soc" aria-label="LinkedIn">in</a>
-                  <a href="#" className="soc" aria-label="WhatsApp">wa</a>
+                  <a href="#" className="soc" aria-label="Facebook">
+                    f
+                  </a>
+                  <a href="#" className="soc" aria-label="Instagram">
+                    ig
+                  </a>
+                  <a href="#" className="soc" aria-label="LinkedIn">
+                    in
+                  </a>
+                  <a href="#" className="soc" aria-label="WhatsApp">
+                    wa
+                  </a>
                 </div>
               </div>
             </div>
@@ -112,30 +129,87 @@ export default function ContactPage() {
 
               <form id="contact-form" ref={formRef} onSubmit={handleSubmit}>
                 <div className="fg-row">
-                  <div className="fg"><label htmlFor="prenom">{c.firstName}</label><input type="text" id="prenom" name="prenom" placeholder="Marie" required /></div>
-                  <div className="fg"><label htmlFor="nom">{c.lastName}</label><input type="text" id="nom" name="nom" placeholder="Dupont" required /></div>
+                  <div className="fg">
+                    <label htmlFor="prenom">{c.firstName}</label>
+                    <input
+                      type="text"
+                      id="prenom"
+                      name="prenom"
+                      placeholder="Marie"
+                      required
+                    />
+                  </div>
+                  <div className="fg">
+                    <label htmlFor="nom">{c.lastName}</label>
+                    <input
+                      type="text"
+                      id="nom"
+                      name="nom"
+                      placeholder="Dupont"
+                      required
+                    />
+                  </div>
                 </div>
-                <div className="fg"><label htmlFor="email">{c.email}</label><input type="email" id="email" name="email" placeholder="marie@exemple.com" required /></div>
-                <div className="fg"><label htmlFor="tel">{c.phone}</label><input type="tel" id="tel" name="tel" placeholder="+33 6 12 34 56 78" /></div>
+                <div className="fg">
+                  <label htmlFor="email">{c.email}</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="marie@exemple.com"
+                    required
+                  />
+                </div>
+                <div className="fg">
+                  <label htmlFor="tel">{c.phone}</label>
+                  <input
+                    type="tel"
+                    id="tel"
+                    name="tel"
+                    placeholder="+33 6 12 34 56 78"
+                  />
+                </div>
                 <div className="fg-row">
                   <div className="fg">
                     <label htmlFor="groupe">{c.groupSize}</label>
                     <select id="groupe" name="groupe">
-                      {c.groupOptions.map((opt, i) => <option key={i} value={i === 0 ? '' : opt}>{opt}</option>)}
+                      {c.groupOptions.map((opt, i) => (
+                        <option key={i} value={i === 0 ? "" : opt}>
+                          {opt}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="fg">
                     <label htmlFor="sujet">{c.subject}</label>
                     <select id="sujet" name="sujet">
-                      {c.subjectOptions.map((opt, i) => <option key={i} value={i === 0 ? '' : opt}>{opt}</option>)}
+                      {c.subjectOptions.map((opt, i) => (
+                        <option key={i} value={i === 0 ? "" : opt}>
+                          {opt}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
-                <div className="fg"><label htmlFor="message">{c.message}</label><textarea id="message" name="message" placeholder={c.messagePlaceholder} required></textarea></div>
-                <button type="submit" className="form-submit">{c.submit}</button>
+                <div className="fg">
+                  <label htmlFor="message">{c.message}</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    placeholder={c.messagePlaceholder}
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" className="form-submit">
+                  {c.submit}
+                </button>
               </form>
 
-              <div className="form-success" ref={successRef} style={{ display: 'none' }}>
+              <div
+                className="form-success"
+                ref={successRef}
+                style={{ display: "none" }}
+              >
                 <div className="check">✅</div>
                 <h3>{c.successTitle}</h3>
                 <p>{c.successMsg}</p>
@@ -167,5 +241,5 @@ export default function ContactPage() {
         </div>
       </section>
     </>
-  )
+  );
 }
