@@ -715,8 +715,11 @@ footer { background:var(--ink); color:rgba(255,255,255,.55); padding:72px 0 36px
 .fg input:focus, .fg select:focus, .fg textarea:focus { border-color:var(--orange); box-shadow:0 0 0 3px rgba(224,123,57,.1); }
 .fg textarea { resize:vertical; min-height:96px; }
 .fg-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.form-submit { width:100%; padding:15px; background:var(--orange); color:var(--white); border:none; border-radius:100px; font-family:'Inter',sans-serif; font-size:1rem; font-weight:700; cursor:pointer; transition:var(--t); margin-top:6px; }
-.form-submit:hover { background:var(--orange-deep); }
+.form-submit { width:100%; padding:15px; background:var(--orange); color:var(--white); border:none; border-radius:100px; font-family:'Inter',sans-serif; font-size:1rem; font-weight:700; cursor:pointer; transition:background var(--t),opacity var(--t); margin-top:6px; }
+.form-submit:hover:not(:disabled) { background:var(--orange-deep); }
+.form-submit:disabled { opacity:.75; cursor:not-allowed; }
+.send-spinner { display:inline-block; width:16px; height:16px; border:2.5px solid rgba(255,255,255,.35); border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite; flex-shrink:0; }
+@keyframes spin { to { transform:rotate(360deg); } }
 
 /* ═══════════════════════════════════
    PAGE BANNER (gallery / contact / offres)

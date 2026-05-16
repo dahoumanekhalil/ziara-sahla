@@ -126,14 +126,30 @@ export default function HomePage() {
             <p className="hero-sub">{tr.hero.sub}</p>
             <div className="hero-actions">
               <button className="btn btn-primary" onClick={openModal}>
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <svg
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                >
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.81 19.79 19.79 0 01.02 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16z" />
                 </svg>
                 {tr.hero.cta1}
               </button>
               <a href="#services" className="btn btn-outline">
                 {tr.hero.cta2}
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                >
                   <polyline points="9 18 15 12 9 6" />
                 </svg>
               </a>
@@ -228,7 +244,13 @@ export default function HomePage() {
           <div className="cards">
             <div className="card reveal" style={{ transitionDelay: ".08s" }}>
               <div className="card-img">
-                <Image src="/assets/hotels/exterior.jpg" alt="Hébergement économique" width={400} height={210} loading="lazy" />
+                <Image
+                  src="/assets/hotels/exterior.jpg"
+                  alt="Hébergement économique"
+                  width={400}
+                  height={210}
+                  loading="lazy"
+                />
               </div>
               <div className="card-body">
                 <div className="card-icon ci-eco">🌿</div>
@@ -236,21 +258,43 @@ export default function HomePage() {
                 <h3>{tr.services.card1.title}</h3>
                 <p>{tr.services.card1.desc}</p>
                 <ul className="card-feats">
-                  {tr.services.feats1.map((f, i) => <li key={i}>{f}</li>)}
+                  {tr.services.feats1.map((f, i) => (
+                    <li key={i}>{f}</li>
+                  ))}
                 </ul>
                 <div className="card-foot">
-                  <div className="card-price">{tr.services.priceLabel} <small>/ pers.</small></div>
-                  <button className="card-link" onClick={openModal} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                  <div className="card-price">
+                    {tr.services.priceLabel} <small>/ pers.</small>
+                  </div>
+                  <button
+                    className="card-link"
+                    onClick={openModal}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                    }}
+                  >
                     {tr.services.moreBtn}
                   </button>
                 </div>
               </div>
             </div>
 
-            <div className="card featured reveal" style={{ transitionDelay: ".16s" }}>
+            <div
+              className="card featured reveal"
+              style={{ transitionDelay: ".16s" }}
+            >
               <div className="ribbon">{tr.services.card2.ribbon}</div>
               <div className="card-img">
-                <Image src="/assets/hotels/algiers-marriott-hotel.jpg" alt="Hôtel intermédiaire Alger" width={400} height={210} loading="lazy" />
+                <Image
+                  src="/assets/hotels/algiers-marriott-hotel.jpg"
+                  alt="Hôtel intermédiaire Alger"
+                  width={400}
+                  height={210}
+                  loading="lazy"
+                />
               </div>
               <div className="card-body">
                 <div className="card-icon ci-mid">✨</div>
@@ -258,11 +302,24 @@ export default function HomePage() {
                 <h3>{tr.services.card2.title}</h3>
                 <p>{tr.services.card2.desc}</p>
                 <ul className="card-feats">
-                  {tr.services.feats2.map((f, i) => <li key={i}>{f}</li>)}
+                  {tr.services.feats2.map((f, i) => (
+                    <li key={i}>{f}</li>
+                  ))}
                 </ul>
                 <div className="card-foot">
-                  <div className="card-price">{tr.services.priceLabel} <small>/ pers.</small></div>
-                  <button className="card-link" onClick={openModal} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                  <div className="card-price">
+                    {tr.services.priceLabel} <small>/ pers.</small>
+                  </div>
+                  <button
+                    className="card-link"
+                    onClick={openModal}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                    }}
+                  >
                     {tr.services.moreBtn}
                   </button>
                 </div>
@@ -271,7 +328,13 @@ export default function HomePage() {
 
             <div className="card reveal" style={{ transitionDelay: ".24s" }}>
               <div className="card-img">
-                <Image src="/assets/hotels/sheraton-club-des-pins-resort-general-1267fc26.jpg" alt="Sheraton Club des Pins Alger" width={400} height={210} loading="lazy" />
+                <Image
+                  src="/assets/hotels/sheraton-club-des-pins-resort-general-1267fc26.jpg"
+                  alt="Sheraton Club des Pins Alger"
+                  width={400}
+                  height={210}
+                  loading="lazy"
+                />
               </div>
               <div className="card-body">
                 <div className="card-icon ci-prem">👑</div>
@@ -279,11 +342,24 @@ export default function HomePage() {
                 <h3>{tr.services.card3.title}</h3>
                 <p>{tr.services.card3.desc}</p>
                 <ul className="card-feats">
-                  {tr.services.feats3.map((f, i) => <li key={i}>{f}</li>)}
+                  {tr.services.feats3.map((f, i) => (
+                    <li key={i}>{f}</li>
+                  ))}
                 </ul>
                 <div className="card-foot">
-                  <div className="card-price">{tr.services.priceLabel} <small>/ pers.</small></div>
-                  <button className="card-link" onClick={openModal} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                  <div className="card-price">
+                    {tr.services.priceLabel} <small>/ pers.</small>
+                  </div>
+                  <button
+                    className="card-link"
+                    onClick={openModal}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                    }}
+                  >
                     {tr.services.moreBtn}
                   </button>
                 </div>
@@ -299,13 +375,24 @@ export default function HomePage() {
           <div style={{ maxWidth: "600px" }}>
             <span className="badge">{tr.trust.badge}</span>
             <h2 className="section-title reveal">{tr.trust.title}</h2>
-            <p className="section-sub reveal" style={{ color: "rgba(255,255,255,.55)" }}>{tr.trust.sub}</p>
+            <p
+              className="section-sub reveal"
+              style={{ color: "rgba(255,255,255,.55)" }}
+            >
+              {tr.trust.sub}
+            </p>
           </div>
 
           <div className="trust-cards">
             {tr.trust.cards.map((card, i) => (
-              <div className="tc reveal" key={i} style={{ transitionDelay: `${.05 + i * .06}s` }}>
-                <div className="tc-icon">{['🚔','📞','🗺️','🏥','📋','🛡️'][i]}</div>
+              <div
+                className="tc reveal"
+                key={i}
+                style={{ transitionDelay: `${0.05 + i * 0.06}s` }}
+              >
+                <div className="tc-icon">
+                  {["🚔", "📞", "🗺️", "🏥", "📋", "🛡️"][i]}
+                </div>
                 <h3>{card.title}</h3>
                 <p>{card.desc}</p>
               </div>
@@ -313,16 +400,31 @@ export default function HomePage() {
           </div>
 
           {/* trust-bar hidden until real stats are ready */}
-          <div className="trust-bar reveal" style={{ display: 'none' }}>
-            <div className="tb-stat"><strong>200+</strong><span>Groupes accompagnés</span></div>
+          <div className="trust-bar reveal" style={{ display: "none" }}>
+            <div className="tb-stat">
+              <strong>200+</strong>
+              <span>Groupes accompagnés</span>
+            </div>
             <div className="tb-div"></div>
-            <div className="tb-stat"><strong>0</strong><span>Incident de sécurité</span></div>
+            <div className="tb-stat">
+              <strong>0</strong>
+              <span>Incident de sécurité</span>
+            </div>
             <div className="tb-div"></div>
-            <div className="tb-stat"><strong>5★</strong><span>Note moyenne clients</span></div>
+            <div className="tb-stat">
+              <strong>5★</strong>
+              <span>Note moyenne clients</span>
+            </div>
             <div className="tb-div"></div>
-            <div className="tb-stat"><strong>15+</strong><span>Pays d&apos;origine</span></div>
+            <div className="tb-stat">
+              <strong>15+</strong>
+              <span>Pays d&apos;origine</span>
+            </div>
             <div className="tb-div"></div>
-            <div className="tb-stat"><strong>100%</strong><span>Satisfaction garantie</span></div>
+            <div className="tb-stat">
+              <strong>100%</strong>
+              <span>Satisfaction garantie</span>
+            </div>
           </div>
         </div>
       </section>
@@ -343,7 +445,6 @@ export default function HomePage() {
               <div className="why-visual-overlay"></div>
               <blockquote className="why-quote">
                 &ldquo;{tr.why.quote}&rdquo;
-                <cite>{tr.why.quoteAuthor}</cite>
               </blockquote>
             </div>
 
@@ -389,48 +490,128 @@ export default function HomePage() {
 
           <div className="gallery-grid reveal">
             <div className="gi gi-1">
-              <Image src="/assets/sahara/sahara-desert.jpg" alt="Grand Erg Oriental – Sahara algérien" width={600} height={460} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <Image
+                src="/assets/sahara/sahara-desert.jpg"
+                alt="Grand Erg Oriental – Sahara algérien"
+                width={600}
+                height={460}
+                loading="lazy"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
               <span className="gi-label">Sahara</span>
             </div>
             <div className="gi gi-2">
-              <Image src="/assets/gherdaia/ghardaia-Par-VisualEyze-min.jpg" alt="Ghardaïa – Vallée du M'Zab" width={400} height={230} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <Image
+                src="/assets/gherdaia/ghardaia-Par-VisualEyze-min.jpg"
+                alt="Ghardaïa – Vallée du M'Zab"
+                width={400}
+                height={230}
+                loading="lazy"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
               <span className="gi-label">Ghardaïa</span>
             </div>
             <div className="gi gi-3">
-              <Image src="/assets/hotels/getlstd-property-photo.jpg" alt="Hôtel de charme" width={300} height={230} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <Image
+                src="/assets/hotels/getlstd-property-photo.jpg"
+                alt="Hôtel de charme"
+                width={300}
+                height={230}
+                loading="lazy"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
               <span className="gi-label">Hébergement</span>
             </div>
             <div className="gi gi-4">
-              <Image src="/assets/gherdaia/association-d-orientation.jpg" alt="Visite culturelle guidée" width={300} height={230} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <Image
+                src="/assets/gherdaia/association-d-orientation.jpg"
+                alt="Visite culturelle guidée"
+                width={300}
+                height={230}
+                loading="lazy"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
               <span className="gi-label">Culture</span>
             </div>
             <div className="gi gi-5">
-              <Image src="/assets/hotels/649232884.jpg" alt="Piscine hôtel Algérie" width={400} height={230} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <Image
+                src="/assets/hotels/649232884.jpg"
+                alt="Piscine hôtel Algérie"
+                width={400}
+                height={230}
+                loading="lazy"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
               <span className="gi-label">Confort</span>
             </div>
           </div>
 
-          <div className="gallery-grid reveal" style={{ marginTop: "12px", gridTemplateRows: "200px" }}>
+          <div
+            className="gallery-grid reveal"
+            style={{ marginTop: "12px", gridTemplateRows: "200px" }}
+          >
             <div className="gi" style={{ gridColumn: "span 4" }}>
-              <Image src="/assets/sahara/images.jpg" alt="Dunes du Sahara" width={400} height={200} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <Image
+                src="/assets/sahara/images.jpg"
+                alt="Dunes du Sahara"
+                width={400}
+                height={200}
+                loading="lazy"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
               <span className="gi-label">Sahara</span>
             </div>
             <div className="gi" style={{ gridColumn: "span 4" }}>
-              <Image src="/assets/hotels/4de8805405a9d2deb1ded672b3c4371cd996655229816595b538429ece31.webp" alt="Hôtel luxe Algérie" width={400} height={200} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <Image
+                src="/assets/hotels/4de8805405a9d2deb1ded672b3c4371cd996655229816595b538429ece31.webp"
+                alt="Hôtel luxe Algérie"
+                width={400}
+                height={200}
+                loading="lazy"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
               <span className="gi-label">Hôtel</span>
             </div>
             <div className="gi" style={{ gridColumn: "span 4" }}>
-              <Image src="/assets/gherdaia/Ghardaia-1.jpeg" alt="Ghardaïa panorama" width={400} height={200} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <Image
+                src="/assets/gherdaia/Ghardaia-1.jpeg"
+                alt="Ghardaïa panorama"
+                width={400}
+                height={200}
+                loading="lazy"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
               <span className="gi-label">Ghardaïa</span>
             </div>
           </div>
 
-          <div className="gallery-more reveal" style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap", marginTop: "32px" }}>
-            <Link href="/galerie" className="btn btn-primary">{tr.gallery.viewAll}</Link>
+          <div
+            className="gallery-more reveal"
+            style={{
+              display: "flex",
+              gap: "14px",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              marginTop: "32px",
+            }}
+          >
+            <Link href="/galerie" className="btn btn-primary">
+              {tr.gallery.viewAll}
+            </Link>
             <button
               className="btn"
               onClick={openModal}
-              style={{ background: "transparent", color: "var(--orange)", border: "2px solid var(--orange)", padding: "15px 32px", borderRadius: "100px", fontWeight: 600, fontSize: ".95rem", cursor: "pointer", fontFamily: "Inter, sans-serif" }}
+              style={{
+                background: "transparent",
+                color: "var(--orange)",
+                border: "2px solid var(--orange)",
+                padding: "15px 32px",
+                borderRadius: "100px",
+                fontWeight: 600,
+                fontSize: ".95rem",
+                cursor: "pointer",
+                fontFamily: "Inter, sans-serif",
+              }}
             >
               {tr.gallery.organize}
             </button>
@@ -442,7 +623,6 @@ export default function HomePage() {
       <section id="cta">
         <div className="container">
           <div className="cta-inner reveal">
-
             {/* ── Brand Medallion ── */}
             <div className="cta-medallion" aria-hidden="true">
               <div className="cta-m-outer">
@@ -463,30 +643,43 @@ export default function HomePage() {
             </div>
 
             <div className="cta-flag">
-              <span className="pulse"></span>{tr.cta.flag}
+              <span className="pulse"></span>
+              {tr.cta.flag}
             </div>
             <h2 className="cta-title">{tr.cta.title}</h2>
             <p className="cta-sub">{tr.cta.sub}</p>
             <div className="cta-actions">
               <a
-                href="https://wa.me/213600000000?text=Bonjour%20Ziara-Sahla%2C%20je%20souhaite%20un%20devis%20pour%20un%20voyage%20en%20Alg%C3%A9rie."
+                href="https://wa.me/213557610660?text=Bonjour%20Ziara-Sahla%2C%20je%20souhaite%20un%20devis%20pour%20un%20voyage%20en%20Alg%C3%A9rie."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-white"
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                 </svg>
                 {tr.cta.btn1}
               </a>
               <a
-                href="https://wa.me/213600000000"
+                href="https://wa.me/213557610660"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-ghost"
               >
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                <svg
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                 </svg>
                 {tr.cta.btn2}
               </a>
