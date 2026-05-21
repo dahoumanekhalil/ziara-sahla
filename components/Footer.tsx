@@ -28,9 +28,7 @@ export default function Footer() {
               <a href="#" className="soc" aria-label="Facebook">
                 f
               </a>
-              <a href="#" className="soc" aria-label="Instagram">
-                ig
-              </a>
+
               <a href="#" className="soc" aria-label="LinkedIn">
                 in
               </a>

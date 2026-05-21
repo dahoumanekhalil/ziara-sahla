@@ -347,7 +347,7 @@ const t: Record<Lang, Translations> = {
         },
         {
           title: "Circuits hors des sentiers battus",
-          desc: "Sahara, Ghardaïa, Oued Souf, Alger, Sétif, Boussada, Djemila, M'sila… Nous ouvrons des portes que les agences ordinaires n'osent pas franchir.",
+          desc: "Sahara, Ghardaïa, Oued Souf, Alger, Sétif, Constantine, Boussada, Djemila, M'sila… Nous ouvrons des portes que les agences ordinaires n'osent pas franchir.",
         },
         {
           title: "Tout inclus, zéro stress",
@@ -355,7 +355,7 @@ const t: Record<Lang, Translations> = {
         },
         {
           title: "Idéal pour entreprises & associations",
-          desc: "Teambuilding, voyages d'études, retraites associatives — nous avons l'expertise pour tous les profils de groupe.",
+          desc: "Teambuilding, voyages d'études, retraites associatives — nous avons l'expertise pour tous les profils de groupes.",
         },
         {
           title: "Transparence totale des prix",
@@ -382,7 +382,7 @@ const t: Record<Lang, Translations> = {
     },
     footer: {
       about:
-        "Votre spécialiste des voyages culturels de groupes en Algérie. Sécurisés, authentiques et inoubliables depuis plus de 10 ans.",
+        "Votre spécialiste des voyages culturels de groupes en Algérie. Sécurisés, authentiques et inoubliables.",
       navTitle: "Navigation",
       formulasTitle: "Formules",
       contactTitle: "Contact",
@@ -700,7 +700,7 @@ const t: Record<Lang, Translations> = {
         },
         {
           title: "Off-the-beaten-track tours",
-          desc: "Sahara, Ghardaïa, Oued Souf, Alger, Setif, Boussada, Djemila, M'sila… We open doors that ordinary agencies dare not enter.",
+          desc: "Sahara, Ghardaïa, Oued Souf, Alger, Setif, Constantine, Boussada, Djemila, M'sila… We open doors that ordinary agencies dare not enter.",
         },
         {
           title: "All-inclusive, zero stress",
@@ -735,7 +735,7 @@ const t: Record<Lang, Translations> = {
     },
     footer: {
       about:
-        "Your specialist in group cultural tours to Algeria. Safe, authentic and unforgettable for over 10 years.",
+        "Your specialist in group cultural tours to Algeria. Safe, authentic and unforgettable.",
       navTitle: "Navigation",
       formulasTitle: "Packages",
       contactTitle: "Contact",
@@ -1049,7 +1049,7 @@ const t: Record<Lang, Translations> = {
         },
         {
           title: "جولات خارج المسارات المعتادة",
-          desc: "الصحراء، تاسيلي، غرداية، بجاية، تيباز... نفتح أبوابًا لا تجرؤ الوكالات العادية على الدخول إليها.",
+          desc: "الصحراء، تاسيلي، غرداية، بجاية... نفتح أبوابًا لا تجرؤ الوكالات العادية على الدخول إليها.",
         },
         {
           title: "شامل لكل شيء، صفر إجهاد",
@@ -1084,7 +1084,7 @@ const t: Record<Lang, Translations> = {
     },
     footer: {
       about:
-        "متخصصكم في الرحلات الثقافية الجماعية إلى الجزائر. آمنة وأصيلة ولا تُنسى منذ أكثر من ١٠ سنوات.",
+        "متخصصكم في الرحلات الثقافية الجماعية إلى الجزائر. آمنة وأصيلة ولا تُنسى.",
       navTitle: "التنقل",
       formulasTitle: "الباقات",
       contactTitle: "اتصل بنا",
