@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, mkdir } from 'fs/promises'
-import path from 'path'
+import { put } from '@vercel/blob'
 import { verifySessionToken } from '@/lib/auth'
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/avif']
@@ -28,12 +27,9 @@ export async function POST(req: NextRequest) {
   }
 
   const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg'
-  const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
-  const uploadsDir = path.join(process.cwd(), 'public', 'assets', 'uploads')
+  const filename = `uploads/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
 
-  await mkdir(uploadsDir, { recursive: true })
-  const bytes = await file.arrayBuffer()
-  await writeFile(path.join(uploadsDir, filename), Buffer.from(bytes))
+  const blob = await put(filename, file, { access: 'public' })
 
-  return NextResponse.json({ src: `/assets/uploads/${filename}` })
+  return NextResponse.json({ src: blob.url })
 }

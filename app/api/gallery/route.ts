@@ -3,7 +3,7 @@ import { getGallery, addGalleryImage } from '@/lib/gallery'
 import { verifySessionToken } from '@/lib/auth'
 
 export async function GET() {
-  const images = getGallery()
+  const images = await getGallery()
   return NextResponse.json(images)
 }
 
@@ -20,6 +20,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Champs obligatoires manquants' }, { status: 400 })
   }
 
-  const image = addGalleryImage({ src, alt, label, category })
+  const image = await addGalleryImage({ src, alt, label, category })
   return NextResponse.json(image, { status: 201 })
 }

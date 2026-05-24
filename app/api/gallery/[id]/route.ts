@@ -9,7 +9,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
   }
 
   const { id } = await params
-  const ok = deleteGalleryImage(id)
+  const ok = await deleteGalleryImage(id)
   if (!ok) return NextResponse.json({ error: 'Image introuvable' }, { status: 404 })
   return NextResponse.json({ ok: true })
 }

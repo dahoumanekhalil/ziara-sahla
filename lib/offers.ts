@@ -1,40 +1,50 @@
-import fs from 'fs'
-import path from 'path'
 import { randomUUID } from 'crypto'
+import { put, list } from '@vercel/blob'
 import type { Offer } from './types'
 
-const DATA_FILE = path.join(process.cwd(), 'data', 'offers.json')
+const PATHNAME = 'data/offers.json'
 
-export function getOffers(): Offer[] {
-  const raw = fs.readFileSync(DATA_FILE, 'utf-8')
-  return JSON.parse(raw) as Offer[]
+async function read(): Promise<Offer[]> {
+  const { blobs } = await list({ prefix: PATHNAME })
+  const blob = blobs.find(b => b.pathname === PATHNAME)
+  if (!blob) return []
+  const res = await fetch(blob.url, { cache: 'no-store' })
+  return res.json()
 }
 
-function saveOffers(offers: Offer[]): void {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(offers, null, 2), 'utf-8')
+async function write(offers: Offer[]): Promise<void> {
+  await put(PATHNAME, JSON.stringify(offers, null, 2), {
+    access: 'public',
+    addRandomSuffix: false,
+    contentType: 'application/json',
+  })
 }
 
-export function addOffer(data: Omit<Offer, 'id'>): Offer {
-  const offers = getOffers()
+export async function getOffers(): Promise<Offer[]> {
+  return read()
+}
+
+export async function addOffer(data: Omit<Offer, 'id'>): Promise<Offer> {
+  const offers = await read()
   const offer: Offer = { id: randomUUID(), ...data }
   offers.push(offer)
-  saveOffers(offers)
+  await write(offers)
   return offer
 }
 
-export function deleteOffer(id: string): boolean {
-  const offers = getOffers()
+export async function deleteOffer(id: string): Promise<boolean> {
+  const offers = await read()
   const next = offers.filter(o => o.id !== id)
   if (next.length === offers.length) return false
-  saveOffers(next)
+  await write(next)
   return true
 }
 
-export function updateOffer(id: string, data: Partial<Omit<Offer, 'id'>>): Offer | null {
-  const offers = getOffers()
+export async function updateOffer(id: string, data: Partial<Omit<Offer, 'id'>>): Promise<Offer | null> {
+  const offers = await read()
   const idx = offers.findIndex(o => o.id === id)
   if (idx === -1) return null
   offers[idx] = { ...offers[idx], ...data }
-  saveOffers(offers)
+  await write(offers)
   return offers[idx]
 }

@@ -3,7 +3,7 @@ import { getOffers, addOffer } from '@/lib/offers'
 import { verifySessionToken } from '@/lib/auth'
 
 export async function GET() {
-  const offers = getOffers()
+  const offers = await getOffers()
   return NextResponse.json(offers)
 }
 
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Champs obligatoires manquants' }, { status: 400 })
   }
 
-  const offer = addOffer({
+  const offer = await addOffer({
     title,
     img,
     cat,
