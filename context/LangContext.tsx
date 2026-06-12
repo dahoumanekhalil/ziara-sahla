@@ -266,12 +266,12 @@ const t: Record<Lang, Translations> = {
       sub: "Trois niveaux d'expérience, une seule promesse : authenticité et sécurité.",
       card1: {
         label: "Formule 01",
-        title: "Économique",
+        title: "Essentiel",
         desc: "L'essentiel de l'Algérie pour les groupes soucieux du budget. Confort simple, authenticité totale.",
       },
       card2: {
         label: "Formule 02",
-        title: "Intermédiaire",
+        title: "Confort",
         desc: "Le parfait équilibre entre confort et immersion culturelle. Notre formule la plus demandée.",
         ribbon: "Populaire",
       },
