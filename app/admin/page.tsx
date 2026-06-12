@@ -10,7 +10,6 @@ export default async function AdminPage() {
   const token = jar.get('admin_session')?.value
   if (!verifySessionToken(token)) redirect('/admin/login')
 
-  const offers = getOffers()
-  const gallery = getGallery()
+  const [offers, gallery] = await Promise.all([getOffers(), getGallery()])
   return <AdminClient initialOffers={offers} initialGallery={gallery} />
 }

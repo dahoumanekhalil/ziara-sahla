@@ -10,6 +10,7 @@ import { useTheme } from '@/context/ThemeContext'
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  if (pathname.startsWith('/admin')) return null
   const isHome = pathname === '/'
   const { openModal, toggleSidebar, isSidebarOpen } = useUI()
   const { lang, setLang, tr } = useLang()

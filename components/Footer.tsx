@@ -1,10 +1,13 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useLang } from "@/context/LangContext";
 
 export default function Footer() {
+  const pathname = usePathname();
   const { tr } = useLang();
+  if (pathname.startsWith("/admin")) return null;
 
   return (
     <footer>

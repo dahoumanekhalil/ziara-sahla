@@ -1,14 +1,17 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useUI } from "@/context/UIContext";
 import { useLang, Lang } from "@/context/LangContext";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function Sidebar() {
+  const pathname = usePathname();
   const { isSidebarOpen, closeSidebar, openModal } = useUI();
   const { lang, setLang, tr } = useLang();
   const { theme, toggleTheme } = useTheme();
+  if (pathname.startsWith("/admin")) return null;
 
   return (
     <>

@@ -13,10 +13,17 @@ const catDisplayLabels: Record<string, string> = {
   corporate: 'Corporate',
 }
 
+type MLString = { fr: string; en: string; ar: string }
+
 export default function OffresClient({ offers }: { offers: Offer[] }) {
   const { openModal } = useUI()
-  const { tr } = useLang()
+  const { tr, lang } = useLang()
   const o = tr.offresPage
+
+  function ml(v: MLString | string): string {
+    if (typeof v === 'string') return v
+    return v[lang] || v.fr || ''
+  }
   const [activeFilter, setActiveFilter] = useState('all')
   const [detailIdx, setDetailIdx] = useState<number | null>(null)
   const [quoteOpen, setQuoteOpen] = useState(false)
@@ -113,19 +120,19 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
                 style={{ transitionDelay: `${0.05 + i * 0.05}s` }}
               >
                 <div className="offer-img">
-                  <Image src={offer.img} alt={offer.title} width={400} height={240} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <Image src={offer.img} alt={ml(offer.title)} width={400} height={240} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   <span className="offer-cat">{catDisplayLabels[offer.cat] ?? offer.cat}</span>
                   {offer.cat === 'sahara' && <span className="offer-status status-hot">{o.statusSahara}</span>}
                   {offer.cat === 'premium' && <span className="offer-status status-top">{o.statusPremium}</span>}
                   {offer.cat === 'corporate' && <span className="offer-status status-promo">{o.statusCorporate}</span>}
-                  <span className="offer-duration">🗓️ {offer.dur}</span>
+                  <span className="offer-duration">🗓️ {ml(offer.dur)}</span>
                 </div>
                 <div className="offer-body">
-                  <h3 className="offer-title">{offer.title}</h3>
-                  <p className="offer-desc">{offer.desc.slice(0, 130)}…</p>
+                  <h3 className="offer-title">{ml(offer.title)}</h3>
+                  <p className="offer-desc">{ml(offer.desc).slice(0, 130)}…</p>
                   <ul className="offer-highlights">
                     {offer.inclus.slice(0, 5).map((inc, j) => (
-                      <li key={j}><span className="hi-ico">{inc.ico}</span> {inc.txt}</li>
+                      <li key={j}><span className="hi-ico">{inc.ico}</span> {ml(inc.txt)}</li>
                     ))}
                   </ul>
                   <div className="offer-foot">
@@ -135,7 +142,7 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
                     </div>
                     <div style={{ display: 'flex', gap: '8px' }}>
                       <button className="offer-detail" onClick={() => setDetailIdx(i)}>{o.detailBtn}</button>
-                      <button className="offer-devis" onClick={() => openQuote(offer.title)}>{o.quoteBtn}</button>
+                      <button className="offer-devis" onClick={() => openQuote(ml(offer.title))}>{o.quoteBtn}</button>
                     </div>
                   </div>
                 </div>
@@ -167,27 +174,27 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
           <div className="detail-modal" onClick={e => e.stopPropagation()}>
             <button className="modal-x" onClick={() => setDetailIdx(null)} style={{ top: '14px', right: '14px', background: 'rgba(0,0,0,.35)', color: '#fff' }} aria-label="Close">✕</button>
             <div className="detail-hero">
-              <Image src={detail.img} alt={detail.title} width={800} height={300} style={{ width: '100%', height: '260px', objectFit: 'cover' }} />
+              <Image src={detail.img} alt={ml(detail.title)} width={800} height={300} style={{ width: '100%', height: '260px', objectFit: 'cover' }} />
               <div className="detail-hero-info">
-                <h2>{detail.title}</h2>
-                <span className="detail-dur-pill">🗓️ {detail.dur}</span>
+                <h2>{ml(detail.title)}</h2>
+                <span className="detail-dur-pill">🗓️ {ml(detail.dur)}</span>
               </div>
             </div>
             <div className="detail-body">
               <div className="detail-meta">
-                {detail.meta.map((m, i) => (
-                  <div className="detail-meta-item" key={i}><span>{m.icon}</span>{m.label}</div>
+                {detail.meta.map((mt, i) => (
+                  <div className="detail-meta-item" key={i}><span>{mt.icon}</span>{ml(mt.label)}</div>
                 ))}
               </div>
               <div className="detail-section">
                 <h4>{o.aboutCircuit}</h4>
-                <p className="detail-desc">{detail.desc}</p>
+                <p className="detail-desc">{ml(detail.desc)}</p>
               </div>
               <div className="detail-section">
                 <h4>{o.includedLabel}</h4>
                 <ul className="detail-feats">
                   {detail.inclus.map((f, i) => (
-                    <li key={i}><span className="df-ico">{f.ico}</span> {f.txt}</li>
+                    <li key={i}><span className="df-ico">{f.ico}</span> {ml(f.txt)}</li>
                   ))}
                 </ul>
               </div>
@@ -197,7 +204,7 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
                   {detail.programme.map((p, i) => (
                     <li className="detail-day" key={i}>
                       <div className="day-num">{p.j}</div>
-                      <div className="day-content"><strong>{p.titre}</strong><p>{p.desc}</p></div>
+                      <div className="day-content"><strong>{ml(p.titre)}</strong><p>{ml(p.desc)}</p></div>
                     </li>
                   ))}
                 </ul>
@@ -209,7 +216,7 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
                 </div>
                 <div className="detail-actions">
                   <button className="offer-detail" onClick={() => setDetailIdx(null)}>{o.closeBtn}</button>
-                  <button className="offer-devis" onClick={() => openQuote(detail.title)}>{o.sendQuote}</button>
+                  <button className="offer-devis" onClick={() => openQuote(ml(detail.title))}>{o.sendQuote}</button>
                 </div>
               </div>
             </div>
@@ -242,7 +249,7 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
                   <label>{m.desiredOffer}</label>
                   <select value={selectedOffer} onChange={e => setSelectedOffer(e.target.value)}>
                     <option value="">{m.groupOptions[0]}</option>
-                    {offers.map(of => <option key={of.id} value={of.title}>{of.title}</option>)}
+                    {offers.map(of => <option key={of.id} value={ml(of.title)}>{ml(of.title)}</option>)}
                   </select>
                 </div>
               </div>

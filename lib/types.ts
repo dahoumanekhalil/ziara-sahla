@@ -1,26 +1,28 @@
+export type MLString = { fr: string; en: string; ar: string }
+
 export interface OfferMeta {
   icon: string
-  label: string
+  label: MLString
 }
 
 export interface OfferInclus {
   ico: string
-  txt: string
+  txt: MLString
 }
 
 export interface OfferProgramme {
   j: string
-  titre: string
-  desc: string
+  titre: MLString
+  desc: MLString
 }
 
 export interface Offer {
   id: string
-  title: string
+  title: MLString
   img: string
   cat: string
-  dur: string
-  desc: string
+  dur: MLString
+  desc: MLString
   meta: OfferMeta[]
   inclus: OfferInclus[]
   programme: OfferProgramme[]

@@ -222,6 +222,68 @@ export interface Translations {
     successMsg: string;
     groupOptions: string[];
   };
+  admin: {
+    viewSite: string;
+    logout: string;
+    tabOffersPrefix: string;
+    tabAdd: string;
+    tabGalleryPrefix: string;
+    inclusions: string;
+    days: string;
+    deleteBtn: string;
+    noOffers: string;
+    confirmDelete: string;
+    sectionGeneral: string;
+    fieldTitle: string;
+    fieldCat: string;
+    fieldDur: string;
+    fieldImg: string;
+    fieldDesc: string;
+    descPlaceholder: string;
+    sectionMeta: string;
+    addBtn: string;
+    metaPlaceholder: string;
+    sectionInclus: string;
+    inclusPlaceholder: string;
+    sectionProg: string;
+    dayTitlePlaceholder: string;
+    dayDescPlaceholder: string;
+    saving: string;
+    submitOffer: string;
+    resetBtn: string;
+    offerAdded: string;
+    addError: string;
+    networkError: string;
+    allCatPrefix: string;
+    cancelBtn: string;
+    addImageBtn: string;
+    newImageTitle: string;
+    urlMode: string;
+    uploadMode: string;
+    imgUrlLabel: string;
+    fileLabel: string;
+    uploading: string;
+    uploadSuccess: string;
+    clickToChange: string;
+    clickToBrowse: string;
+    orDrag: string;
+    fileTypes: string;
+    altLabel: string;
+    altPlaceholder: string;
+    captionLabel: string;
+    captionPlaceholder: string;
+    categoryLabel: string;
+    addingImg: string;
+    addToGallery: string;
+    noImages: string;
+    inCategory: string;
+    addOne: string;
+    deleteImgBtn: string;
+    confirmDeleteImg: string;
+    imgAdded: string;
+    imgError: string;
+    uploadError: string;
+  };
 }
 
 const t: Record<Lang, Translations> = {
@@ -576,6 +638,68 @@ const t: Record<Lang, Translations> = {
         "50+ personnes",
       ],
     },
+    admin: {
+      viewSite: "Voir le site ↗",
+      logout: "Déconnexion",
+      tabOffersPrefix: "Offres",
+      tabAdd: "+ Ajouter une offre",
+      tabGalleryPrefix: "🖼 Galerie",
+      inclusions: "inclusions",
+      days: "jours",
+      deleteBtn: "Supprimer",
+      noOffers: "Aucune offre. Ajoutez-en une !",
+      confirmDelete: "Supprimer",
+      sectionGeneral: "Informations générales",
+      fieldTitle: "Titre *",
+      fieldCat: "Catégorie *",
+      fieldDur: "Durée *",
+      fieldImg: "Image (chemin ou URL) *",
+      fieldDesc: "Description *",
+      descPlaceholder: "Description du circuit…",
+      sectionMeta: "Informations clés",
+      addBtn: "+ Ajouter",
+      metaPlaceholder: "Départ: Alger → Ghardaïa",
+      sectionInclus: "Ce qui est inclus",
+      inclusPlaceholder: "Transport privé climatisé",
+      sectionProg: "Programme jour par jour",
+      dayTitlePlaceholder: "Titre du jour",
+      dayDescPlaceholder: "Description de la journée…",
+      saving: "Enregistrement…",
+      submitOffer: "Ajouter l'offre",
+      resetBtn: "Réinitialiser",
+      offerAdded: "Offre ajoutée avec succès !",
+      addError: "Erreur lors de l'ajout",
+      networkError: "Erreur réseau",
+      allCatPrefix: "Tout",
+      cancelBtn: "✕ Annuler",
+      addImageBtn: "+ Ajouter une image",
+      newImageTitle: "Nouvelle image",
+      urlMode: "🔗 Lien URL",
+      uploadMode: "📁 Depuis le PC",
+      imgUrlLabel: "URL de l'image *",
+      fileLabel: "Fichier image *",
+      uploading: "Téléchargement en cours…",
+      uploadSuccess: "Fichier uploadé avec succès",
+      clickToChange: "Cliquer pour changer",
+      clickToBrowse: "Cliquez pour parcourir",
+      orDrag: "ou glissez une image ici",
+      fileTypes: "JPG, PNG, WebP, GIF — max 10 Mo",
+      altLabel: "Texte alternatif (SEO) *",
+      altPlaceholder: "Description de l'image",
+      captionLabel: "Légende (affichée en galerie) *",
+      captionPlaceholder: "Dunes au coucher de soleil",
+      categoryLabel: "Catégorie *",
+      addingImg: "Ajout…",
+      addToGallery: "✓ Ajouter à la galerie",
+      noImages: "Aucune image",
+      inCategory: "dans la catégorie",
+      addOne: "Ajoutez-en une !",
+      deleteImgBtn: "🗑 Supprimer",
+      confirmDeleteImg: "Supprimer cette image ?",
+      imgAdded: "Image ajoutée avec succès !",
+      imgError: "Erreur lors de l'ajout",
+      uploadError: "Erreur lors de l'upload",
+    },
   },
 
   en: {
@@ -640,7 +764,7 @@ const t: Record<Lang, Translations> = {
         "Air-conditioned bus",
         "French-speaking guide",
         "Traditional meals included",
-        "Assistance 7 days/7",
+        "Assistance 7 days a week",
       ],
       feats2: [
         "3-4 star accommodation",
@@ -673,7 +797,7 @@ const t: Record<Lang, Translations> = {
           desc: "A dedicated team available at all times, including medical emergencies.",
         },
         {
-          title: "Mastered logistics",
+          title: "Managed logistics",
           desc: "Transport, accommodation, catering and activities — all planned before your arrival.",
         },
         {
@@ -716,7 +840,7 @@ const t: Record<Lang, Translations> = {
         },
       ],
       quote:
-        "A trip to Algeria with Ziara Sahla is much more than a tour — it's an encounter with a millennial civilization.",
+        "A trip to Algeria with Ziara Sahla is much more than a tour — it's an encounter with an ancient civilization.",
     },
     gallery: {
       badge: "Gallery",
@@ -752,7 +876,7 @@ const t: Record<Lang, Translations> = {
         "Intermediate Tour",
         "Premium Tour",
         "Custom groups",
-        "Companies & CE",
+        "Companies & Works Councils",
       ],
       rights: "© 2026 Ziara-Sahla. All rights reserved.",
       legal: "Legal notice",
@@ -821,12 +945,12 @@ const t: Record<Lang, Translations> = {
         "Coordination of European departures, French-speaking client relations, personalized quotes.",
       office2Title: "Algeria Office – Algiers",
       office2Desc:
-        "On-site logistics, guides, accommodation and security management. Open 7 days/7 during tours.",
+        "On-site logistics, guides, accommodation and security management. Open 7 days a week during tours.",
     },
     galleryPage: {
       badge: "Photos",
       title: "Algeria Gallery",
-      sub: "From Saharan landscapes to millennial cities, experience Algeria in pictures before discovering it for real.",
+      sub: "From Saharan landscapes to ancient cities, experience Algeria in pictures before discovering it for real.",
       saharaBadge: "Desert",
       saharaTitle: "The Grand Sahara",
       saharaSub:
@@ -834,7 +958,7 @@ const t: Record<Lang, Translations> = {
       ghardaiaBadge: "Culture",
       ghardaiaTitle: "Ghardaïa & the M'Zab Valley",
       ghardaiaSub:
-        "A millennial city listed as a UNESCO World Heritage Site, a crossroads of cultures and Berber architecture.",
+        "An ancient city listed as a UNESCO World Heritage Site, a crossroads of cultures and Berber architecture.",
       hotelsBadge: "Accommodation",
       hotelsTitle: "Our Partner Hotels",
       hotelsSub:
@@ -848,7 +972,7 @@ const t: Record<Lang, Translations> = {
     offresPage: {
       badge: "Trips & Tours",
       title: "Our Offers in Algeria",
-      sub: "From the Saharan desert to millennial cities, choose the adventure that suits you.",
+      sub: "From the Saharan desert to ancient cities, choose the adventure that suits you.",
       filters: [
         { key: "all", label: "All offers" },
         { key: "sahara", label: "🏜️ Sahara" },
@@ -928,6 +1052,68 @@ const t: Record<Lang, Translations> = {
         "50+ people",
       ],
     },
+    admin: {
+      viewSite: "View site ↗",
+      logout: "Logout",
+      tabOffersPrefix: "Offers",
+      tabAdd: "+ Add an offer",
+      tabGalleryPrefix: "🖼 Gallery",
+      inclusions: "inclusions",
+      days: "days",
+      deleteBtn: "Delete",
+      noOffers: "No offers yet. Add one!",
+      confirmDelete: "Delete",
+      sectionGeneral: "General information",
+      fieldTitle: "Title *",
+      fieldCat: "Category *",
+      fieldDur: "Duration *",
+      fieldImg: "Image (path or URL) *",
+      fieldDesc: "Description *",
+      descPlaceholder: "Tour description…",
+      sectionMeta: "Key information",
+      addBtn: "+ Add",
+      metaPlaceholder: "Departure: Algiers → Ghardaïa",
+      sectionInclus: "What's included",
+      inclusPlaceholder: "Private air-conditioned transport",
+      sectionProg: "Day by day program",
+      dayTitlePlaceholder: "Day title",
+      dayDescPlaceholder: "Day description…",
+      saving: "Saving…",
+      submitOffer: "Add offer",
+      resetBtn: "Reset",
+      offerAdded: "Offer added successfully!",
+      addError: "Error adding offer",
+      networkError: "Network error",
+      allCatPrefix: "All",
+      cancelBtn: "✕ Cancel",
+      addImageBtn: "+ Add an image",
+      newImageTitle: "New image",
+      urlMode: "🔗 URL link",
+      uploadMode: "📁 From PC",
+      imgUrlLabel: "Image URL *",
+      fileLabel: "Image file *",
+      uploading: "Uploading…",
+      uploadSuccess: "File uploaded successfully",
+      clickToChange: "Click to change",
+      clickToBrowse: "Click to browse",
+      orDrag: "or drag an image here",
+      fileTypes: "JPG, PNG, WebP, GIF — max 10 MB",
+      altLabel: "Alt text (SEO) *",
+      altPlaceholder: "Image description",
+      captionLabel: "Caption (shown in gallery) *",
+      captionPlaceholder: "Dunes at sunset",
+      categoryLabel: "Category *",
+      addingImg: "Adding…",
+      addToGallery: "✓ Add to gallery",
+      noImages: "No images",
+      inCategory: "in category",
+      addOne: "Add one!",
+      deleteImgBtn: "🗑 Delete",
+      confirmDeleteImg: "Delete this image?",
+      imgAdded: "Image added successfully!",
+      imgError: "Error adding image",
+      uploadError: "Upload error",
+    },
   },
 
   ar: {
@@ -985,11 +1171,11 @@ const t: Record<Lang, Translations> = {
       priceLabel: "بناءً على الطلب",
       moreBtn: "← اعرف المزيد",
       feats1: [
-        "إقامة 2 نجوم",
+        "إقامة ٢ نجوم",
         "نقل بالحافلة المكيفة",
         "مرشد ناطق بالفرنسية",
         "وجبات تقليدية مشمولة",
-        "مساعدة 7 أيام/7",
+        "مساعدة ٧ أيام في الأسبوع",
       ],
       feats2: [
         "إقامة ٣-٤ نجوم",
@@ -1049,7 +1235,7 @@ const t: Record<Lang, Translations> = {
         },
         {
           title: "جولات خارج المسارات المعتادة",
-          desc: "الصحراء، تاسيلي، غرداية، بجاية... نفتح أبوابًا لا تجرؤ الوكالات العادية على الدخول إليها.",
+          desc: "الصحراء، غرداية، وادي سوف، الجزائر العاصمة، سطيف، قسنطينة، بوسعادة، جميلة، المسيلة… نفتح أبوابًا لا تجرؤ الوكالات العادية على الدخول إليها.",
         },
         {
           title: "شامل لكل شيء، صفر إجهاد",
@@ -1168,7 +1354,7 @@ const t: Record<Lang, Translations> = {
         "تنسيق المغادرات الأوروبية، علاقات العملاء الناطقين بالفرنسية، عروض الأسعار المخصصة.",
       office2Title: "مكتب الجزائر – الجزائر العاصمة",
       office2Desc:
-        "إدارة اللوجستيك في الموقع، المرشدون، الإقامة والأمن. مفتوح ٧ أيام/٧ خلال الجولات.",
+        "إدارة اللوجستيك في الموقع، المرشدون، الإقامة والأمن. مفتوح ٧ أيام في الأسبوع خلال الجولات.",
     },
     galleryPage: {
       badge: "الصور",
@@ -1193,7 +1379,7 @@ const t: Record<Lang, Translations> = {
     offresPage: {
       badge: "رحلات وجولات",
       title: "عروضنا في الجزائر",
-      sub: "من صحراء الصحراء إلى المدن العريقة، اختر المغامرة التي تناسبك.",
+      sub: "من الصحراء الكبرى إلى المدن العريقة، اختر المغامرة التي تناسبك.",
       filters: [
         { key: "all", label: "جميع العروض" },
         { key: "sahara", label: "🏜️ الصحراء" },
@@ -1266,6 +1452,68 @@ const t: Record<Lang, Translations> = {
         "٢٦ – ٥٠ شخصًا",
         "٥٠+ شخصًا",
       ],
+    },
+    admin: {
+      viewSite: "مشاهدة الموقع ↗",
+      logout: "تسجيل الخروج",
+      tabOffersPrefix: "العروض",
+      tabAdd: "+ إضافة عرض",
+      tabGalleryPrefix: "🖼 المعرض",
+      inclusions: "إضافات",
+      days: "أيام",
+      deleteBtn: "حذف",
+      noOffers: "لا توجد عروض. أضف واحدًا!",
+      confirmDelete: "حذف",
+      sectionGeneral: "معلومات عامة",
+      fieldTitle: "العنوان *",
+      fieldCat: "الفئة *",
+      fieldDur: "المدة *",
+      fieldImg: "الصورة (مسار أو رابط) *",
+      fieldDesc: "الوصف *",
+      descPlaceholder: "وصف الجولة…",
+      sectionMeta: "معلومات رئيسية",
+      addBtn: "+ إضافة",
+      metaPlaceholder: "المغادرة: الجزائر → غرداية",
+      sectionInclus: "ما هو مشمول",
+      inclusPlaceholder: "نقل خاص مكيف",
+      sectionProg: "البرنامج يومًا بيوم",
+      dayTitlePlaceholder: "عنوان اليوم",
+      dayDescPlaceholder: "وصف اليوم…",
+      saving: "جارٍ الحفظ…",
+      submitOffer: "إضافة العرض",
+      resetBtn: "إعادة تعيين",
+      offerAdded: "تمت إضافة العرض بنجاح!",
+      addError: "خطأ في الإضافة",
+      networkError: "خطأ في الشبكة",
+      allCatPrefix: "الكل",
+      cancelBtn: "✕ إلغاء",
+      addImageBtn: "+ إضافة صورة",
+      newImageTitle: "صورة جديدة",
+      urlMode: "🔗 رابط URL",
+      uploadMode: "📁 من الحاسوب",
+      imgUrlLabel: "رابط الصورة *",
+      fileLabel: "ملف الصورة *",
+      uploading: "جارٍ الرفع…",
+      uploadSuccess: "تم رفع الملف بنجاح",
+      clickToChange: "انقر للتغيير",
+      clickToBrowse: "انقر للاستعراض",
+      orDrag: "أو اسحب صورة هنا",
+      fileTypes: "JPG، PNG، WebP، GIF — بحد أقصى 10 ميغابايت",
+      altLabel: "النص البديل (SEO) *",
+      altPlaceholder: "وصف الصورة",
+      captionLabel: "التسمية التوضيحية (تُعرض في المعرض) *",
+      captionPlaceholder: "الكثبان عند الغروب",
+      categoryLabel: "الفئة *",
+      addingImg: "جارٍ الإضافة…",
+      addToGallery: "✓ إضافة إلى المعرض",
+      noImages: "لا توجد صور",
+      inCategory: "في الفئة",
+      addOne: "أضف واحدة!",
+      deleteImgBtn: "🗑 حذف",
+      confirmDeleteImg: "هل تريد حذف هذه الصورة؟",
+      imgAdded: "تمت إضافة الصورة بنجاح!",
+      imgError: "خطأ في الإضافة",
+      uploadError: "خطأ في الرفع",
     },
   },
 };

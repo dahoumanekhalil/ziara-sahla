@@ -477,8 +477,8 @@ export default function HomePage() {
               <Image
                 src="/assets/logo/logo.png"
                 alt=""
-                width={44}
-                height={44}
+                width={88}
+                height={88}
                 className="gbs-logo"
                 draggable={false}
               />
@@ -632,10 +632,10 @@ export default function HomePage() {
                   <Image
                     src="/assets/logo/logo.png"
                     alt="Ziara-Sahla"
-                    width={66}
-                    height={66}
+                    width={110}
+                    height={110}
                     draggable={false}
-                    style={{ borderRadius: "50%" }}
+                    style={{ borderRadius: "8px" }}
                   />
                 </div>
               </div>

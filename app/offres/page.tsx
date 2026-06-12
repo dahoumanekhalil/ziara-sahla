@@ -3,7 +3,7 @@ import OffresClient from './OffresClient'
 
 export const dynamic = 'force-dynamic'
 
-export default function OffresPage() {
-  const offers = getOffers()
+export default async function OffresPage() {
+  const offers = await getOffers()
   return <OffresClient offers={offers} />
 }

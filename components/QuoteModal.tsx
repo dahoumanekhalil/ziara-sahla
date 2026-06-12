@@ -1,17 +1,20 @@
 'use client'
 import { useState, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import { useUI } from '@/context/UIContext'
 import { useLang } from '@/context/LangContext'
 
 type Status = 'idle' | 'sending' | 'success' | 'error'
 
 export default function QuoteModal() {
+  const pathname = usePathname()
   const { isModalOpen, closeModal } = useUI()
   const { tr } = useLang()
   const m = tr.modal
   const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const formRef = useRef<HTMLFormElement>(null)
+  if (pathname.startsWith('/admin')) return null
 
   async function submitForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
