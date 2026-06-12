@@ -322,7 +322,7 @@ export default function AdminClient({
                     <span>{l.flag}</span>
                     <span>{l.label}</span>
                     {/* completion dots */}
-                    {['title', 'desc', 'dur'].every(k => (form as Record<string, MLString>)[k][l.key]) && (
+                    {(['title', 'desc', 'dur'] as const).every(k => (form[k] as MLString)[l.key]) && (
                       <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block' }} />
                     )}
                   </button>
