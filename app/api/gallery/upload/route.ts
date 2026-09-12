@@ -32,14 +32,29 @@ export async function POST(req: NextRequest) {
   const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg'
   const basename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
 
-  if (USE_BLOB) {
-    const blob = await put(`uploads/${basename}`, file, { access: 'public' })
-    return NextResponse.json({ src: blob.url })
-  }
+  const isServerless = !!process.env.VERCEL || !!process.env.AWS_LAMBDA_FUNCTION_NAME
 
-  const uploadsDir = join(process.cwd(), 'public', 'uploads')
-  await mkdir(uploadsDir, { recursive: true })
-  const bytes = Buffer.from(await file.arrayBuffer())
-  await writeFile(join(uploadsDir, basename), bytes)
-  return NextResponse.json({ src: `/uploads/${basename}` })
+  try {
+    if (USE_BLOB) {
+      const blob = await put(`uploads/${basename}`, file, { access: 'public' })
+      return NextResponse.json({ src: blob.url })
+    }
+
+    if (isServerless) {
+      return NextResponse.json(
+        { error: 'Stockage non configuré. Ajoutez la variable d’environnement BLOB_READ_WRITE_TOKEN (Vercel Blob) pour activer l’upload.' },
+        { status: 500 },
+      )
+    }
+
+    const uploadsDir = join(process.cwd(), 'public', 'uploads')
+    await mkdir(uploadsDir, { recursive: true })
+    const bytes = Buffer.from(await file.arrayBuffer())
+    await writeFile(join(uploadsDir, basename), bytes)
+    return NextResponse.json({ src: `/uploads/${basename}` })
+  } catch (err) {
+    console.error('[upload] error:', err)
+    const message = err instanceof Error ? err.message : 'Erreur inconnue'
+    return NextResponse.json({ error: `Échec de l’upload: ${message}` }, { status: 500 })
+  }
 }
