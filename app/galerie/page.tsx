@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useUI } from '@/context/UIContext'
 import { useLang } from '@/context/LangContext'
 import type { GalleryImage } from '@/lib/gallery'
+import type { Category } from '@/lib/categories'
 
 export default function GaleriePage() {
   const { openModal } = useUI()
@@ -11,11 +12,16 @@ export default function GaleriePage() {
   const g = tr.galleryPage
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [allPhotos, setAllPhotos] = useState<GalleryImage[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
 
   useEffect(() => {
     fetch('/api/gallery')
       .then(r => r.json())
       .then(setAllPhotos)
+      .catch(() => {})
+    fetch('/api/categories')
+      .then(r => r.json())
+      .then((cs: Category[]) => setCategories(cs.filter(c => c.kind === 'gallery' && !c.hidden)))
       .catch(() => {})
   }, [])
 
@@ -42,9 +48,13 @@ export default function GaleriePage() {
     return () => { document.body.style.overflow = '' }
   }, [lightboxIndex])
 
-  const sahara = allPhotos.filter(p => p.category === 'sahara')
-  const ghardaia = allPhotos.filter(p => p.category === 'ghardaia')
-  const hotels = allPhotos.filter(p => p.category === 'hotels')
+  function sectionHeader(cat: Category): { badge: string; title: string; sub: string } {
+    if (cat.name === 'sahara') return { badge: g.saharaBadge, title: g.saharaTitle, sub: g.saharaSub }
+    if (cat.name === 'ghardaia') return { badge: g.ghardaiaBadge, title: g.ghardaiaTitle, sub: g.ghardaiaSub }
+    if (cat.name === 'hotels') return { badge: g.hotelsBadge, title: g.hotelsTitle, sub: g.hotelsSub }
+    const nice = cat.name.charAt(0).toUpperCase() + cat.name.slice(1)
+    return { badge: cat.emoji, title: `${cat.emoji} ${nice}`, sub: '' }
+  }
 
   return (
     <>
@@ -61,59 +71,29 @@ export default function GaleriePage() {
       <section className="gallery-page">
         <div className="container">
 
-          {/* Sahara */}
-          <div className="cat-section reveal">
-            <div className="cat-header">
-              <span className="badge">{g.saharaBadge}</span>
-              <h2>{g.saharaTitle}</h2>
-              <p>{g.saharaSub}</p>
-            </div>
-            <div className="photo-grid">
-              {sahara.map((photo) => (
-                <div className="photo-item" key={photo.id} onClick={() => setLightboxIndex(allPhotos.indexOf(photo))}>
-                  <Image src={photo.src} alt={photo.alt} width={400} height={280} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <span className="photo-label">{photo.label}</span>
-                  <span className="photo-zoom">🔍</span>
+          {categories.map(cat => {
+            const photos = allPhotos.filter(p => p.category === cat.name)
+            if (photos.length === 0) return null
+            const h = sectionHeader(cat)
+            return (
+              <div className="cat-section reveal" key={cat.id}>
+                <div className="cat-header">
+                  <span className="badge">{h.badge}</span>
+                  <h2>{h.title}</h2>
+                  {h.sub && <p>{h.sub}</p>}
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Ghardaïa */}
-          <div className="cat-section reveal">
-            <div className="cat-header">
-              <span className="badge">{g.ghardaiaBadge}</span>
-              <h2>{g.ghardaiaTitle}</h2>
-              <p>{g.ghardaiaSub}</p>
-            </div>
-            <div className="photo-grid">
-              {ghardaia.map((photo) => (
-                <div className="photo-item" key={photo.id} onClick={() => setLightboxIndex(allPhotos.indexOf(photo))}>
-                  <Image src={photo.src} alt={photo.alt} width={400} height={280} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <span className="photo-label">{photo.label}</span>
-                  <span className="photo-zoom">🔍</span>
+                <div className="photo-grid">
+                  {photos.map((photo) => (
+                    <div className="photo-item" key={photo.id} onClick={() => setLightboxIndex(allPhotos.indexOf(photo))}>
+                      <Image src={photo.src} alt={photo.alt} width={400} height={280} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <span className="photo-label">{photo.label}</span>
+                      <span className="photo-zoom">🔍</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Hotels */}
-          <div className="cat-section reveal">
-            <div className="cat-header">
-              <span className="badge">{g.hotelsBadge}</span>
-              <h2>{g.hotelsTitle}</h2>
-              <p>{g.hotelsSub}</p>
-            </div>
-            <div className="photo-grid">
-              {hotels.map((photo) => (
-                <div className="photo-item" key={photo.id} onClick={() => setLightboxIndex(allPhotos.indexOf(photo))}>
-                  <Image src={photo.src} alt={photo.alt} width={400} height={280} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <span className="photo-label">{photo.label}</span>
-                  <span className="photo-zoom">🔍</span>
-                </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            )
+          })}
 
           {/* Page CTA */}
           <div className="page-cta reveal">
