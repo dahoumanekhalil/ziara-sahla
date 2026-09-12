@@ -2,7 +2,10 @@ export type MLString = { fr: string; en: string; ar: string }
 
 export interface OfferMeta {
   icon: string
-  label: MLString
+  from?: MLString
+  to?: MLString
+  /** @deprecated legacy single-field label (kept for backward compatibility with older offers) */
+  label?: MLString | string
 }
 
 export interface OfferInclus {

@@ -576,5 +576,214 @@
         }
       }
     ]
+  },
+  {
+    "id": "f2e812e3-6fef-4d2c-9caa-67f3128201a8",
+    "title": {
+      "fr": "test",
+      "en": "",
+      "ar": ""
+    },
+    "img": "/uploads/1789230347243-pvucbp.webp",
+    "cat": "",
+    "dur": {
+      "fr": "7 jours",
+      "en": "",
+      "ar": ""
+    },
+    "desc": {
+      "fr": "test testset set est set set set aes ta ts et",
+      "en": "",
+      "ar": ""
+    },
+    "meta": [
+      {
+        "icon": "📍",
+        "from": {
+          "fr": "test1",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "test2",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "icon": "📍",
+        "from": {
+          "fr": "test2",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "test3",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "icon": "📍",
+        "from": {
+          "fr": "test3",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "test4",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "icon": "📍",
+        "from": {
+          "fr": "test4",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "test5",
+          "en": "",
+          "ar": ""
+        }
+      }
+    ],
+    "inclus": [
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "test test 1",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "test test 2",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "test test 3",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "test test 4",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "test test 5",
+          "en": "",
+          "ar": ""
+        }
+      }
+    ],
+    "programme": [
+      {
+        "j": "J1",
+        "titre": {
+          "fr": "joure1",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "jour1",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "j": "J2",
+        "titre": {
+          "fr": "joure2",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "joure2",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "j": "J3",
+        "titre": {
+          "fr": "jour 3",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "jour3",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "j": "J4",
+        "titre": {
+          "fr": "jour4",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "jour4",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "j": "J5",
+        "titre": {
+          "fr": "jour5",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "jour5",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "j": "J6",
+        "titre": {
+          "fr": "jour6",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "jour6",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "j": "J7",
+        "titre": {
+          "fr": "jour7",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "jour7",
+          "en": "",
+          "ar": ""
+        }
+      }
+    ]
   }
 ]

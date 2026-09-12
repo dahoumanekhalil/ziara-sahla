@@ -243,6 +243,40 @@ export interface Translations {
     sectionMeta: string;
     addBtn: string;
     metaPlaceholder: string;
+    metaFromLabel: string;
+    metaToLabel: string;
+    metaFromPlaceholder: string;
+    metaToPlaceholder: string;
+    iconPickerTitle: string;
+    iconPickerOther: string;
+    tabServices: string;
+    tabContact: string;
+    savedOk: string;
+    saveError: string;
+    saveBtn: string;
+    servicesTitle: string;
+    servicesSub: string;
+    contactTitle: string;
+    contactSub: string;
+    fieldServiceImg: string;
+    fieldServiceIcon: string;
+    fieldServiceIconClass: string;
+    fieldServiceLabel: string;
+    fieldServiceDesc: string;
+    fieldServiceRibbon: string;
+    fieldServiceFeatured: string;
+    fieldServiceFeats: string;
+    ribbonPlaceholder: string;
+    featPlaceholder: string;
+    contactEmail: string;
+    contactPhoneFr: string;
+    contactPhoneDz: string;
+    contactAddrFr: string;
+    contactAddrDz: string;
+    contactFacebook: string;
+    contactInstagram: string;
+    contactLinkedin: string;
+    contactWhatsapp: string;
     sectionInclus: string;
     inclusPlaceholder: string;
     sectionProg: string;
@@ -659,6 +693,40 @@ const t: Record<Lang, Translations> = {
       sectionMeta: "Informations clés",
       addBtn: "+ Ajouter",
       metaPlaceholder: "Départ: Alger → Ghardaïa",
+      metaFromLabel: "De",
+      metaToLabel: "À",
+      metaFromPlaceholder: "Alger",
+      metaToPlaceholder: "Ghardaïa",
+      iconPickerTitle: "Choisir un icône",
+      iconPickerOther: "Autre emoji…",
+      tabServices: "🧭 Services",
+      tabContact: "📞 Contact",
+      savedOk: "Enregistré ✓",
+      saveError: "Erreur d'enregistrement",
+      saveBtn: "💾 Enregistrer",
+      servicesTitle: "Services de la page d'accueil",
+      servicesSub: "Modifiez les cartes de la section « Nos circuits » affichée sur la page d'accueil.",
+      contactTitle: "Informations de contact",
+      contactSub: "Ces informations apparaissent sur la page /contact et le pied de page.",
+      fieldServiceImg: "Image *",
+      fieldServiceIcon: "Icône (emoji)",
+      fieldServiceIconClass: "Palette de couleur",
+      fieldServiceLabel: "Étiquette (ex : Formule 01)",
+      fieldServiceDesc: "Description",
+      fieldServiceRibbon: "Ruban (optionnel)",
+      fieldServiceFeatured: "Carte mise en avant",
+      fieldServiceFeats: "Caractéristiques",
+      ribbonPlaceholder: "Populaire",
+      featPlaceholder: "Hébergement 3 étoiles",
+      contactEmail: "Email",
+      contactPhoneFr: "Téléphone France",
+      contactPhoneDz: "Téléphone Algérie",
+      contactAddrFr: "Adresse France",
+      contactAddrDz: "Adresse Algérie",
+      contactFacebook: "URL Facebook",
+      contactInstagram: "URL Instagram",
+      contactLinkedin: "URL LinkedIn",
+      contactWhatsapp: "URL WhatsApp",
       sectionInclus: "Ce qui est inclus",
       inclusPlaceholder: "Transport privé climatisé",
       sectionProg: "Programme jour par jour",
@@ -1073,6 +1141,40 @@ const t: Record<Lang, Translations> = {
       sectionMeta: "Key information",
       addBtn: "+ Add",
       metaPlaceholder: "Departure: Algiers → Ghardaïa",
+      metaFromLabel: "From",
+      metaToLabel: "To",
+      metaFromPlaceholder: "Algiers",
+      metaToPlaceholder: "Ghardaïa",
+      iconPickerTitle: "Choose an icon",
+      iconPickerOther: "Other emoji…",
+      tabServices: "🧭 Services",
+      tabContact: "📞 Contact",
+      savedOk: "Saved ✓",
+      saveError: "Save error",
+      saveBtn: "💾 Save",
+      servicesTitle: "Home-page services",
+      servicesSub: "Edit the cards shown in the “Our tours” section on the home page.",
+      contactTitle: "Contact information",
+      contactSub: "This info shows on the /contact page and in the footer.",
+      fieldServiceImg: "Image *",
+      fieldServiceIcon: "Icon (emoji)",
+      fieldServiceIconClass: "Color palette",
+      fieldServiceLabel: "Label (e.g. Package 01)",
+      fieldServiceDesc: "Description",
+      fieldServiceRibbon: "Ribbon (optional)",
+      fieldServiceFeatured: "Featured card",
+      fieldServiceFeats: "Features",
+      ribbonPlaceholder: "Popular",
+      featPlaceholder: "3-star accommodation",
+      contactEmail: "Email",
+      contactPhoneFr: "France phone",
+      contactPhoneDz: "Algeria phone",
+      contactAddrFr: "France address",
+      contactAddrDz: "Algeria address",
+      contactFacebook: "Facebook URL",
+      contactInstagram: "Instagram URL",
+      contactLinkedin: "LinkedIn URL",
+      contactWhatsapp: "WhatsApp URL",
       sectionInclus: "What's included",
       inclusPlaceholder: "Private air-conditioned transport",
       sectionProg: "Day by day program",
@@ -1474,6 +1576,40 @@ const t: Record<Lang, Translations> = {
       sectionMeta: "معلومات رئيسية",
       addBtn: "+ إضافة",
       metaPlaceholder: "المغادرة: الجزائر → غرداية",
+      metaFromLabel: "من",
+      metaToLabel: "إلى",
+      metaFromPlaceholder: "الجزائر",
+      metaToPlaceholder: "غرداية",
+      iconPickerTitle: "اختر رمزًا",
+      iconPickerOther: "رمز آخر…",
+      tabServices: "🧭 الخدمات",
+      tabContact: "📞 التواصل",
+      savedOk: "تم الحفظ ✓",
+      saveError: "خطأ في الحفظ",
+      saveBtn: "💾 حفظ",
+      servicesTitle: "خدمات الصفحة الرئيسية",
+      servicesSub: "عدّل البطاقات المعروضة في قسم « جولاتنا » على الصفحة الرئيسية.",
+      contactTitle: "معلومات الاتصال",
+      contactSub: "تظهر هذه المعلومات في صفحة الاتصال وتذييل الموقع.",
+      fieldServiceImg: "الصورة *",
+      fieldServiceIcon: "الأيقونة (رمز)",
+      fieldServiceIconClass: "لوحة الألوان",
+      fieldServiceLabel: "التسمية (مثال : الباقة ٠١)",
+      fieldServiceDesc: "الوصف",
+      fieldServiceRibbon: "شريط (اختياري)",
+      fieldServiceFeatured: "بطاقة مميزة",
+      fieldServiceFeats: "الميزات",
+      ribbonPlaceholder: "الأكثر طلبًا",
+      featPlaceholder: "إقامة ٣ نجوم",
+      contactEmail: "البريد الإلكتروني",
+      contactPhoneFr: "هاتف فرنسا",
+      contactPhoneDz: "هاتف الجزائر",
+      contactAddrFr: "عنوان فرنسا",
+      contactAddrDz: "عنوان الجزائر",
+      contactFacebook: "رابط فيسبوك",
+      contactInstagram: "رابط إنستغرام",
+      contactLinkedin: "رابط لينكدإن",
+      contactWhatsapp: "رابط واتساب",
       sectionInclus: "ما هو مشمول",
       inclusPlaceholder: "نقل خاص مكيف",
       sectionProg: "البرنامج يومًا بيوم",
