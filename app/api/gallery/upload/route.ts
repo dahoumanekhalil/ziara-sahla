@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { put } from '@vercel/blob'
+import { writeFile, mkdir } from 'fs/promises'
+import { join } from 'path'
 import { verifySessionToken } from '@/lib/auth'
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/avif']
 const MAX_SIZE = 10 * 1024 * 1024 // 10 MB
+const USE_BLOB = !!process.env.BLOB_READ_WRITE_TOKEN
 
 export async function POST(req: NextRequest) {
   const token = req.cookies.get('admin_session')?.value
@@ -27,9 +30,16 @@ export async function POST(req: NextRequest) {
   }
 
   const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg'
-  const filename = `uploads/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
+  const basename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
 
-  const blob = await put(filename, file, { access: 'public' })
+  if (USE_BLOB) {
+    const blob = await put(`uploads/${basename}`, file, { access: 'public' })
+    return NextResponse.json({ src: blob.url })
+  }
 
-  return NextResponse.json({ src: blob.url })
+  const uploadsDir = join(process.cwd(), 'public', 'uploads')
+  await mkdir(uploadsDir, { recursive: true })
+  const bytes = Buffer.from(await file.arrayBuffer())
+  await writeFile(join(uploadsDir, basename), bytes)
+  return NextResponse.json({ src: `/uploads/${basename}` })
 }

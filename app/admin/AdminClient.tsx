@@ -4,11 +4,9 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import type { Offer, MLString } from '@/lib/types'
 import type { GalleryImage } from '@/lib/gallery'
+import type { Category, CategoryKind } from '@/lib/categories'
 import { useLang } from '@/context/LangContext'
 import type { Lang } from '@/context/LangContext'
-
-const CATS = ['sahara', 'culture', 'premium', 'corporate']
-const GALLERY_CATS = ['sahara', 'ghardaia', 'hotels', 'culture', 'autre']
 const FORM_LANGS: { key: Lang; flag: string; label: string }[] = [
   { key: 'fr', flag: '🇫🇷', label: 'Français' },
   { key: 'en', flag: '🇬🇧', label: 'English' },
@@ -22,9 +20,9 @@ const UI_LANGS: { key: Lang; label: string }[] = [
 
 const emptyML = (): MLString => ({ fr: '', en: '', ar: '' })
 
-const emptyForm = () => ({
+const emptyForm = (defaultCat = 'sahara') => ({
   img: '',
-  cat: 'sahara',
+  cat: defaultCat,
   title: emptyML(),
   dur: emptyML(),
   desc: emptyML(),
@@ -33,19 +31,23 @@ const emptyForm = () => ({
   programme: [{ j: 'J1', titre: emptyML(), desc: emptyML() }],
 })
 
-const emptyGalleryForm = () => ({
+const emptyGalleryForm = (defaultCat = 'sahara') => ({
   src: '',
   alt: '',
   label: '',
-  category: 'sahara',
+  category: defaultCat,
 })
+
+const emptyCatForm = () => ({ name: '', emoji: '🏷️', kind: 'offer' as CategoryKind })
 
 export default function AdminClient({
   initialOffers,
   initialGallery,
+  initialCategories,
 }: {
   initialOffers: Offer[]
   initialGallery: GalleryImage[]
+  initialCategories: Category[]
 }) {
   const router = useRouter()
   const { tr, lang, setLang } = useLang()
@@ -53,15 +55,22 @@ export default function AdminClient({
 
   const [offers, setOffers] = useState<Offer[]>(initialOffers)
   const [gallery, setGallery] = useState<GalleryImage[]>(initialGallery)
-  const [form, setForm] = useState(emptyForm())
+  const [categories, setCategories] = useState<Category[]>(initialCategories)
+  const offerCats = categories.filter(c => c.kind === 'offer')
+  const galleryCats = categories.filter(c => c.kind === 'gallery')
+
+  const [form, setForm] = useState(() => emptyForm(offerCats[0]?.name ?? 'sahara'))
   const [formLang, setFormLang] = useState<Lang>('fr')
-  const [galleryForm, setGalleryForm] = useState(emptyGalleryForm())
+  const [galleryForm, setGalleryForm] = useState(() => emptyGalleryForm(galleryCats[0]?.name ?? 'sahara'))
+  const [catForm, setCatForm] = useState(emptyCatForm())
   const [saving, setSaving] = useState(false)
   const [msg, setMsg] = useState('')
   const [msgOk, setMsgOk] = useState(false)
   const [galleryMsg, setGalleryMsg] = useState('')
   const [galleryMsgOk, setGalleryMsgOk] = useState(false)
-  const [tab, setTab] = useState<'list' | 'add' | 'gallery'>('list')
+  const [catMsg, setCatMsg] = useState('')
+  const [catMsgOk, setCatMsgOk] = useState(false)
+  const [tab, setTab] = useState<'list' | 'add' | 'gallery' | 'cats'>('list')
   const [galleryCatFilter, setGalleryCatFilter] = useState<string>('all')
   const [showAddImage, setShowAddImage] = useState(false)
   const [imgMode, setImgMode] = useState<'url' | 'upload'>('url')
@@ -224,6 +233,53 @@ export default function AdminClient({
     if (res.ok) setGallery(g => g.filter(x => x.id !== id))
   }
 
+  async function handleAddCategory(e: React.FormEvent) {
+    e.preventDefault()
+    setSaving(true)
+    setCatMsg('')
+    try {
+      const res = await fetch('/api/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(catForm),
+      })
+      const data = await res.json()
+      if (res.ok) {
+        setCategories(c => [...c, data])
+        setCatForm(emptyCatForm())
+        setCatMsg('Catégorie ajoutée')
+        setCatMsgOk(true)
+      } else {
+        setCatMsg(data.error ?? 'Erreur')
+        setCatMsgOk(false)
+      }
+    } catch {
+      setCatMsg(a.networkError)
+      setCatMsgOk(false)
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  async function handleDeleteCategory(cat: Category) {
+    if (!confirm(`Supprimer la catégorie "${cat.name}" ?`)) return
+    const res = await fetch(`/api/categories/${cat.id}`, { method: 'DELETE' })
+    if (res.ok) setCategories(cs => cs.filter(c => c.id !== cat.id))
+  }
+
+  async function handleToggleHidden(cat: Category) {
+    const next = !cat.hidden
+    const res = await fetch(`/api/categories/${cat.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ hidden: next }),
+    })
+    if (res.ok) {
+      const updated = await res.json()
+      setCategories(cs => cs.map(c => (c.id === cat.id ? updated : c)))
+    }
+  }
+
   const filteredGallery = galleryCatFilter === 'all'
     ? gallery
     : gallery.filter(img => img.category === galleryCatFilter)
@@ -254,10 +310,10 @@ export default function AdminClient({
 
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '32px 24px' }}>
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: 4, marginBottom: 28, background: '#1a1f2e', borderRadius: 10, padding: 4, width: 'fit-content' }}>
-          {(['list', 'add', 'gallery'] as const).map(t => (
-            <button key={t} onClick={() => { setTab(t); setMsg(''); setGalleryMsg('') }} style={{ padding: '8px 20px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '.875rem', background: tab === t ? '#E07B39' : 'transparent', color: tab === t ? '#fff' : '#94a3b8', transition: 'all .2s' }}>
-              {t === 'list' ? `${a.tabOffersPrefix} (${offers.length})` : t === 'add' ? a.tabAdd : `${a.tabGalleryPrefix} (${gallery.length})`}
+        <div style={{ display: 'flex', gap: 4, marginBottom: 28, background: '#1a1f2e', borderRadius: 10, padding: 4, width: 'fit-content', flexWrap: 'wrap' }}>
+          {(['list', 'add', 'gallery', 'cats'] as const).map(t => (
+            <button key={t} onClick={() => { setTab(t); setMsg(''); setGalleryMsg(''); setCatMsg('') }} style={{ padding: '8px 20px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '.875rem', background: tab === t ? '#E07B39' : 'transparent', color: tab === t ? '#fff' : '#94a3b8', transition: 'all .2s' }}>
+              {t === 'list' ? `${a.tabOffersPrefix} (${offers.length})` : t === 'add' ? a.tabAdd : t === 'gallery' ? `${a.tabGalleryPrefix} (${gallery.length})` : `🏷️ Catégories (${categories.length})`}
             </button>
           ))}
         </div>
@@ -350,7 +406,7 @@ export default function AdminClient({
                 <div>
                   <Label>{a.fieldCat}</Label>
                   <select value={form.cat} onChange={e => setPlainField('cat', e.target.value)} style={{ ...inputBase, width: '100%' }}>
-                    {CATS.map(c => <option key={c} value={c}>{c}</option>)}
+                    {offerCats.map(c => <option key={c.id} value={c.name}>{c.emoji} {c.name}{c.hidden ? ' (masquée)' : ''}</option>)}
                   </select>
                 </div>
                 <div>
@@ -482,11 +538,14 @@ export default function AdminClient({
             )}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20, flexWrap: 'wrap', gap: 12 }}>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                {['all', ...GALLERY_CATS].map(cat => (
-                  <button key={cat} onClick={() => setGalleryCatFilter(cat)} style={{ padding: '5px 14px', borderRadius: 100, border: `1px solid ${galleryCatFilter === cat ? '#E07B39' : '#2d3748'}`, cursor: 'pointer', fontSize: '.78rem', fontWeight: 600, background: galleryCatFilter === cat ? '#E07B39' : '#1a1f2e', color: galleryCatFilter === cat ? '#fff' : '#94a3b8', transition: 'all .2s' }}>
-                    {cat === 'all' ? `${a.allCatPrefix} (${gallery.length})` : `${galleryEmoji(cat)} ${cat} (${gallery.filter(g => g.category === cat).length})`}
-                  </button>
-                ))}
+                {['all', ...galleryCats.map(c => c.name)].map(cat => {
+                  const emoji = cat === 'all' ? '' : galleryCats.find(c => c.name === cat)?.emoji ?? '📷'
+                  return (
+                    <button key={cat} onClick={() => setGalleryCatFilter(cat)} style={{ padding: '5px 14px', borderRadius: 100, border: `1px solid ${galleryCatFilter === cat ? '#E07B39' : '#2d3748'}`, cursor: 'pointer', fontSize: '.78rem', fontWeight: 600, background: galleryCatFilter === cat ? '#E07B39' : '#1a1f2e', color: galleryCatFilter === cat ? '#fff' : '#94a3b8', transition: 'all .2s' }}>
+                      {cat === 'all' ? `${a.allCatPrefix} (${gallery.length})` : `${emoji} ${cat} (${gallery.filter(g => g.category === cat).length})`}
+                    </button>
+                  )
+                })}
               </div>
               <button onClick={() => setShowAddImage(v => !v)} style={{ padding: '8px 18px', background: showAddImage ? 'rgba(224,123,57,.15)' : '#E07B39', color: showAddImage ? '#E07B39' : '#fff', border: `1px solid ${showAddImage ? 'rgba(224,123,57,.4)' : '#E07B39'}`, borderRadius: 8, fontWeight: 700, fontSize: '.875rem', cursor: 'pointer', transition: 'all .2s' }}>
                 {showAddImage ? a.cancelBtn : a.addImageBtn}
@@ -554,9 +613,9 @@ export default function AdminClient({
                   <div style={{ gridColumn: '1 / -1' }}>
                     <Label>{a.categoryLabel}</Label>
                     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                      {GALLERY_CATS.map(cat => (
-                        <button key={cat} type="button" onClick={() => setGalleryForm(f => ({ ...f, category: cat }))} style={{ padding: '6px 16px', borderRadius: 100, border: `1.5px solid ${galleryForm.category === cat ? galleryCatHex(cat) : '#2d3748'}`, background: galleryForm.category === cat ? galleryCatHex(cat) + '22' : 'transparent', color: galleryForm.category === cat ? galleryCatHex(cat) : '#94a3b8', fontWeight: 600, fontSize: '.8rem', cursor: 'pointer', transition: 'all .15s' }}>
-                          {galleryEmoji(cat)} {cat}
+                      {galleryCats.map(c => (
+                        <button key={c.id} type="button" onClick={() => setGalleryForm(f => ({ ...f, category: c.name }))} style={{ padding: '6px 16px', borderRadius: 100, border: `1.5px solid ${galleryForm.category === c.name ? galleryCatHex(c.name) : '#2d3748'}`, background: galleryForm.category === c.name ? galleryCatHex(c.name) + '22' : 'transparent', color: galleryForm.category === c.name ? galleryCatHex(c.name) : '#94a3b8', fontWeight: 600, fontSize: '.8rem', cursor: 'pointer', transition: 'all .15s' }}>
+                          {c.emoji} {c.name}
                         </button>
                       ))}
                     </div>
@@ -595,6 +654,86 @@ export default function AdminClient({
                 </p>
               )}
             </div>
+          </div>
+        )}
+
+        {/* ── Categories tab ── */}
+        {tab === 'cats' && (
+          <div>
+            {catMsg && (
+              <div style={{ background: catMsgOk ? 'rgba(34,197,94,.1)' : 'rgba(239,68,68,.1)', border: `1px solid ${catMsgOk ? 'rgba(34,197,94,.3)' : 'rgba(239,68,68,.3)'}`, borderRadius: 8, padding: '10px 14px', marginBottom: 20, color: catMsgOk ? '#4ade80' : '#f87171', fontSize: '.875rem' }}>
+                {catMsg}
+              </div>
+            )}
+
+            {/* Add form */}
+            <form onSubmit={handleAddCategory} style={{ ...sectionStyle, marginBottom: 24 }}>
+              <h2 style={{ ...sectionTitle, marginBottom: 16 }}>+ Nouvelle catégorie</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: '90px 1fr 1fr auto', gap: 12, alignItems: 'end' }}>
+                <div>
+                  <Label>Emoji</Label>
+                  <Input value={catForm.emoji} onChange={v => setCatForm(f => ({ ...f, emoji: v }))} placeholder="🏷️" />
+                </div>
+                <div>
+                  <Label>Nom (identifiant)</Label>
+                  <Input value={catForm.name} onChange={v => setCatForm(f => ({ ...f, name: v.toLowerCase().replace(/\s+/g, '-') }))} placeholder="ex: sahara" required />
+                </div>
+                <div>
+                  <Label>Type</Label>
+                  <select value={catForm.kind} onChange={e => setCatForm(f => ({ ...f, kind: e.target.value as CategoryKind }))} style={{ ...inputBase, width: '100%' }}>
+                    <option value="offer">Offre</option>
+                    <option value="gallery">Galerie</option>
+                  </select>
+                </div>
+                <button type="submit" disabled={saving} style={{ padding: '9px 22px', background: '#E07B39', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: '.88rem', cursor: saving ? 'not-allowed' : 'pointer', opacity: saving ? .7 : 1 }}>
+                  {saving ? '…' : '+ Ajouter'}
+                </button>
+              </div>
+              <p style={{ fontSize: '.72rem', color: '#475569', marginTop: 10 }}>
+                Le nom sert d&apos;identifiant (minuscules, sans espaces). Les catégories &quot;offre&quot; s&apos;utilisent dans les offres, &quot;galerie&quot; dans les photos.
+              </p>
+            </form>
+
+            {/* Two sections */}
+            {(['offer', 'gallery'] as const).map(kind => {
+              const list = categories.filter(c => c.kind === kind)
+              const label = kind === 'offer' ? 'Catégories des offres' : 'Catégories de la galerie'
+              return (
+                <section key={kind} style={{ ...sectionStyle, marginBottom: 20 }}>
+                  <h2 style={sectionTitle}>{label} ({list.length})</h2>
+                  {list.length === 0 && (
+                    <p style={{ color: '#475569', textAlign: 'center', padding: '20px 0', fontSize: '.85rem' }}>Aucune catégorie.</p>
+                  )}
+                  <div style={{ display: 'grid', gap: 8 }}>
+                    {list.map(cat => {
+                      const usageCount = kind === 'offer'
+                        ? offers.filter(o => o.cat === cat.name).length
+                        : gallery.filter(g => g.category === cat.name).length
+                      return (
+                        <div key={cat.id} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: '#0f1117', border: `1px solid ${cat.hidden ? 'rgba(239,68,68,.3)' : '#2d3748'}`, borderRadius: 10, opacity: cat.hidden ? .7 : 1 }}>
+                          <span style={{ fontSize: '1.4rem' }}>{cat.emoji}</span>
+                          <div style={{ flex: 1, minWidth: 0 }}>
+                            <div style={{ fontWeight: 700, color: '#e2e8f0', fontSize: '.95rem', display: 'flex', alignItems: 'center', gap: 8 }}>
+                              {cat.name}
+                              {cat.hidden && <span style={{ fontSize: '.65rem', fontWeight: 700, padding: '2px 8px', borderRadius: 100, background: 'rgba(239,68,68,.15)', color: '#f87171', textTransform: 'uppercase', letterSpacing: '.05em' }}>Masquée</span>}
+                            </div>
+                            <div style={{ fontSize: '.75rem', color: '#64748b', marginTop: 2 }}>
+                              {usageCount} {kind === 'offer' ? (usageCount > 1 ? 'offres' : 'offre') : (usageCount > 1 ? 'images' : 'image')}
+                            </div>
+                          </div>
+                          <button onClick={() => handleToggleHidden(cat)} title={cat.hidden ? 'Afficher sur le site' : 'Masquer du site'} style={{ padding: '7px 14px', background: cat.hidden ? 'rgba(34,197,94,.1)' : 'rgba(148,163,184,.1)', border: `1px solid ${cat.hidden ? 'rgba(34,197,94,.35)' : '#2d3748'}`, borderRadius: 8, color: cat.hidden ? '#4ade80' : '#94a3b8', fontSize: '.78rem', fontWeight: 600, cursor: 'pointer' }}>
+                            {cat.hidden ? '👁 Afficher' : '🚫 Masquer'}
+                          </button>
+                          <button onClick={() => handleDeleteCategory(cat)} style={{ padding: '7px 14px', background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.3)', borderRadius: 8, color: '#f87171', fontSize: '.78rem', fontWeight: 600, cursor: 'pointer' }}>
+                            Supprimer
+                          </button>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </section>
+              )
+            })}
           </div>
         )}
       </div>

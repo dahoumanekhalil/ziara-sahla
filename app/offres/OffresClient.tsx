@@ -15,7 +15,8 @@ const catDisplayLabels: Record<string, string> = {
 
 type MLString = { fr: string; en: string; ar: string }
 
-export default function OffresClient({ offers }: { offers: Offer[] }) {
+export default function OffresClient({ offers, hiddenCats = [] }: { offers: Offer[]; hiddenCats?: string[] }) {
+  const hiddenSet = new Set(hiddenCats)
   const { openModal } = useUI()
   const { tr, lang } = useLang()
   const o = tr.offresPage
@@ -100,7 +101,7 @@ export default function OffresClient({ offers }: { offers: Offer[] }) {
 
           {/* Filter bar */}
           <div className="filter-bar reveal">
-            {o.filters.map(f => (
+            {o.filters.filter(f => f.key === 'all' || !hiddenSet.has(f.key)).map(f => (
               <button
                 key={f.key}
                 className={`filter-btn${activeFilter === f.key ? ' active' : ''}`}

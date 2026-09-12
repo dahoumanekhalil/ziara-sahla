@@ -124,5 +124,19 @@
     "alt": "boussada",
     "label": "boussada",
     "category": "sahara"
+  },
+  {
+    "id": "60191f65-996b-46c7-8bba-cf85b63d2440",
+    "src": "/uploads/1789203422315-khsdj7.webp",
+    "alt": "Djemila",
+    "label": "Djemila",
+    "category": "djemila"
+  },
+  {
+    "id": "a3d8b800-1ed6-4817-a7c7-7b2dd6e85ae4",
+    "src": "/uploads/1789203433072-kqpjzi.webp",
+    "alt": "Djemila",
+    "label": "Djemila",
+    "category": "djemila"
   }
 ]

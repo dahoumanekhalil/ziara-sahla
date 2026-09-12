@@ -1,0 +1,72 @@
+[
+  {
+    "id": "035e90ba-4617-49fc-9f7e-eb28b512aac2",
+    "name": "sahara",
+    "kind": "offer",
+    "emoji": "🏜️",
+    "hidden": false
+  },
+  {
+    "id": "722c3660-d429-4359-bcde-c42682882110",
+    "name": "culture",
+    "kind": "offer",
+    "emoji": "🏛️",
+    "hidden": false
+  },
+  {
+    "id": "a054944e-ae80-4d0e-817c-b888b687022f",
+    "name": "premium",
+    "kind": "offer",
+    "emoji": "👑",
+    "hidden": false
+  },
+  {
+    "id": "3ea15c95-794a-4a06-bd68-964a2689bd45",
+    "name": "corporate",
+    "kind": "offer",
+    "emoji": "🏢",
+    "hidden": false
+  },
+  {
+    "id": "1f290d07-cfbe-4220-8e96-4ab80ba13612",
+    "name": "sahara",
+    "kind": "gallery",
+    "emoji": "🏜️",
+    "hidden": false
+  },
+  {
+    "id": "331519fe-05ea-450b-8c1b-4de0ff8363e9",
+    "name": "ghardaia",
+    "kind": "gallery",
+    "emoji": "🕌",
+    "hidden": false
+  },
+  {
+    "id": "494b3e41-6fa6-448f-857e-12c70488e208",
+    "name": "hotels",
+    "kind": "gallery",
+    "emoji": "🏨",
+    "hidden": false
+  },
+  {
+    "id": "08d8d081-1b15-4d9f-bf8d-26f8a91debaa",
+    "name": "culture",
+    "kind": "gallery",
+    "emoji": "🎭",
+    "hidden": false
+  },
+  {
+    "id": "bd0724f7-9b07-4b4c-97d6-320e592c0a88",
+    "name": "autre",
+    "kind": "gallery",
+    "emoji": "📷",
+    "hidden": true
+  },
+  {
+    "id": "ecf575b3-992d-4233-bef2-92859cd8c17a",
+    "name": "djemila",
+    "kind": "gallery",
+    "emoji": "🏷️",
+    "hidden": false
+  }
+]
