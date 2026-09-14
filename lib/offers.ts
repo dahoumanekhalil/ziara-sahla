@@ -1,11 +1,10 @@
 import { randomUUID } from 'crypto'
 import { readFile, writeFile, mkdir } from 'fs/promises'
 import { join, dirname } from 'path'
-import { put, list } from '@vercel/blob'
+import { put, list, USE_BLOB } from './blob'
 import type { Offer } from './types'
 
 const PATHNAME = 'data/offers.json'
-const USE_BLOB = !!process.env.BLOB_READ_WRITE_TOKEN
 
 async function read(): Promise<Offer[]> {
   if (USE_BLOB) {

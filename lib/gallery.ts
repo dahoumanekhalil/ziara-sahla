@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto'
 import { readFile, writeFile, mkdir } from 'fs/promises'
 import { join, dirname } from 'path'
-import { put, list } from '@vercel/blob'
+import { put, list, USE_BLOB } from './blob'
 
 export interface GalleryImage {
   id: string
@@ -12,7 +12,6 @@ export interface GalleryImage {
 }
 
 const PATHNAME = 'data/gallery.json'
-const USE_BLOB = !!process.env.BLOB_READ_WRITE_TOKEN
 
 async function read(): Promise<GalleryImage[]> {
   if (USE_BLOB) {

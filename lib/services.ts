@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto'
 import { readFile, writeFile, mkdir } from 'fs/promises'
 import { join, dirname } from 'path'
-import { put, list } from '@vercel/blob'
+import { put, list, USE_BLOB } from './blob'
 import type { MLString } from './types'
 
 export type ServiceIconClass = 'ci-eco' | 'ci-mid' | 'ci-prem'
@@ -20,7 +20,6 @@ export interface ServiceCard {
 }
 
 const PATHNAME = 'data/services.json'
-const USE_BLOB = !!process.env.BLOB_READ_WRITE_TOKEN
 
 const ml = (fr: string, en: string, ar: string): MLString => ({ fr, en, ar })
 

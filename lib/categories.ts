@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto'
 import { readFile, writeFile, mkdir } from 'fs/promises'
 import { join, dirname } from 'path'
-import { put, list } from '@vercel/blob'
+import { put, list, USE_BLOB } from './blob'
 
 export type CategoryKind = 'offer' | 'gallery'
 
@@ -14,7 +14,6 @@ export interface Category {
 }
 
 const PATHNAME = 'data/categories.json'
-const USE_BLOB = !!process.env.BLOB_READ_WRITE_TOKEN
 
 const DEFAULT_SEED: Array<Omit<Category, 'id'>> = [
   { name: 'sahara', kind: 'offer', emoji: '🏜️', hidden: false },

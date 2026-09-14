@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { put } from '@vercel/blob'
+import { put, USE_BLOB } from '@/lib/blob'
 import { writeFile, mkdir } from 'fs/promises'
 import { join } from 'path'
 import { verifySessionToken } from '@/lib/auth'
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/avif']
 const MAX_SIZE = 10 * 1024 * 1024 // 10 MB
-const USE_BLOB = !!process.env.BLOB_READ_WRITE_TOKEN
 
 export async function POST(req: NextRequest) {
   const token = req.cookies.get('admin_session')?.value

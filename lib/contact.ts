@@ -1,6 +1,6 @@
 import { readFile, writeFile, mkdir } from 'fs/promises'
 import { join, dirname } from 'path'
-import { put, list } from '@vercel/blob'
+import { put, list, USE_BLOB } from './blob'
 
 export interface ContactInfo {
   email: string
@@ -15,7 +15,6 @@ export interface ContactInfo {
 }
 
 const PATHNAME = 'data/contact.json'
-const USE_BLOB = !!process.env.BLOB_READ_WRITE_TOKEN
 
 export const DEFAULT_CONTACT: ContactInfo = {
   email: 'contact@ziara-sahla.com',

@@ -36,10 +36,12 @@ Le cas B est **de loin le plus fréquent sur Vercel**. Le message trompeur cache
 
 ### Les vraies causes possibles côté serveur
 
-#### B1. `BLOB_READ_WRITE_TOKEN` manquant ou invalide sur Vercel
-- **Fichier** : `lib/offers.ts:8` — `const USE_BLOB = !!process.env.BLOB_READ_WRITE_TOKEN`
-- Si la variable existe mais que le token est révoqué / expiré / attaché à un mauvais store, `put()` (`lib/offers.ts:28`) lève une erreur.
-- **Vérifier** : `Vercel Dashboard → Project → Settings → Environment Variables`. La variable doit exister pour tous les environnements (Production, Preview, Development). Elle est créée automatiquement en attachant un Blob Store au projet (`Storage → Blob → Connect Store`).
+#### B1. Token Vercel Blob manquant ou invalide
+- **Fichier** : `lib/blob.ts` — lit le token depuis `BLOB_READ_WRITE_TOKEN` OU `ZIARA_READ_WRITE_TOKEN`.
+- Si aucune des deux variables n'existe sur Vercel, `USE_BLOB` est `false` → le code tente d'écrire dans `data/*.json` sur le filesystem serverless (read-only) → `writeFile` lève `EROFS` → 500.
+- Si la variable existe mais que le token est révoqué / expiré / attaché à un mauvais store, `put()` lève une erreur d'auth.
+- **Vérifier** : `Vercel Dashboard → Project → Settings → Environment Variables`. Une de ces variables doit exister pour tous les environnements (Production, Preview, Development). Elles sont créées automatiquement en attachant un Blob Store au projet (`Storage → Blob → Connect Store`).
+- **Historique** : sur ce projet, Vercel a généré `ZIARA_READ_WRITE_TOKEN` (nommage personnalisé pour ce store) au lieu du nom par défaut `BLOB_READ_WRITE_TOKEN`. Le helper `lib/blob.ts` accepte les deux noms.
 
 #### B2. Cookie admin invalidé par un redéploiement
 - **Fichier** : `lib/auth.ts:3` — `const SECRET = process.env.SESSION_SECRET ?? 'ziara-sahla-dev-secret'`
