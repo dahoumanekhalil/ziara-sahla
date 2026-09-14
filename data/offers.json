@@ -785,5 +785,217 @@
         }
       }
     ]
+  },
+  {
+    "id": "4b313836-20bc-425f-adb5-aeb30a5bc07d",
+    "title": {
+      "fr": "test",
+      "en": "",
+      "ar": ""
+    },
+    "img": "/uploads/1789381988719-w5xgeq.webp",
+    "cat": "",
+    "dur": {
+      "fr": "6 jours",
+      "en": "",
+      "ar": ""
+    },
+    "desc": {
+      "fr": "test tse t set set set set set set set set set ataelktj alketj ael;ktjasel;ktj aesl;kt ja",
+      "en": "",
+      "ar": ""
+    },
+    "meta": [
+      {
+        "icon": "📍",
+        "from": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "icon": "📍",
+        "from": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "icon": "📍",
+        "from": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "icon": "📍",
+        "from": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "ttest",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "icon": "📍",
+        "from": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      }
+    ],
+    "inclus": [
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "ttest",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "ico": "✅",
+        "txt": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      }
+    ],
+    "programme": [
+      {
+        "j": "J1",
+        "titre": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "j": "J2",
+        "titre": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "j": "J3",
+        "titre": {
+          "fr": "tet",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "j": "J4",
+        "titre": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        }
+      },
+      {
+        "j": "J5",
+        "titre": {
+          "fr": "test",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "tetst",
+          "en": "",
+          "ar": ""
+        }
+      }
+    ]
   }
 ]
