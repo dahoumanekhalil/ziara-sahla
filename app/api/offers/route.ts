@@ -8,28 +8,34 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const token = req.cookies.get('admin_session')?.value
-  if (!verifySessionToken(token)) {
-    return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+  try {
+    const token = req.cookies.get('admin_session')?.value
+    if (!verifySessionToken(token)) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
+    const body = await req.json()
+    const { title, img, cat, dur, desc, meta, inclus, programme } = body
+
+    if (!title || !img || !dur || !desc) {
+      return NextResponse.json({ error: 'Champs obligatoires manquants' }, { status: 400 })
+    }
+
+    const offer = await addOffer({
+      title,
+      img,
+      cat: cat ?? '',
+      dur,
+      desc,
+      meta: meta ?? [],
+      inclus: inclus ?? [],
+      programme: programme ?? [],
+    })
+
+    return NextResponse.json(offer, { status: 201 })
+  } catch (err) {
+    console.error('[POST /api/offers]', err)
+    const message = err instanceof Error ? err.message : 'Erreur inconnue'
+    return NextResponse.json({ error: `Échec de l'ajout: ${message}` }, { status: 500 })
   }
-
-  const body = await req.json()
-  const { title, img, cat, dur, desc, meta, inclus, programme } = body
-
-  if (!title || !img || !dur || !desc) {
-    return NextResponse.json({ error: 'Champs obligatoires manquants' }, { status: 400 })
-  }
-
-  const offer = await addOffer({
-    title,
-    img,
-    cat: cat ?? '',
-    dur,
-    desc,
-    meta: meta ?? [],
-    inclus: inclus ?? [],
-    programme: programme ?? [],
-  })
-
-  return NextResponse.json(offer, { status: 201 })
 }

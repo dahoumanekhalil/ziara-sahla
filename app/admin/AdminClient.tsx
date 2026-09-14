@@ -162,11 +162,18 @@ export default function AdminClient({
         setMsgOk(true)
         setTab('list')
       } else {
-        const data = await res.json()
-        setMsg(data.error ?? a.addError)
+        const text = await res.text()
+        let errMsg = ''
+        try {
+          errMsg = JSON.parse(text).error ?? ''
+        } catch {
+          errMsg = `HTTP ${res.status} — ${text.slice(0, 200)}`
+        }
+        setMsg(errMsg || a.addError)
         setMsgOk(false)
       }
-    } catch {
+    } catch (err) {
+      console.error('[handleAdd] fetch failed', err)
       setMsg(a.networkError)
       setMsgOk(false)
     } finally {
