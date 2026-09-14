@@ -58,6 +58,12 @@ Le cas B est **de loin le plus fréquent sur Vercel**. Le message trompeur cache
 - Vercel Serverless refuse les requêtes dont le body dépasse **4.5 MB** avec un `413 Payload Too Large`.
 - Peu probable ici : les images sont uploadées via `/api/gallery/upload` séparément et seule l'URL est envoyée dans le body de l'offre. Sauf si quelqu'un colle un `data:image/...;base64,...` dans le champ URL de l'image.
 
+#### B4bis. `Vercel Blob: This blob already exists` (v2+)
+- Depuis `@vercel/blob` v2, `put()` refuse par défaut d'écraser un blob existant.
+- Le pattern de stockage utilisé ici écrit toujours vers le même chemin (`data/offers.json`, `data/gallery.json`, etc.) avec `addRandomSuffix: false`, donc chaque écriture après la première déclenche l'erreur.
+- **Fix appliqué** : ajouter `allowOverwrite: true` à chaque `put()` dans `lib/offers.ts`, `lib/gallery.ts`, `lib/categories.ts`, `lib/services.ts`, `lib/contact.ts`.
+- Doc Vercel : https://vercel.link/blob-allow-overwrite
+
 #### B5. Le handler POST ne wrap pas ses erreurs
 - **Fichier** : `app/api/offers/route.ts:10-35` — pas de `try/catch` autour de `addOffer()`.
 - Si `addOffer` throw, Next.js renvoie une page HTML 500 → client affiche "Erreur réseau".

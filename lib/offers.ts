@@ -27,6 +27,7 @@ async function write(offers: Offer[]): Promise<void> {
     await put(PATHNAME, JSON.stringify(offers, null, 2), {
       access: 'public',
       addRandomSuffix: false,
+      allowOverwrite: true,
       contentType: 'application/json',
     })
     return

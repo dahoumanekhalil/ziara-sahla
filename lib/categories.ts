@@ -48,6 +48,7 @@ async function write(cats: Category[]): Promise<void> {
     await put(PATHNAME, JSON.stringify(cats, null, 2), {
       access: 'public',
       addRandomSuffix: false,
+      allowOverwrite: true,
       contentType: 'application/json',
     })
     return

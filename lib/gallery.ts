@@ -34,6 +34,7 @@ async function write(images: GalleryImage[]): Promise<void> {
     await put(PATHNAME, JSON.stringify(images, null, 2), {
       access: 'public',
       addRandomSuffix: false,
+      allowOverwrite: true,
       contentType: 'application/json',
     })
     return

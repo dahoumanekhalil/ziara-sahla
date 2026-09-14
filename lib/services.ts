@@ -113,6 +113,7 @@ async function write(cards: ServiceCard[]): Promise<void> {
     await put(PATHNAME, JSON.stringify(cards, null, 2), {
       access: 'public',
       addRandomSuffix: false,
+      allowOverwrite: true,
       contentType: 'application/json',
     })
     return

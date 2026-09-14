@@ -51,6 +51,7 @@ async function write(info: ContactInfo): Promise<void> {
     await put(PATHNAME, JSON.stringify(info, null, 2), {
       access: 'public',
       addRandomSuffix: false,
+      allowOverwrite: true,
       contentType: 'application/json',
     })
     return
