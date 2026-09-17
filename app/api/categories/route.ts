@@ -14,12 +14,12 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json()
-  const { name, kind, emoji } = body
+  const { name, kind, emoji, parent } = body
   if (!name || !kind) {
     return NextResponse.json({ error: 'Champs obligatoires manquants' }, { status: 400 })
   }
 
-  const result = await addCategory({ name, kind, emoji })
+  const result = await addCategory({ name, kind, emoji, parent: parent ?? null })
   if ('error' in result) {
     return NextResponse.json({ error: result.error }, { status: 400 })
   }

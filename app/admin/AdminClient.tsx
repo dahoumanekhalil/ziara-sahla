@@ -31,11 +31,13 @@ const emptyForm = () => ({
   desc: emptyML(),
   meta: [{ icon: '📍', from: emptyML(), to: emptyML() }],
   inclus: [{ ico: '✅', txt: emptyML() }],
+  nonInclus: [{ ico: '❌', txt: emptyML() }],
   programme: [{ j: 'J1', titre: emptyML(), desc: emptyML() }],
 })
 
 const META_ICONS = ['📍', '📅', '🗓️', '👥', '🏨', '🚌', '✈️', '🚗', '⏱️', '🎯', '💰', '🌡️', '🌍', '🏛️', '🕌', '⛰️', '🏜️', '🌊', '🌴', '🔥', '☀️', '🌙', '🎪', '🎭']
 const INCLUS_ICONS = ['✅', '🍽️', '🛏️', '🚌', '🎫', '📸', '🧭', '🏊', '💧', '🎁', '🎨', '☕', '🍷', '🎵', '🚿', '🔒', '📶', '🛎️', '👨‍🏫', '🎧', '💼', '🩺', '🛂', '🅿️']
+const NON_INCLUS_ICONS = ['❌', '🚫', '⛔', '✈️', '🛂', '💳', '💵', '🍽️', '🏨', '🎫', '📸', '🩺', '💊', '🎁', '☕', '🍷', '🚗', '🅿️', '📶', '🎧', '🚿', '💼', '🧾', '🛍️']
 const SERVICE_ICONS = ['🌿', '✨', '👑', '💎', '⭐', '🏆', '🎖️', '🏅', '🎯', '🚀', '💼', '🎁', '☕', '🍷', '🏖️', '🏔️', '🕌', '🏛️', '🎭', '📷', '🌙', '☀️', '🌟', '🏨']
 
 const emptyGalleryForm = (defaultCat = 'sahara') => ({
@@ -45,7 +47,7 @@ const emptyGalleryForm = (defaultCat = 'sahara') => ({
   category: defaultCat,
 })
 
-const emptyCatForm = () => ({ name: '', emoji: '🏷️', kind: 'offer' as CategoryKind })
+const emptyCatForm = () => ({ name: '', emoji: '🏷️', kind: 'offer' as CategoryKind, parent: '' as string })
 
 export default function AdminClient({
   initialOffers,
@@ -78,6 +80,7 @@ export default function AdminClient({
   const [saving, setSaving] = useState(false)
   const [msg, setMsg] = useState('')
   const [msgOk, setMsgOk] = useState(false)
+  const [editingId, setEditingId] = useState<string | null>(null)
   const [galleryMsg, setGalleryMsg] = useState('')
   const [galleryMsgOk, setGalleryMsgOk] = useState(false)
   const [catMsg, setCatMsg] = useState('')
@@ -132,6 +135,18 @@ export default function AdminClient({
     })
   }
 
+  function setNonInclus(i: number, key: 'ico' | 'txt', value: string) {
+    setForm(f => {
+      const nonInclus = [...f.nonInclus]
+      if (key === 'ico') {
+        nonInclus[i] = { ...nonInclus[i], ico: value }
+      } else {
+        nonInclus[i] = { ...nonInclus[i], txt: { ...nonInclus[i].txt, [formLang]: value } }
+      }
+      return { ...f, nonInclus }
+    })
+  }
+
   function setProg(i: number, key: 'j' | 'titre' | 'desc', value: string) {
     setForm(f => {
       const programme = [...f.programme]
@@ -144,21 +159,67 @@ export default function AdminClient({
     })
   }
 
-  async function handleAdd(e: React.FormEvent) {
+  function toML(v: unknown): MLString {
+    if (v && typeof v === 'object' && 'fr' in (v as Record<string, unknown>)) {
+      const obj = v as Partial<MLString>
+      return { fr: obj.fr ?? '', en: obj.en ?? '', ar: obj.ar ?? '' }
+    }
+    if (typeof v === 'string') return { fr: v, en: '', ar: '' }
+    return emptyML()
+  }
+
+  function loadOfferToForm(offer: Offer) {
+    setForm({
+      img: offer.img ?? '',
+      cat: offer.cat ?? '',
+      title: toML(offer.title),
+      dur: toML(offer.dur),
+      desc: toML(offer.desc),
+      meta: (offer.meta ?? []).map(m => ({
+        icon: m.icon ?? '📍',
+        from: m.from ? toML(m.from) : (m.label ? toML(m.label) : emptyML()),
+        to: m.to ? toML(m.to) : emptyML(),
+      })),
+      inclus: (offer.inclus ?? []).map(i => ({ ico: i.ico ?? '✅', txt: toML(i.txt) })),
+      nonInclus: (offer.nonInclus ?? []).map(i => ({ ico: i.ico ?? '❌', txt: toML(i.txt) })),
+      programme: (offer.programme ?? []).map(p => ({
+        j: p.j ?? 'J1',
+        titre: toML(p.titre),
+        desc: toML(p.desc),
+      })),
+    })
+  }
+
+  function startEdit(offer: Offer) {
+    setEditingId(offer.id)
+    loadOfferToForm(offer)
+    setMsg('')
+    setTab('add')
+  }
+
+  function cancelEdit() {
+    setEditingId(null)
+    setForm(emptyForm())
+    setMsg('')
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSaving(true)
     setMsg('')
+    const isEdit = editingId !== null
     try {
-      const res = await fetch('/api/offers', {
-        method: 'POST',
+      const res = await fetch(isEdit ? `/api/offers/${editingId}` : '/api/offers', {
+        method: isEdit ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
       if (res.ok) {
-        const newOffer = await res.json()
-        setOffers(o => [...o, newOffer])
+        const saved = await res.json()
+        setOffers(o => isEdit ? o.map(x => x.id === saved.id ? saved : x) : [...o, saved])
         setForm(emptyForm())
-        setMsg(a.offerAdded)
+        setEditingId(null)
+        setMsg(isEdit ? a.offerUpdated : a.offerAdded)
         setMsgOk(true)
         setTab('list')
       } else {
@@ -173,7 +234,7 @@ export default function AdminClient({
         setMsgOk(false)
       }
     } catch (err) {
-      console.error('[handleAdd] fetch failed', err)
+      console.error('[handleSubmit] fetch failed', err)
       setMsg(a.networkError)
       setMsgOk(false)
     } finally {
@@ -181,8 +242,9 @@ export default function AdminClient({
     }
   }
 
-  async function handleDelete(id: string, title: MLString) {
-    if (!confirm(`${a.confirmDelete} "${title.fr}" ?`)) return
+  async function handleDelete(id: string, title: MLString | string) {
+    const label = typeof title === 'string' ? title : title.fr
+    if (!confirm(`${a.confirmDelete} "${label}" ?`)) return
     const res = await fetch(`/api/offers/${id}`, { method: 'DELETE' })
     if (res.ok) setOffers(o => o.filter(x => x.id !== id))
   }
@@ -336,6 +398,34 @@ export default function AdminClient({
       : s))
   }
 
+  function addService() {
+    const id = typeof crypto !== 'undefined' && 'randomUUID' in crypto
+      ? crypto.randomUUID()
+      : `svc-${Date.now()}`
+    const newService: ServiceCard = {
+      id,
+      img: '',
+      icon: '✨',
+      iconClass: 'ci-mid',
+      label: emptyML(),
+      title: emptyML(),
+      desc: emptyML(),
+      feats: [emptyML()],
+      active: true,
+      minPeople: 5,
+      maxPeople: 30,
+    }
+    setServices(list => [...list, newService])
+    setServicesMsg('')
+  }
+
+  function deleteService(i: number, title: MLString) {
+    const label = title.fr || title.en || title.ar || '(sans titre)'
+    if (!confirm(`${a.confirmDelete} "${label}" ?`)) return
+    setServices(list => list.filter((_, j) => j !== i))
+    setServicesMsg('')
+  }
+
   async function handleSaveServices() {
     setSaving(true)
     setServicesMsg('')
@@ -419,11 +509,12 @@ export default function AdminClient({
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '32px 24px' }}>
         {/* Tabs */}
         <div style={{ display: 'flex', gap: 4, marginBottom: 28, background: '#1a1f2e', borderRadius: 10, padding: 4, width: 'fit-content', flexWrap: 'wrap' }}>
-          {(['list', 'gallery', 'cats', 'contact'] as const).map(t => (
+          {(['list', 'gallery', 'cats', 'services', 'contact'] as const).map(t => (
             <button key={t} onClick={() => { setTab(t); setMsg(''); setGalleryMsg(''); setCatMsg(''); setServicesMsg(''); setContactMsg('') }} style={{ padding: '8px 20px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '.875rem', background: tab === t ? '#E07B39' : 'transparent', color: tab === t ? '#fff' : '#94a3b8', transition: 'all .2s' }}>
               {t === 'list' ? `${a.tabOffersPrefix} (${offers.length})`
                 : t === 'gallery' ? `${a.tabGalleryPrefix} (${gallery.length})`
                 : t === 'cats' ? `🏷️ Catégories (${categories.length})`
+                : t === 'services' ? `${a.tabServices} (${services.length})`
                 : a.tabContact}
             </button>
           ))}
@@ -440,7 +531,7 @@ export default function AdminClient({
           <div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
               <button
-                onClick={() => { setTab('add'); setMsg('') }}
+                onClick={() => { cancelEdit(); setTab('add') }}
                 style={{ padding: '9px 20px', background: '#E07B39', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: '.88rem', cursor: 'pointer', transition: 'background .18s' }}
               >
                 {a.tabAdd}
@@ -455,6 +546,9 @@ export default function AdminClient({
                   </div>
                   <div style={{ fontSize: '.8rem', color: '#64748b' }}>{o.dur?.fr ?? o.dur as unknown as string} · {o.inclus.length} {a.inclusions} · {o.programme.length} {a.days}</div>
                 </div>
+                <button onClick={() => startEdit(o)} style={{ padding: '7px 16px', background: 'rgba(224,123,57,.12)', border: '1px solid rgba(224,123,57,.4)', borderRadius: 8, color: '#E07B39', fontSize: '.8rem', fontWeight: 600, cursor: 'pointer', flexShrink: 0 }}>
+                  {a.editBtn}
+                </button>
                 <button onClick={() => handleDelete(o.id, o.title)} style={{ padding: '7px 16px', background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.3)', borderRadius: 8, color: '#f87171', fontSize: '.8rem', fontWeight: 600, cursor: 'pointer', flexShrink: 0 }}>
                   {a.deleteBtn}
                 </button>
@@ -465,17 +559,22 @@ export default function AdminClient({
           </div>
         )}
 
-        {/* ── Add offer form ── */}
+        {/* ── Add / Edit offer form ── */}
         {tab === 'add' && (
-          <form onSubmit={handleAdd} style={{ display: 'grid', gap: 28 }}>
-            <div>
+          <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 28 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <button
                 type="button"
-                onClick={() => { setTab('list'); setMsg('') }}
+                onClick={() => { cancelEdit(); setTab('list') }}
                 style={{ padding: '7px 16px', background: 'transparent', color: '#94a3b8', border: '1px solid #2d3748', borderRadius: 8, fontWeight: 600, fontSize: '.82rem', cursor: 'pointer' }}
               >
                 ← {a.tabOffersPrefix}
               </button>
+              {editingId && (
+                <span style={{ fontSize: '.78rem', fontWeight: 700, padding: '5px 12px', borderRadius: 100, background: 'rgba(224,123,57,.15)', color: '#E07B39', textTransform: 'uppercase', letterSpacing: '.05em' }}>
+                  {a.editingBadge}
+                </span>
+              )}
             </div>
 
             {/* Language selector for form content */}
@@ -541,6 +640,36 @@ export default function AdminClient({
                     required={formLang === 'fr'}
                     dir={formLang === 'ar' ? 'rtl' : 'ltr'}
                   />
+                </div>
+                <div style={{ gridColumn: '1 / -1' }}>
+                  <Label>{a.fieldCat}</Label>
+                  <select
+                    value={form.cat}
+                    onChange={e => setForm(f => ({ ...f, cat: e.target.value }))}
+                    style={{ ...inputBase, width: '100%' }}
+                  >
+                    <option value="">{a.categoryNone}</option>
+                    {(() => {
+                      const offerCats = categories.filter(c => c.kind === 'offer' && !c.hidden)
+                      const roots = offerCats.filter(c => !c.parent)
+                      const options: React.ReactElement[] = []
+                      roots.forEach(root => {
+                        options.push(
+                          <option key={root.id} value={root.name}>
+                            {root.emoji} {root.name}
+                          </option>
+                        )
+                        offerCats.filter(c => c.parent === root.id).forEach(child => {
+                          options.push(
+                            <option key={child.id} value={child.name}>
+                              &nbsp;&nbsp;↳ {child.emoji} {child.name}
+                            </option>
+                          )
+                        })
+                      })
+                      return options
+                    })()}
+                  </select>
                 </div>
                 <div style={{ gridColumn: '1 / -1' }}>
                   <Label>{a.fieldImg}</Label>
@@ -621,6 +750,29 @@ export default function AdminClient({
               ))}
             </section>
 
+            {/* Non inclus */}
+            <section style={sectionStyle}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                <h2 style={sectionTitle}>{a.sectionNonInclus}</h2>
+                <AddBtn onClick={() => setForm(f => ({ ...f, nonInclus: [...f.nonInclus, { ico: '❌', txt: emptyML() }] }))}>{a.addBtn}</AddBtn>
+              </div>
+              {form.nonInclus.map((inc, i) => (
+                <div key={i} style={{ display: 'flex', gap: 10, marginBottom: 10, alignItems: 'center' }}>
+                  <IconPicker value={inc.ico} onChange={v => setNonInclus(i, 'ico', v)} presets={NON_INCLUS_ICONS} />
+                  <Input
+                    value={inc.txt[formLang]}
+                    onChange={v => setNonInclus(i, 'txt', v)}
+                    placeholder={formLang === 'fr' ? a.nonInclusPlaceholder : formLang === 'en' ? 'International flights' : 'الرحلات الدولية'}
+                    style={{ flex: 1 }}
+                    dir={formLang === 'ar' ? 'rtl' : 'ltr'}
+                  />
+                  {form.nonInclus.length > 0 && (
+                    <RemoveBtn onClick={() => setForm(f => ({ ...f, nonInclus: f.nonInclus.filter((_, j) => j !== i) }))} />
+                  )}
+                </div>
+              ))}
+            </section>
+
             {/* Programme */}
             <section style={sectionStyle}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
@@ -656,9 +808,9 @@ export default function AdminClient({
 
             <div style={{ display: 'flex', gap: 12 }}>
               <button type="submit" disabled={saving} style={{ padding: '13px 32px', background: '#E07B39', color: '#fff', border: 'none', borderRadius: 10, fontWeight: 700, fontSize: '1rem', cursor: saving ? 'not-allowed' : 'pointer', opacity: saving ? .7 : 1 }}>
-                {saving ? a.saving : a.submitOffer}
+                {saving ? a.saving : (editingId ? a.updateOffer : a.submitOffer)}
               </button>
-              <button type="button" onClick={() => { setForm(emptyForm()); setMsg('') }} style={{ padding: '13px 24px', background: 'transparent', color: '#94a3b8', border: '1px solid #2d3748', borderRadius: 10, fontWeight: 600, cursor: 'pointer' }}>
+              <button type="button" onClick={() => { cancelEdit() }} style={{ padding: '13px 24px', background: 'transparent', color: '#94a3b8', border: '1px solid #2d3748', borderRadius: 10, fontWeight: 600, cursor: 'pointer' }}>
                 {a.resetBtn}
               </button>
             </div>
@@ -817,7 +969,7 @@ export default function AdminClient({
                 </div>
                 <div>
                   <Label>Type</Label>
-                  <select value={catForm.kind} onChange={e => setCatForm(f => ({ ...f, kind: e.target.value as CategoryKind }))} style={{ ...inputBase, width: '100%' }}>
+                  <select value={catForm.kind} onChange={e => setCatForm(f => ({ ...f, kind: e.target.value as CategoryKind, parent: '' }))} style={{ ...inputBase, width: '100%' }}>
                     <option value="offer">Offre</option>
                     <option value="gallery">Galerie</option>
                   </select>
@@ -825,6 +977,21 @@ export default function AdminClient({
                 <button type="submit" disabled={saving} style={{ padding: '9px 22px', background: '#E07B39', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: '.88rem', cursor: saving ? 'not-allowed' : 'pointer', opacity: saving ? .7 : 1 }}>
                   {saving ? '…' : '+ Ajouter'}
                 </button>
+              </div>
+              <div style={{ marginTop: 12 }}>
+                <Label>{a.fieldParent}</Label>
+                <select
+                  value={catForm.parent}
+                  onChange={e => setCatForm(f => ({ ...f, parent: e.target.value }))}
+                  style={{ ...inputBase, width: '100%' }}
+                >
+                  <option value="">{a.parentNone}</option>
+                  {categories
+                    .filter(c => c.kind === catForm.kind && !c.parent)
+                    .map(c => (
+                      <option key={c.id} value={c.id}>{c.emoji} {c.name}</option>
+                    ))}
+                </select>
               </div>
               <p style={{ fontSize: '.72rem', color: '#475569', marginTop: 10 }}>
                 Le nom sert d&apos;identifiant (minuscules, sans espaces). Les catégories &quot;offre&quot; s&apos;utilisent dans les offres, &quot;galerie&quot; dans les photos.
@@ -834,7 +1001,45 @@ export default function AdminClient({
             {/* Two sections */}
             {(['offer', 'gallery'] as const).map(kind => {
               const list = categories.filter(c => c.kind === kind)
+              const roots = list.filter(c => !c.parent)
               const label = kind === 'offer' ? 'Catégories des offres' : 'Catégories de la galerie'
+
+              const renderCat = (cat: Category, depth: number) => {
+                const usageCount = kind === 'offer'
+                  ? offers.filter(o => o.cat === cat.name).length
+                  : gallery.filter(g => g.category === cat.name).length
+                const children = list.filter(c => c.parent === cat.id)
+                return (
+                  <div key={cat.id} style={{ display: 'grid', gap: 8, marginLeft: depth * 24 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: '#0f1117', border: `1px solid ${cat.hidden ? 'rgba(239,68,68,.3)' : '#2d3748'}`, borderRadius: 10, opacity: cat.hidden ? .7 : 1 }}>
+                      {depth > 0 && <span style={{ color: '#475569', fontSize: '.9rem' }}>↳</span>}
+                      <span style={{ fontSize: '1.4rem' }}>{cat.emoji}</span>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontWeight: 700, color: '#e2e8f0', fontSize: '.95rem', display: 'flex', alignItems: 'center', gap: 8 }}>
+                          {cat.name}
+                          {cat.hidden && <span style={{ fontSize: '.65rem', fontWeight: 700, padding: '2px 8px', borderRadius: 100, background: 'rgba(239,68,68,.15)', color: '#f87171', textTransform: 'uppercase', letterSpacing: '.05em' }}>Masquée</span>}
+                          {depth === 0 && children.length > 0 && (
+                            <span style={{ fontSize: '.65rem', fontWeight: 700, padding: '2px 8px', borderRadius: 100, background: 'rgba(224,123,57,.15)', color: '#E07B39', textTransform: 'uppercase', letterSpacing: '.05em' }}>
+                              {children.length} {a.subCatsLabel.toLowerCase()}
+                            </span>
+                          )}
+                        </div>
+                        <div style={{ fontSize: '.75rem', color: '#64748b', marginTop: 2 }}>
+                          {usageCount} {kind === 'offer' ? (usageCount > 1 ? 'offres' : 'offre') : (usageCount > 1 ? 'images' : 'image')}
+                        </div>
+                      </div>
+                      <button onClick={() => handleToggleHidden(cat)} title={cat.hidden ? 'Afficher sur le site' : 'Masquer du site'} style={{ padding: '7px 14px', background: cat.hidden ? 'rgba(34,197,94,.1)' : 'rgba(148,163,184,.1)', border: `1px solid ${cat.hidden ? 'rgba(34,197,94,.35)' : '#2d3748'}`, borderRadius: 8, color: cat.hidden ? '#4ade80' : '#94a3b8', fontSize: '.78rem', fontWeight: 600, cursor: 'pointer' }}>
+                        {cat.hidden ? '👁 Afficher' : '🚫 Masquer'}
+                      </button>
+                      <button onClick={() => handleDeleteCategory(cat)} style={{ padding: '7px 14px', background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.3)', borderRadius: 8, color: '#f87171', fontSize: '.78rem', fontWeight: 600, cursor: 'pointer' }}>
+                        Supprimer
+                      </button>
+                    </div>
+                    {children.map(child => renderCat(child, depth + 1))}
+                  </div>
+                )
+              }
+
               return (
                 <section key={kind} style={{ ...sectionStyle, marginBottom: 20 }}>
                   <h2 style={sectionTitle}>{label} ({list.length})</h2>
@@ -842,31 +1047,7 @@ export default function AdminClient({
                     <p style={{ color: '#475569', textAlign: 'center', padding: '20px 0', fontSize: '.85rem' }}>Aucune catégorie.</p>
                   )}
                   <div style={{ display: 'grid', gap: 8 }}>
-                    {list.map(cat => {
-                      const usageCount = kind === 'offer'
-                        ? offers.filter(o => o.cat === cat.name).length
-                        : gallery.filter(g => g.category === cat.name).length
-                      return (
-                        <div key={cat.id} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: '#0f1117', border: `1px solid ${cat.hidden ? 'rgba(239,68,68,.3)' : '#2d3748'}`, borderRadius: 10, opacity: cat.hidden ? .7 : 1 }}>
-                          <span style={{ fontSize: '1.4rem' }}>{cat.emoji}</span>
-                          <div style={{ flex: 1, minWidth: 0 }}>
-                            <div style={{ fontWeight: 700, color: '#e2e8f0', fontSize: '.95rem', display: 'flex', alignItems: 'center', gap: 8 }}>
-                              {cat.name}
-                              {cat.hidden && <span style={{ fontSize: '.65rem', fontWeight: 700, padding: '2px 8px', borderRadius: 100, background: 'rgba(239,68,68,.15)', color: '#f87171', textTransform: 'uppercase', letterSpacing: '.05em' }}>Masquée</span>}
-                            </div>
-                            <div style={{ fontSize: '.75rem', color: '#64748b', marginTop: 2 }}>
-                              {usageCount} {kind === 'offer' ? (usageCount > 1 ? 'offres' : 'offre') : (usageCount > 1 ? 'images' : 'image')}
-                            </div>
-                          </div>
-                          <button onClick={() => handleToggleHidden(cat)} title={cat.hidden ? 'Afficher sur le site' : 'Masquer du site'} style={{ padding: '7px 14px', background: cat.hidden ? 'rgba(34,197,94,.1)' : 'rgba(148,163,184,.1)', border: `1px solid ${cat.hidden ? 'rgba(34,197,94,.35)' : '#2d3748'}`, borderRadius: 8, color: cat.hidden ? '#4ade80' : '#94a3b8', fontSize: '.78rem', fontWeight: 600, cursor: 'pointer' }}>
-                            {cat.hidden ? '👁 Afficher' : '🚫 Masquer'}
-                          </button>
-                          <button onClick={() => handleDeleteCategory(cat)} style={{ padding: '7px 14px', background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.3)', borderRadius: 8, color: '#f87171', fontSize: '.78rem', fontWeight: 600, cursor: 'pointer' }}>
-                            Supprimer
-                          </button>
-                        </div>
-                      )
-                    })}
+                    {roots.map(cat => renderCat(cat, 0))}
                   </div>
                 </section>
               )
@@ -883,9 +1064,18 @@ export default function AdminClient({
               </div>
             )}
 
-            <div style={{ marginBottom: 20 }}>
-              <h2 style={{ ...sectionTitle, fontSize: '1.1rem', marginBottom: 6 }}>{a.servicesTitle}</h2>
-              <p style={{ fontSize: '.85rem', color: '#64748b' }}>{a.servicesSub}</p>
+            <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 20, flexWrap: 'wrap' }}>
+              <div>
+                <h2 style={{ ...sectionTitle, fontSize: '1.1rem', marginBottom: 6 }}>{a.servicesTitle}</h2>
+                <p style={{ fontSize: '.85rem', color: '#64748b' }}>{a.servicesSub}</p>
+              </div>
+              <button
+                type="button"
+                onClick={addService}
+                style={{ padding: '9px 18px', background: '#E07B39', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: '.88rem', cursor: 'pointer', flexShrink: 0 }}
+              >
+                {a.addServiceBtn}
+              </button>
             </div>
 
             {/* Language switcher */}
@@ -905,11 +1095,24 @@ export default function AdminClient({
               </div>
             </div>
 
+            {services.length === 0 && (
+              <p style={{ color: '#475569', textAlign: 'center', padding: '30px 0', fontSize: '.85rem' }}>{a.noServices}</p>
+            )}
+
             {services.map((svc, i) => (
               <section key={svc.id} style={{ ...sectionStyle, marginBottom: 20 }}>
-                <h3 style={{ ...sectionTitle, marginBottom: 16 }}>
-                  #{i + 1} — {svc.title[serviceLang] || svc.title.fr || '(sans titre)'}
-                </h3>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, gap: 12 }}>
+                  <h3 style={{ ...sectionTitle, margin: 0 }}>
+                    #{i + 1} — {svc.title[serviceLang] || svc.title.fr || '(sans titre)'}
+                  </h3>
+                  <button
+                    type="button"
+                    onClick={() => deleteService(i, svc.title)}
+                    style={{ padding: '6px 14px', background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.3)', borderRadius: 8, color: '#f87171', fontSize: '.78rem', fontWeight: 600, cursor: 'pointer', flexShrink: 0 }}
+                  >
+                    🗑 {a.deleteBtn}
+                  </button>
+                </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   <div style={{ gridColumn: '1 / -1' }}>
@@ -973,6 +1176,43 @@ export default function AdminClient({
                         dir={serviceLang === 'ar' ? 'rtl' : 'ltr'}
                       />
                     </div>
+                  </div>
+
+                  <div style={{ gridColumn: '1 / -1', background: svc.active ? 'rgba(34,197,94,.06)' : 'rgba(239,68,68,.06)', border: `1px solid ${svc.active ? 'rgba(34,197,94,.25)' : 'rgba(239,68,68,.25)'}`, borderRadius: 10, padding: '14px 16px' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+                      <input
+                        type="checkbox"
+                        checked={svc.active}
+                        onChange={e => setServices(list => list.map((s, j) => j === i ? { ...s, active: e.target.checked } : s))}
+                        style={{ width: 18, height: 18, cursor: 'pointer' }}
+                      />
+                      <span style={{ fontSize: '.95rem', fontWeight: 700, color: svc.active ? '#4ade80' : '#f87171' }}>
+                        {svc.active ? '🟢' : '🔴'} {a.fieldServiceActive}
+                      </span>
+                    </label>
+                    <p style={{ margin: '6px 0 0 28px', fontSize: '.78rem', color: '#64748b' }}>{a.fieldServiceActiveHint}</p>
+                  </div>
+
+                  <div>
+                    <Label>{a.fieldServiceMinPeople}</Label>
+                    <input
+                      type="number"
+                      min={1}
+                      value={svc.minPeople}
+                      onChange={e => setServices(list => list.map((s, j) => j === i ? { ...s, minPeople: Math.max(1, parseInt(e.target.value) || 1) } : s))}
+                      style={{ ...inputBase, width: '100%' }}
+                    />
+                  </div>
+
+                  <div>
+                    <Label>{a.fieldServiceMaxPeople}</Label>
+                    <input
+                      type="number"
+                      min={1}
+                      value={svc.maxPeople}
+                      onChange={e => setServices(list => list.map((s, j) => j === i ? { ...s, maxPeople: Math.max(1, parseInt(e.target.value) || 1) } : s))}
+                      style={{ ...inputBase, width: '100%' }}
+                    />
                   </div>
 
                   <div style={{ gridColumn: '1 / -1' }}>

@@ -137,6 +137,16 @@ export default function OffersSection({
                   ))}
                 </ul>
               </div>
+              {detail.nonInclus && detail.nonInclus.filter(f => ml(f.txt)).length > 0 && (
+                <div className="detail-section">
+                  <h4>{o.notIncludedLabel}</h4>
+                  <ul className="detail-feats">
+                    {detail.nonInclus.filter(f => ml(f.txt)).map((f, i) => (
+                      <li key={i}><span className="df-ico">{f.ico}</span> {ml(f.txt)}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <div className="detail-section">
                 <h4>{o.programLabel}</h4>
                 <ul className="detail-prog">

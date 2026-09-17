@@ -28,5 +28,6 @@ export interface Offer {
   desc: MLString
   meta: OfferMeta[]
   inclus: OfferInclus[]
+  nonInclus?: OfferInclus[]
   programme: OfferProgramme[]
 }

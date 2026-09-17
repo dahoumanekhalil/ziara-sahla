@@ -11,6 +11,7 @@ export interface Category {
   kind: CategoryKind
   emoji: string
   hidden: boolean
+  parent?: string | null
 }
 
 const PATHNAME = 'data/categories.json'
@@ -71,7 +72,14 @@ export async function addCategory(data: Omit<Category, 'id' | 'hidden'> & { hidd
   if (!name) return { error: 'Nom requis' }
   if (data.kind !== 'offer' && data.kind !== 'gallery') return { error: 'Type invalide' }
   const cats = await getCategories()
-  if (cats.some(c => c.kind === data.kind && c.name === name)) {
+  const parent = data.parent && data.parent.trim() ? data.parent.trim() : null
+  if (parent) {
+    const p = cats.find(c => c.id === parent)
+    if (!p) return { error: 'Catégorie parente introuvable' }
+    if (p.kind !== data.kind) return { error: 'La catégorie parente doit être du même type' }
+    if (p.parent) return { error: 'Une sous-catégorie ne peut pas être parente' }
+  }
+  if (cats.some(c => c.kind === data.kind && c.name === name && (c.parent ?? null) === parent)) {
     return { error: 'Cette catégorie existe déjà' }
   }
   const cat: Category = {
@@ -80,6 +88,7 @@ export async function addCategory(data: Omit<Category, 'id' | 'hidden'> & { hidd
     kind: data.kind,
     emoji: data.emoji || '🏷️',
     hidden: data.hidden ?? false,
+    parent,
   }
   cats.push(cat)
   await write(cats)
@@ -88,7 +97,7 @@ export async function addCategory(data: Omit<Category, 'id' | 'hidden'> & { hidd
 
 export async function deleteCategory(id: string): Promise<boolean> {
   const cats = await getCategories()
-  const next = cats.filter(c => c.id !== id)
+  const next = cats.filter(c => c.id !== id && c.parent !== id)
   if (next.length === cats.length) return false
   await write(next)
   return true

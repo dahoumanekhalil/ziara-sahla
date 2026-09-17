@@ -186,6 +186,7 @@ export interface Translations {
     contactBtn: string;
     aboutCircuit: string;
     includedLabel: string;
+    notIncludedLabel: string;
     programLabel: string;
     fromLabel: string;
     closeBtn: string;
@@ -231,6 +232,11 @@ export interface Translations {
     inclusions: string;
     days: string;
     deleteBtn: string;
+    editBtn: string;
+    editingBadge: string;
+    updateOffer: string;
+    offerUpdated: string;
+    categoryNone: string;
     noOffers: string;
     confirmDelete: string;
     sectionGeneral: string;
@@ -266,8 +272,16 @@ export interface Translations {
     fieldServiceRibbon: string;
     fieldServiceFeatured: string;
     fieldServiceFeats: string;
+    fieldServiceActive: string;
+    fieldServiceActiveHint: string;
+    fieldServiceMinPeople: string;
+    fieldServiceMaxPeople: string;
+    addServiceBtn: string;
+    noServices: string;
     ribbonPlaceholder: string;
     featPlaceholder: string;
+    comingSoon: string;
+    peopleRange: string;
     contactEmail: string;
     contactPhoneFr: string;
     contactPhoneDz: string;
@@ -279,6 +293,11 @@ export interface Translations {
     contactWhatsapp: string;
     sectionInclus: string;
     inclusPlaceholder: string;
+    sectionNonInclus: string;
+    nonInclusPlaceholder: string;
+    fieldParent: string;
+    parentNone: string;
+    subCatsLabel: string;
     sectionProg: string;
     dayTitlePlaceholder: string;
     dayDescPlaceholder: string;
@@ -617,6 +636,7 @@ const t: Record<Lang, Translations> = {
       contactBtn: "Nous contacter",
       aboutCircuit: "À propos de ce circuit",
       includedLabel: "Ce qui est inclus",
+      notIncludedLabel: "Ce qui n'est pas inclus dans l'offre",
       programLabel: "Programme jour par jour",
       fromLabel: "À partir de",
       closeBtn: "Fermer",
@@ -681,6 +701,11 @@ const t: Record<Lang, Translations> = {
       inclusions: "inclusions",
       days: "jours",
       deleteBtn: "Supprimer",
+      editBtn: "Modifier",
+      editingBadge: "Modification",
+      updateOffer: "Enregistrer les modifications",
+      offerUpdated: "Offre mise à jour !",
+      categoryNone: "— Sans catégorie —",
       noOffers: "Aucune offre. Ajoutez-en une !",
       confirmDelete: "Supprimer",
       sectionGeneral: "Informations générales",
@@ -699,13 +724,13 @@ const t: Record<Lang, Translations> = {
       metaToPlaceholder: "Ghardaïa",
       iconPickerTitle: "Choisir un icône",
       iconPickerOther: "Autre emoji…",
-      tabServices: "🧭 Services",
+      tabServices: "📦 Formules",
       tabContact: "📞 Contact",
       savedOk: "Enregistré ✓",
       saveError: "Erreur d'enregistrement",
       saveBtn: "💾 Enregistrer",
-      servicesTitle: "Services de la page d'accueil",
-      servicesSub: "Modifiez les cartes de la section « Nos circuits » affichée sur la page d'accueil.",
+      servicesTitle: "Formules des offres",
+      servicesSub: "Modifiez les cartes de formules (Essentiel, Confort, Premium…) affichées sur la page d'accueil.",
       contactTitle: "Informations de contact",
       contactSub: "Ces informations apparaissent sur la page /contact et le pied de page.",
       fieldServiceImg: "Image *",
@@ -716,8 +741,16 @@ const t: Record<Lang, Translations> = {
       fieldServiceRibbon: "Ruban (optionnel)",
       fieldServiceFeatured: "Carte mise en avant",
       fieldServiceFeats: "Caractéristiques",
+      fieldServiceActive: "Package actif",
+      fieldServiceActiveHint: "Décochez pour afficher « Bientôt disponible » à la place",
+      fieldServiceMinPeople: "Min. personnes",
+      fieldServiceMaxPeople: "Max. personnes",
+      addServiceBtn: "+ Nouvelle formule",
+      noServices: "Aucune formule. Créez-en une pour l'afficher sur la page d'accueil.",
       ribbonPlaceholder: "Populaire",
       featPlaceholder: "Hébergement 3 étoiles",
+      comingSoon: "Bientôt disponible",
+      peopleRange: "De {min} à {max} personnes",
       contactEmail: "Email",
       contactPhoneFr: "Téléphone France",
       contactPhoneDz: "Téléphone Algérie",
@@ -729,6 +762,11 @@ const t: Record<Lang, Translations> = {
       contactWhatsapp: "URL WhatsApp",
       sectionInclus: "Ce qui est inclus",
       inclusPlaceholder: "Transport privé climatisé",
+      sectionNonInclus: "Ce qui n'est pas inclus dans l'offre",
+      nonInclusPlaceholder: "Vols internationaux",
+      fieldParent: "Catégorie parente (optionnel)",
+      parentNone: "Aucune — catégorie principale",
+      subCatsLabel: "Sous-catégories",
       sectionProg: "Programme jour par jour",
       dayTitlePlaceholder: "Titre du jour",
       dayDescPlaceholder: "Description de la journée…",
@@ -1066,6 +1104,7 @@ const t: Record<Lang, Translations> = {
       contactBtn: "Contact us",
       aboutCircuit: "About this tour",
       includedLabel: "What's included",
+      notIncludedLabel: "What's not included in the offer",
       programLabel: "Day by day program",
       fromLabel: "From",
       closeBtn: "Close",
@@ -1129,6 +1168,11 @@ const t: Record<Lang, Translations> = {
       inclusions: "inclusions",
       days: "days",
       deleteBtn: "Delete",
+      editBtn: "Edit",
+      editingBadge: "Editing",
+      updateOffer: "Save changes",
+      offerUpdated: "Offer updated!",
+      categoryNone: "— No category —",
       noOffers: "No offers yet. Add one!",
       confirmDelete: "Delete",
       sectionGeneral: "General information",
@@ -1147,13 +1191,13 @@ const t: Record<Lang, Translations> = {
       metaToPlaceholder: "Ghardaïa",
       iconPickerTitle: "Choose an icon",
       iconPickerOther: "Other emoji…",
-      tabServices: "🧭 Services",
+      tabServices: "📦 Packages",
       tabContact: "📞 Contact",
       savedOk: "Saved ✓",
       saveError: "Save error",
       saveBtn: "💾 Save",
-      servicesTitle: "Home-page services",
-      servicesSub: "Edit the cards shown in the “Our tours” section on the home page.",
+      servicesTitle: "Offer packages",
+      servicesSub: "Edit the package cards (Economy, Intermediate, Premium…) shown on the home page.",
       contactTitle: "Contact information",
       contactSub: "This info shows on the /contact page and in the footer.",
       fieldServiceImg: "Image *",
@@ -1164,8 +1208,16 @@ const t: Record<Lang, Translations> = {
       fieldServiceRibbon: "Ribbon (optional)",
       fieldServiceFeatured: "Featured card",
       fieldServiceFeats: "Features",
+      fieldServiceActive: "Package active",
+      fieldServiceActiveHint: "Uncheck to display “Coming soon” instead",
+      fieldServiceMinPeople: "Min. people",
+      fieldServiceMaxPeople: "Max. people",
+      addServiceBtn: "+ New package",
+      noServices: "No packages yet. Add one to display it on the home page.",
       ribbonPlaceholder: "Popular",
       featPlaceholder: "3-star accommodation",
+      comingSoon: "Coming soon",
+      peopleRange: "From {min} to {max} people",
       contactEmail: "Email",
       contactPhoneFr: "France phone",
       contactPhoneDz: "Algeria phone",
@@ -1177,6 +1229,11 @@ const t: Record<Lang, Translations> = {
       contactWhatsapp: "WhatsApp URL",
       sectionInclus: "What's included",
       inclusPlaceholder: "Private air-conditioned transport",
+      sectionNonInclus: "What's not included in the offer",
+      nonInclusPlaceholder: "International flights",
+      fieldParent: "Parent category (optional)",
+      parentNone: "None — top-level category",
+      subCatsLabel: "Sub-categories",
       sectionProg: "Day by day program",
       dayTitlePlaceholder: "Day title",
       dayDescPlaceholder: "Day description…",
@@ -1507,6 +1564,7 @@ const t: Record<Lang, Translations> = {
       contactBtn: "اتصل بنا",
       aboutCircuit: "حول هذه الجولة",
       includedLabel: "ما هو مشمول",
+      notIncludedLabel: "ما هو غير مشمول في العرض",
       programLabel: "البرنامج يومًا بيوم",
       fromLabel: "ابتداءً من",
       closeBtn: "إغلاق",
@@ -1564,6 +1622,11 @@ const t: Record<Lang, Translations> = {
       inclusions: "إضافات",
       days: "أيام",
       deleteBtn: "حذف",
+      editBtn: "تعديل",
+      editingBadge: "قيد التعديل",
+      updateOffer: "حفظ التعديلات",
+      offerUpdated: "تم تحديث العرض!",
+      categoryNone: "— بدون فئة —",
       noOffers: "لا توجد عروض. أضف واحدًا!",
       confirmDelete: "حذف",
       sectionGeneral: "معلومات عامة",
@@ -1582,13 +1645,13 @@ const t: Record<Lang, Translations> = {
       metaToPlaceholder: "غرداية",
       iconPickerTitle: "اختر رمزًا",
       iconPickerOther: "رمز آخر…",
-      tabServices: "🧭 الخدمات",
+      tabServices: "📦 الباقات",
       tabContact: "📞 التواصل",
       savedOk: "تم الحفظ ✓",
       saveError: "خطأ في الحفظ",
       saveBtn: "💾 حفظ",
-      servicesTitle: "خدمات الصفحة الرئيسية",
-      servicesSub: "عدّل البطاقات المعروضة في قسم « جولاتنا » على الصفحة الرئيسية.",
+      servicesTitle: "باقات العروض",
+      servicesSub: "قم بتعديل بطاقات الباقات (اقتصادية، متوسطة، مميزة…) المعروضة على الصفحة الرئيسية.",
       contactTitle: "معلومات الاتصال",
       contactSub: "تظهر هذه المعلومات في صفحة الاتصال وتذييل الموقع.",
       fieldServiceImg: "الصورة *",
@@ -1599,8 +1662,16 @@ const t: Record<Lang, Translations> = {
       fieldServiceRibbon: "شريط (اختياري)",
       fieldServiceFeatured: "بطاقة مميزة",
       fieldServiceFeats: "الميزات",
+      fieldServiceActive: "الباقة مفعّلة",
+      fieldServiceActiveHint: "قم بإلغاء التحديد لعرض « قريبًا » بدلًا من ذلك",
+      fieldServiceMinPeople: "الحد الأدنى للأشخاص",
+      fieldServiceMaxPeople: "الحد الأقصى للأشخاص",
+      addServiceBtn: "+ باقة جديدة",
+      noServices: "لا توجد باقات. أضف واحدة لعرضها على الصفحة الرئيسية.",
       ribbonPlaceholder: "الأكثر طلبًا",
       featPlaceholder: "إقامة ٣ نجوم",
+      comingSoon: "قريبًا",
+      peopleRange: "من {min} إلى {max} شخصًا",
       contactEmail: "البريد الإلكتروني",
       contactPhoneFr: "هاتف فرنسا",
       contactPhoneDz: "هاتف الجزائر",
@@ -1612,6 +1683,11 @@ const t: Record<Lang, Translations> = {
       contactWhatsapp: "رابط واتساب",
       sectionInclus: "ما هو مشمول",
       inclusPlaceholder: "نقل خاص مكيف",
+      sectionNonInclus: "ما هو غير مشمول في العرض",
+      nonInclusPlaceholder: "الرحلات الدولية",
+      fieldParent: "الفئة الأصلية (اختياري)",
+      parentNone: "لا شيء — فئة رئيسية",
+      subCatsLabel: "الفئات الفرعية",
       sectionProg: "البرنامج يومًا بيوم",
       dayTitlePlaceholder: "عنوان اليوم",
       dayDescPlaceholder: "وصف اليوم…",

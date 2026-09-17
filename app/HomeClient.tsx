@@ -257,52 +257,101 @@ export default function HomeClient({
           </div>
 
           <div className="cards">
-            {services.map((svc, i) => (
-              <div
-                key={svc.id}
-                className={`card${svc.featured ? " featured" : ""} reveal`}
-                style={{ transitionDelay: `${0.08 + i * 0.08}s` }}
-              >
-                {svc.ribbon && <div className="ribbon">{ml(svc.ribbon)}</div>}
-                <div className="card-img">
-                  <Image
-                    src={svc.img}
-                    alt={ml(svc.title)}
-                    width={400}
-                    height={210}
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card-body">
-                  <div className={`card-icon ${svc.iconClass}`}>{svc.icon}</div>
-                  <div className="card-label">{ml(svc.label)}</div>
-                  <h3>{ml(svc.title)}</h3>
-                  <p>{ml(svc.desc)}</p>
-                  <ul className="card-feats">
-                    {svc.feats.map((f, j) => (
-                      <li key={j}>{ml(f)}</li>
-                    ))}
-                  </ul>
-                  <div className="card-foot">
-                    <div className="card-price">
-                      {tr.services.priceLabel} <small>/ pers.</small>
-                    </div>
-                    <button
-                      className="card-link"
-                      onClick={openModal}
-                      style={{
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                        padding: 0,
-                      }}
-                    >
-                      {tr.services.moreBtn}
-                    </button>
+            {services.map((svc, i) => {
+              const peopleLabel = tr.admin.peopleRange
+                .replace("{min}", String(svc.minPeople))
+                .replace("{max}", String(svc.maxPeople));
+              return (
+                <div
+                  key={svc.id}
+                  className={`card${svc.featured ? " featured" : ""}${svc.active ? "" : " inactive"} reveal`}
+                  style={{ transitionDelay: `${0.08 + i * 0.08}s`, position: "relative" }}
+                >
+                  {svc.ribbon && svc.active && <div className="ribbon">{ml(svc.ribbon)}</div>}
+                  <div className="card-img" style={{ filter: svc.active ? undefined : "grayscale(80%) brightness(.55)" }}>
+                    <Image
+                      src={svc.img}
+                      alt={ml(svc.title)}
+                      width={400}
+                      height={210}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="card-body">
+                    <div className={`card-icon ${svc.iconClass}`}>{svc.icon}</div>
+                    <div className="card-label">{ml(svc.label)}</div>
+                    <h3>{ml(svc.title)}</h3>
+                    {svc.active ? (
+                      <>
+                        <p>{ml(svc.desc)}</p>
+                        <div style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 6,
+                          padding: "6px 12px",
+                          background: "rgba(224,123,57,.1)",
+                          border: "1px solid rgba(224,123,57,.3)",
+                          borderRadius: 999,
+                          color: "#E07B39",
+                          fontSize: ".8rem",
+                          fontWeight: 700,
+                          marginBottom: 12,
+                        }}>
+                          👥 {peopleLabel}
+                        </div>
+                        <ul className="card-feats">
+                          {svc.feats.map((f, j) => (
+                            <li key={j}>{ml(f)}</li>
+                          ))}
+                        </ul>
+                        <div className="card-foot">
+                          <div className="card-price">
+                            {tr.services.priceLabel} <small>/ pers.</small>
+                          </div>
+                          <button
+                            className="card-link"
+                            onClick={openModal}
+                            style={{
+                              background: "none",
+                              border: "none",
+                              cursor: "pointer",
+                              padding: 0,
+                            }}
+                          >
+                            {tr.services.moreBtn}
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <div style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "40px 20px",
+                        textAlign: "center",
+                        minHeight: 220,
+                      }}>
+                        <div style={{ fontSize: "2.6rem", marginBottom: 12 }}>⏳</div>
+                        <div style={{
+                          fontSize: "1.15rem",
+                          fontWeight: 800,
+                          letterSpacing: ".04em",
+                          textTransform: "uppercase",
+                          color: "#E07B39",
+                          background: "rgba(224,123,57,.1)",
+                          border: "1px solid rgba(224,123,57,.35)",
+                          borderRadius: 999,
+                          padding: "8px 18px",
+                        }}>
+                          {tr.admin.comingSoon}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

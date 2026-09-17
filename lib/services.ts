@@ -17,6 +17,27 @@ export interface ServiceCard {
   feats: MLString[]
   ribbon?: MLString
   featured?: boolean
+  active: boolean
+  minPeople: number
+  maxPeople: number
+}
+
+function normalize(card: Partial<ServiceCard> & { id: string }): ServiceCard {
+  return {
+    id: card.id,
+    img: card.img ?? '',
+    icon: card.icon ?? '✨',
+    iconClass: (card.iconClass ?? 'ci-mid') as ServiceIconClass,
+    label: card.label ?? { fr: '', en: '', ar: '' },
+    title: card.title ?? { fr: '', en: '', ar: '' },
+    desc: card.desc ?? { fr: '', en: '', ar: '' },
+    feats: card.feats ?? [],
+    ribbon: card.ribbon,
+    featured: card.featured,
+    active: card.active ?? true,
+    minPeople: typeof card.minPeople === 'number' ? card.minPeople : 5,
+    maxPeople: typeof card.maxPeople === 'number' ? card.maxPeople : 30,
+  }
 }
 
 const PATHNAME = 'data/services.json'
@@ -43,6 +64,9 @@ export const DEFAULT_SERVICES: ServiceCard[] = [
       ml('Repas traditionnels inclus', 'Traditional meals included', 'وجبات تقليدية مشمولة'),
       ml('Assistance 7j/7', '7/7 assistance', 'مساعدة ٧/٧'),
     ],
+    active: true,
+    minPeople: 5,
+    maxPeople: 30,
   },
   {
     id: 'svc-mid',
@@ -66,6 +90,9 @@ export const DEFAULT_SERVICES: ServiceCard[] = [
       ml('Escorte sécuritaire incluse', 'Security escort included', 'مرافقة أمنية مشمولة'),
       ml('Assistance 24h/24', '24/7 assistance', 'مساعدة ٢٤/٧'),
     ],
+    active: true,
+    minPeople: 5,
+    maxPeople: 30,
   },
   {
     id: 'svc-prem',
@@ -87,6 +114,9 @@ export const DEFAULT_SERVICES: ServiceCard[] = [
       ml('Escorte VIP garantie', 'VIP escort guaranteed', 'مرافقة VIP مضمونة'),
       ml('Conciergerie dédiée', 'Dedicated concierge', 'خدمة استقبال مخصصة'),
     ],
+    active: true,
+    minPeople: 5,
+    maxPeople: 30,
   },
 ]
 
@@ -97,12 +127,12 @@ async function read(): Promise<ServiceCard[]> {
     if (!blob) return DEFAULT_SERVICES
     const res = await fetch(blob.url, { cache: 'no-store' })
     const parsed = await res.json()
-    return Array.isArray(parsed) && parsed.length > 0 ? parsed : DEFAULT_SERVICES
+    return Array.isArray(parsed) && parsed.length > 0 ? parsed.map(normalize) : DEFAULT_SERVICES
   }
   try {
     const data = await readFile(join(process.cwd(), PATHNAME), 'utf-8')
     const parsed = JSON.parse(data)
-    return Array.isArray(parsed) && parsed.length > 0 ? parsed : DEFAULT_SERVICES
+    return Array.isArray(parsed) && parsed.length > 0 ? parsed.map(normalize) : DEFAULT_SERVICES
   } catch {
     return DEFAULT_SERVICES
   }
@@ -128,7 +158,7 @@ export async function getServices(): Promise<ServiceCard[]> {
 }
 
 export async function replaceServices(cards: ServiceCard[]): Promise<ServiceCard[]> {
-  const withIds = cards.map(c => ({ ...c, id: c.id || randomUUID() }))
-  await write(withIds)
-  return withIds
+  const clean = cards.map(c => normalize({ ...c, id: c.id || randomUUID() }))
+  await write(clean)
+  return clean
 }

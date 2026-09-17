@@ -1,100 +1,237 @@
 [
   {
     "id": "a1b2c3d4-0001",
-    "title": "Sahara Classique",
+    "title": {
+      "fr": "Sahara Classique",
+      "en": "",
+      "ar": ""
+    },
     "img": "/assets/sahara/sahara-desert.jpg",
     "cat": "sahara",
-    "dur": "7 jours / 6 nuits",
-    "desc": "Partez à la conquête du Grand Erg Oriental, l'un des plus grands déserts de sable au monde. Traversée de dunes monumentales, nuit en bivouac sous un ciel étoilé, découverte des oasis cachées et rencontre avec les nomades touaregs. Un voyage qui transforme.",
+    "dur": {
+      "fr": "7 jours / 6 nuits",
+      "en": "",
+      "ar": ""
+    },
+    "desc": {
+      "fr": "Partez à la conquête du Grand Erg Oriental, l'un des plus grands déserts de sable au monde. Traversée de dunes monumentales, nuit en bivouac sous un ciel étoilé, découverte des oasis cachées et rencontre avec les nomades touaregs. Un voyage qui transforme.",
+      "en": "",
+      "ar": ""
+    },
     "meta": [
       {
         "icon": "📍",
-        "label": "Départ: Alger → Ghardaïa → Tamanrasset"
+        "from": {
+          "fr": "Départ: Alger → Ghardaïa → Tamanrasset ",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "tet",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "icon": "👥",
-        "label": "Groupes de 10 à 50 personnes"
+        "from": {
+          "fr": "Groupes de 10 à 50 personnes",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "icon": "🗣️",
-        "label": "Guide francophone natif"
+        "from": {
+          "fr": "Guide francophone natif",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "icon": "🛡️",
-        "label": "Escorte sécuritaire officielle"
+        "from": {
+          "fr": "Escorte sécuritaire officielle",
+          "en": "",
+          "ar": ""
+        },
+        "to": {
+          "fr": "",
+          "en": "",
+          "ar": ""
+        }
       }
     ],
     "inclus": [
       {
         "ico": "🚌",
-        "txt": "Transport privé climatisé"
+        "txt": {
+          "fr": "Transport privé climatisé",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "ico": "🏨",
-        "txt": "Hébergement 3★ + 1 nuit bivouac"
+        "txt": {
+          "fr": "Hébergement 3★ + 1 nuit bivouac",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "ico": "🍽️",
-        "txt": "Pension complète"
+        "txt": {
+          "fr": "Pension complète",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "ico": "🧭",
-        "txt": "Guide francophone expert"
+        "txt": {
+          "fr": "Guide francophone expert",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "ico": "🚔",
-        "txt": "Escorte policière"
+        "txt": {
+          "fr": "Escorte policière",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "ico": "💼",
-        "txt": "Assurance voyage incluse"
+        "txt": {
+          "fr": "Assurance voyage incluse",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "ico": "📸",
-        "txt": "Séance photo coucher de soleil"
+        "txt": {
+          "fr": "Séance photo coucher de soleil",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "ico": "🐪",
-        "txt": "Balade dromadaire"
+        "txt": {
+          "fr": "Balade dromadaire",
+          "en": "",
+          "ar": ""
+        }
       }
     ],
     "programme": [
       {
         "j": "J1",
-        "titre": "Alger → Ghardaïa",
-        "desc": "Vol interne ou bus VIP. Dîner de bienvenue et présentation du circuit."
+        "titre": {
+          "fr": "Alger → Ghardaïa",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "Vol interne ou bus VIP. Dîner de bienvenue et présentation du circuit.",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "j": "J2",
-        "titre": "Ghardaïa – Cité UNESCO",
-        "desc": "Visite de la ville mozabite, souk historique et artisanat local."
+        "titre": {
+          "fr": "Ghardaïa – Cité UNESCO",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "Visite de la ville mozabite, souk historique et artisanat local.",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "j": "J3",
-        "titre": "Route vers le Grand Erg",
-        "desc": "Traversée des paysages désertiques, arrêt aux oasis."
+        "titre": {
+          "fr": "Route vers le Grand Erg",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "Traversée des paysages désertiques, arrêt aux oasis.",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "j": "J4",
-        "titre": "Dunes & Bivouac",
-        "desc": "Arrivée dans l'Erg, coucher de soleil en quad, nuit sous les étoiles."
+        "titre": {
+          "fr": "Dunes & Bivouac",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "Arrivée dans l'Erg, coucher de soleil en quad, nuit sous les étoiles.",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "j": "J5",
-        "titre": "Lever de soleil & Oasis",
-        "desc": "Lever de soleil sur les dunes, visite d'une oasis secrète."
+        "titre": {
+          "fr": "Lever de soleil & Oasis",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "Lever de soleil sur les dunes, visite d'une oasis secrète.",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "j": "J6",
-        "titre": "Retour vers le Nord",
-        "desc": "Route retour avec escale photographique."
+        "titre": {
+          "fr": "Retour vers le Nord",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "Route retour avec escale photographique.",
+          "en": "",
+          "ar": ""
+        }
       },
       {
         "j": "J7",
-        "titre": "Retour Alger",
-        "desc": "Transfert aéroport, fin du circuit."
+        "titre": {
+          "fr": "Retour Alger",
+          "en": "",
+          "ar": ""
+        },
+        "desc": {
+          "fr": "Transfert aéroport, fin du circuit.",
+          "en": "",
+          "ar": ""
+        }
       }
-    ]
+    ],
+    "nonInclus": []
   },
   {
     "id": "a1b2c3d4-0002",

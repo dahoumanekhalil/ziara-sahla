@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json()
-    const { title, img, cat, dur, desc, meta, inclus, programme } = body
+    const { title, img, cat, dur, desc, meta, inclus, nonInclus, programme } = body
 
     if (!title || !img || !dur || !desc) {
       return NextResponse.json({ error: 'Champs obligatoires manquants' }, { status: 400 })
@@ -29,6 +29,7 @@ export async function POST(req: NextRequest) {
       desc,
       meta: meta ?? [],
       inclus: inclus ?? [],
+      nonInclus: nonInclus ?? [],
       programme: programme ?? [],
     })
 
